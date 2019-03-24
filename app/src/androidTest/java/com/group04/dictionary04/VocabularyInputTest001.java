@@ -2,8 +2,10 @@ package com.group04.dictionary04;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -23,6 +25,9 @@ import static org.hamcrest.Matchers.not;
 @RunWith(AndroidJUnit4.class)
 public class VocabularyInputTest001 {
 
+    @Rule
+    public ActivityTestRule<InputViewActivity> InputViewActivityTestRule = new ActivityTestRule<>(InputViewActivity.class);
+
     @Test
     public void testButtonsVisible() {
 
@@ -30,5 +35,7 @@ public class VocabularyInputTest001 {
         onView(withId(R.id.txt_german_input)).check(matches(isDisplayed()));
         onView(withId(R.id.txt_english_input)).check(matches(isDisplayed()));
         onView(withId(R.id.txt_spanish_input)).check(matches(isDisplayed()));
+
+
     }
 }

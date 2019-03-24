@@ -5,9 +5,52 @@
               android:orientation="vertical"
               tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/German"
+        android:layout_width="177dp"
+        android:layout_height="wrap_content"
+        android:text="German:" />
+
+    <EditText
+        android:id="@+id/txt_german_input"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Ger" />
 
     <TextView
-            android:text="TextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/textView"/>
+        android:id="@+id/English"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:text="English:" />
+
+    <EditText
+        android:id="@+id/txt_english_input"
+        android:layout_width="174dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Eng" />
+
+    <TextView
+        android:id="@+id/Spanish"
+        android:layout_width="172dp"
+        android:layout_height="wrap_content"
+        android:text="Spanish:" />
+
+    <EditText
+        android:id="@+id/txt_spanish_input"
+        android:layout_width="172dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Esp" />
+
+    <Button
+        android:id="@+id/button_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Insert your words!" />
+
 </LinearLayout>
