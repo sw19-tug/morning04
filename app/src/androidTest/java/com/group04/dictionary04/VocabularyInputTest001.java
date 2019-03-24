@@ -40,7 +40,7 @@ public class VocabularyInputTest001 {
         onView(withId(R.id.txt_english_input)).check(matches(isDisplayed()));
         onView(withId(R.id.txt_spanish_input)).check(matches(isDisplayed()));
 
-        onView(withText(R.string.toast_success)).inRoot(withDecorView(not(is(InputViewActivityTestRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+        onView(withText("Successful")).inRoot(withDecorView(not(is(InputViewActivityTestRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
     }
 }
 

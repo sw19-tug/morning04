@@ -22,8 +22,9 @@ public class InputViewActivity  extends Activity  {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast displayToast = Toast.makeText(InputViewActivity.this,"top", Toast.LENGTH_LONG);
-                displayToast.show();
+                String toast_success1 = "Successful";
+                Toast toast_success = Toast.makeText(getApplicationContext(),toast_success1, Toast.LENGTH_LONG);
+                toast_success.show();
 
             }
         });
