@@ -1,6 +1,7 @@
 package com.group04.dictionary04.model;
 
-public class Entry implements com.group04.dictionary04.interfaces.Entry {
+public class default_Entry implements com.group04.dictionary04.interfaces.Entry {
+
 
     @Override
     public String getId1() {

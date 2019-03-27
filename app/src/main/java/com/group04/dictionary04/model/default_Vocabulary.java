@@ -1,6 +1,6 @@
 package com.group04.dictionary04.model;
 
-public class Vocabulary implements com.group04.dictionary04.interfaces.Vocabulary {
+public class default_Vocabulary implements com.group04.dictionary04.interfaces.Vocabulary {
 
     @Override
     public String getId() {

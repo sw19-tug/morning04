@@ -5,7 +5,7 @@ import com.group04.dictionary.enums.LanguageIdentifier;
 
 import java.util.List;
 
-public class Filter implements com.group04.dictionary04.interfaces.Filter {
+public class default_Filter implements com.group04.dictionary04.interfaces.Filter {
 
     @Override
     public LanguageIdentifier getLangID1() {

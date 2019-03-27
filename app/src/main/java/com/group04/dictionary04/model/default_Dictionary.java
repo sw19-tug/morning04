@@ -7,11 +7,17 @@ import com.group04.dictionary04.interfaces.Exam;
 import com.group04.dictionary04.interfaces.Filter;
 import com.group04.dictionary04.interfaces.Language;
 import com.group04.dictionary04.interfaces.Pair;
-
-import java.util.ArrayList;
 import java.util.List;
 
-public class Dictionary implements com.group04.dictionary04.interfaces.Dictionary {
+public class default_Dictionary implements com.group04.dictionary04.interfaces.Dictionary {
+
+    public default_Dictionary() {
+        Language de = new default_Language("German", LanguageIdentifier.DE);
+        Language en = new default_Language("English", LanguageIdentifier.EN);
+        Language fr = new default_Language("French", LanguageIdentifier.FR);
+        Language it = new default_Language("Italy", LanguageIdentifier.IT);
+        Language sp = new default_Language("Spanish", LanguageIdentifier.SP);
+    }
 
     @Override
     public Entry getEntry(String id1, String id2) {

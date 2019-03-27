@@ -2,7 +2,7 @@ package com.group04.dictionary04.model;
 
 import com.group04.dictionary04.interfaces.Vocabulary;
 
-public class Pair implements com.group04.dictionary04.interfaces.Pair {
+public class default_Pair implements com.group04.dictionary04.interfaces.Pair {
 
     @Override
     public Vocabulary getVoc1() {
