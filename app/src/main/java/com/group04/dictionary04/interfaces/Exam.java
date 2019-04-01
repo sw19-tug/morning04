@@ -1,5 +1,7 @@
 package com.group04.dictionary04.interfaces;
 
+import com.group04.dictionary04.model.default_Entry;
+
 import java.util.List;
 
 public interface Exam {
@@ -8,7 +10,7 @@ public interface Exam {
     String result = null;
     String filter = null;
 
-    List<Entry> getVocsToTest();
+    List<default_Entry> getVocsToTest();
     void setVocsToTest(List<Entry> vocsToTest);
     List<Entry> getFailedVocs();
     void setFailedVocs(List<Entry> failedVocs);
