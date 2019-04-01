@@ -40,6 +40,11 @@ public class default_Dictionary implements com.group04.dictionary04.interfaces.D
     }
 
     @Override
+    public Exam generateExam(Filter filter) {
+        return null;
+    }
+
+    @Override
     public void addTranslation(String voc1, String voc2, LanguageIdentifier lang1, LanguageIdentifier lang2) {
 
     }

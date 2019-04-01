@@ -15,6 +15,7 @@ public interface Dictionary {
     List<Entry> getEntries(Filter filter);
     Pair getTranslation(Entry entry);
     Exam getExam(Filter filter);
+    Exam generateExam(Filter filter);
 
     void addTranslation(String voc1, String voc2, LanguageIdentifier lang1, LanguageIdentifier lang2);
     void addDifficulty(Entry entry, DifficultyIdentifier diff);

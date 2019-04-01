@@ -15,7 +15,7 @@ public class default_Language implements com.group04.dictionary04.interfaces.Lan
     }
 
     @Override
-    public Vocabulary getVocByID(String id) {
+    public default_Vocabulary getVocByID(String id) {
         return null;
     }
 
