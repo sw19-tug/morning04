@@ -30,9 +30,9 @@ public class MainActivityRatingTest
 
     @Test
     public void textFieldsVisible(){
-        onView(withId(R.id.tv_sort)).check(matches(withText("Rate:")));
+        onView(withId(R.id.tv_sort)).check(matches(withText("Sort:")));
         onView(withId(R.id.tv_sort)).check(matches(isDisplayed()));
-        onView(withId(R.id.tv_rate)).check(matches(withText("Sort:")));
+        onView(withId(R.id.tv_rate)).check(matches(withText("Rate:")));
         onView(withId(R.id.tv_rate)).check(matches(isDisplayed()));
     }
 }
