@@ -13,10 +13,11 @@ public class LearningViewActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.learningview);
 
-        //DatabaseController dbController = new DatabaseController(this.getApplicationContext());
-        //dbController.saveTestDatabase();
-        //Dictionary d = dbController.getCurrentDatabase();
+        DatabaseController dbController = new DatabaseController(this.getApplicationContext());
+        dbController.saveTestDatabase();
+        Dictionary d = dbController.getCurrentDatabase();
 
-        //Log.d("log", "Currently there are " + d.getEntries().size() + " entries in this dict");
+
+        Log.d("log", "Currently there are " + d.getEntries().size() + " entries in this dict");
     }
 }
