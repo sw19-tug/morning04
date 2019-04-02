@@ -10,7 +10,7 @@ public class default_Language implements com.group04.dictionary04.interfaces.Lan
 
     String displayName = null;
     LanguageIdentifier langName = null;
-    List<Vocabulary> vocabularies = null;
+    List<default_Vocabulary> vocabularies = null;
 
     public default_Language(String _displayName, LanguageIdentifier _langName) {
         setDisplayName(_displayName);
@@ -27,12 +27,14 @@ public class default_Language implements com.group04.dictionary04.interfaces.Lan
             case IT: return "IT";
             case SP: return "SP";
         }
+        return null;
     }
 
     @Override
     public default_Vocabulary getVocByID(String id) {
-        id.
-        return null;
+        String index = id.substring(3, id.length() - 1);
+        int i = Integer.parseInt(index);
+        return vocabularies.get(i);
     }
 
     @Override
@@ -68,12 +70,12 @@ public class default_Language implements com.group04.dictionary04.interfaces.Lan
     }
 
     @Override
-    public List<Vocabulary> getVocabularies() {
+    public List<default_Vocabulary> getVocabularies() {
         return this.vocabularies;
     }
 
     @Override
-    public void setVocabularies(List<Vocabulary> vocabularies) {
+    public void setVocabularies(List<default_Vocabulary> vocabularies) {
         this.vocabularies = vocabularies;
     }
 

@@ -7,7 +7,7 @@ import java.util.List;
 public class default_Exam implements com.group04.dictionary04.interfaces.Exam {
 
     @Override
-    public List<Entry> getVocsToTest() {
+    public List<default_Entry> getVocsToTest() {
         return null;
     }
 
