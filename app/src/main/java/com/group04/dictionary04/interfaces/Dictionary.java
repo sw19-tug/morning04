@@ -7,13 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface Dictionary {
-    List<Entry> entries = new ArrayList<>();
-    List<Language> languages = new ArrayList<>();
-    List<Exam> exams = new ArrayList<>();
-
     Entry getEntry(String id1, String id2);
     List<Entry> getEntries(Filter filter);
     Pair getTranslation(Entry entry);
+    Language getLanguage(LanguageIdentifier ident);
     Exam getExam(Filter filter);
     Exam generateExam(Filter filter);
 
