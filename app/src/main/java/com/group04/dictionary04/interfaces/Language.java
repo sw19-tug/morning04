@@ -10,7 +10,7 @@ public interface Language {
     List<Vocabulary> vocabularies = null;
 
     Vocabulary getVocByID(String id);
-    String addVocabulary(String value);
+    Vocabulary addVocabulary(String value);
 
     /* xxxxxxxxxxxx Getter & Setter xxxxxxxxxxxxxxxxx */
 
