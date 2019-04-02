@@ -3,7 +3,6 @@ package com.group04.dictionary04.interfaces;
 import com.group04.dictionary.enums.DifficultyIdentifier;
 import com.group04.dictionary.enums.LanguageIdentifier;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface Filter {
@@ -16,9 +15,9 @@ public interface Filter {
     public Integer getLimit_pairs();
     public void setLimit_pairs(Integer limit);
     public LanguageIdentifier getLangID1();
-    public void setLangID1(LanguageIdentifier langID1);
+    public void setLangID1(LanguageIdentifier langID);
     public LanguageIdentifier getLangID2();
-    public void setLangID2(LanguageIdentifier langID2);
+    public void setLangID2(LanguageIdentifier langID);
     public List<String> getTags();
     public void setTags(List<String> tags);
     public DifficultyIdentifier getDifficulty();

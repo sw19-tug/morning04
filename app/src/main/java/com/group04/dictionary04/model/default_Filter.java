@@ -24,41 +24,41 @@ public class default_Filter implements com.group04.dictionary04.interfaces.Filte
     }
     @Override
     public LanguageIdentifier getLangID1() {
-        return null;
+        return langID1;
     }
 
     @Override
-    public void setLangID1(LanguageIdentifier langID1) {
-
+    public void setLangID1(LanguageIdentifier langID) {
+        langID1 = langID;
     }
 
     @Override
     public LanguageIdentifier getLangID2() {
-        return null;
+        return langID2;
     }
 
     @Override
-    public void setLangID2(LanguageIdentifier langID2) {
-
+    public void setLangID2(LanguageIdentifier langID) {
+        langID2 = langID;
     }
 
     @Override
     public List<String> getTags() {
-        return null;
+        return tags;
     }
 
     @Override
     public void setTags(List<String> tags) {
-
+        this.tags = tags;
     }
 
     @Override
     public DifficultyIdentifier getDifficulty() {
-        return null;
+        return difficulty;
     }
 
     @Override
     public void setDifficulty(DifficultyIdentifier difficulty) {
-
+        this.difficulty = difficulty;
     }
 }
