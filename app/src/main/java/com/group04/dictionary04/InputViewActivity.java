@@ -108,7 +108,7 @@ public class InputViewActivity extends Activity {
 
                     dict.addTranslation(field1.toString(), field2.toString(), language1, language2);
 
-//                    Log.d("log", "Currently there are " + dict.getEntries().size() + " entries in this dict");
+                    Log.d("log", "Currently there are " + dict.getEntries().size() + " entries in this dict");
 
                 }
 
