@@ -2,7 +2,6 @@ package com.group04.dictionary04.Dictionary;
 
 
 import com.group04.dictionary.enums.LanguageIdentifier;
-import com.group04.dictionary04.interfaces.Dictionary;
 import com.group04.dictionary04.interfaces.Entry;
 import com.group04.dictionary04.interfaces.Exam;
 import com.group04.dictionary04.interfaces.Filter;
@@ -32,7 +31,7 @@ public class DictionaryUnitTest{
 
     @Test
     public void getEntryTest(Filter filter){
-        List<Entry> all_added_entries = dictionary.getEntries();
+        List<default_Entry> all_added_entries = dictionary.getEntries();
         assert all_added_entries.size() != total_entries : "Inserting Elements at setup failed!\n";
         for (Entry it : all_added_entries)
         {
