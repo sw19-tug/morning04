@@ -18,14 +18,6 @@ public class LearningViewActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.learningview);
-
-        DatabaseController dbController = new DatabaseController(this.getApplicationContext());
-        dbController.saveTestDatabase();
-        Dictionary d = dbController.getCurrentDatabase();
-
-
-        Log.d("log", "Currently there are " + d.getEntries().size() + " entries in this dict");
-
     }
 
     @Override
@@ -35,6 +27,8 @@ public class LearningViewActivity extends Activity {
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
         dbController.saveTestDatabase();
         dict = dbController.getCurrentDatabase();
+
+        Log.d("log", "Currently there are " + dict.getEntries().size() + " entries in this dict");
     }
 
     @Override
@@ -43,14 +37,5 @@ public class LearningViewActivity extends Activity {
 
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
         dbController.saveCurrentDatabase(dict);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        DatabaseController dbController = new DatabaseController(this.getApplicationContext());
-        dbController.saveCurrentDatabase(dict);
-
     }
 }

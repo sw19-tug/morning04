@@ -12,9 +12,7 @@ import java.util.List;
 public class default_Dictionary implements Dictionary {
     private List<default_Entry> entries = new ArrayList<>();
     private HashMap<LanguageIdentifier, default_Language> languages = new HashMap<>();
-
     List<default_Exam> exams = new ArrayList<>();
-
 
     public default_Dictionary() {
         default_Language de = new default_Language("German", LanguageIdentifier.DE);
@@ -24,11 +22,10 @@ public class default_Dictionary implements Dictionary {
         default_Language sp = new default_Language("Spanish", LanguageIdentifier.SP);
 
         languages.put(LanguageIdentifier.DE, de);
-
-        languages.put(LanguageIdentifier.DE, en);
-        languages.put(LanguageIdentifier.DE, fr);
-        languages.put(LanguageIdentifier.DE, it);
-        languages.put(LanguageIdentifier.DE, sp);
+        languages.put(LanguageIdentifier.EN, en);
+        languages.put(LanguageIdentifier.FR, fr);
+        languages.put(LanguageIdentifier.IT, it);
+        languages.put(LanguageIdentifier.SP, sp);
     }
 
     
@@ -67,11 +64,6 @@ public class default_Dictionary implements Dictionary {
     @Override
     public default_Exam generateExam(default_Filter filter) {
 
-        return null;
-    }
-
-    @Override
-    public Exam generateExam(Filter filter) {
         return null;
     }
 
