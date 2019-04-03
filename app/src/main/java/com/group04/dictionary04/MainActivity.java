@@ -57,4 +57,5 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, TestViewActivity.class);
         this.startActivity(intent);
     }
+
 }

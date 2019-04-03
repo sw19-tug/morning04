@@ -8,9 +8,11 @@ import java.util.List;
 
 public class default_Language implements com.group04.dictionary04.interfaces.Language {
 
+
     private String displayName = null;
     private LanguageIdentifier langName = null;
     private List<default_Vocabulary> vocabularies = new ArrayList<>();
+
 
     public default_Language(String _displayName, LanguageIdentifier _langName) {
         setDisplayName(_displayName);
@@ -38,6 +40,7 @@ public class default_Language implements com.group04.dictionary04.interfaces.Lan
 
     @Override
     public default_Vocabulary addVocabulary(String value) {
+
         default_Vocabulary voc = new default_Vocabulary();
         voc.setValue(value);
 

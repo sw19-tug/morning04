@@ -12,7 +12,9 @@ import java.util.List;
 public class default_Dictionary implements Dictionary {
     private List<default_Entry> entries = new ArrayList<>();
     private HashMap<LanguageIdentifier, default_Language> languages = new HashMap<>();
+
     List<default_Exam> exams = new ArrayList<>();
+
 
     public default_Dictionary() {
         default_Language de = new default_Language("German", LanguageIdentifier.DE);
@@ -22,14 +24,17 @@ public class default_Dictionary implements Dictionary {
         default_Language sp = new default_Language("Spanish", LanguageIdentifier.SP);
 
         languages.put(LanguageIdentifier.DE, de);
-        languages.put(LanguageIdentifier.EN, en);
-        languages.put(LanguageIdentifier.FR, fr);
-        languages.put(LanguageIdentifier.IT, it);
-        languages.put(LanguageIdentifier.SP, sp);
+
+        languages.put(LanguageIdentifier.DE, en);
+        languages.put(LanguageIdentifier.DE, fr);
+        languages.put(LanguageIdentifier.DE, it);
+        languages.put(LanguageIdentifier.DE, sp);
     }
 
+    
     @Override
     public default_Entry getEntry(String id1, String id2) {
+
         for(default_Entry entry : entries) {
             if((entry.getId1().equals(id1) && entry.getId2().equals(id2)) || (entry.getId2().equals(id1) && entry.getId1().equals(id2))) {
                 return entry;
@@ -61,6 +66,12 @@ public class default_Dictionary implements Dictionary {
 
     @Override
     public default_Exam generateExam(default_Filter filter) {
+
+        return null;
+    }
+
+    @Override
+    public Exam generateExam(Filter filter) {
         return null;
     }
 
@@ -69,8 +80,6 @@ public class default_Dictionary implements Dictionary {
         default_Language first = getLanguage(lang1);
         default_Language second = getLanguage(lang2);
 
-        if(second == null)
-            Log.d("asdf", "asaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 
         default_Vocabulary ovoc1 = first.addVocabulary(voc1);
         default_Vocabulary ovoc2 = second.addVocabulary(voc2);
@@ -78,6 +87,7 @@ public class default_Dictionary implements Dictionary {
         default_Entry entry = new default_Entry();
         entry.setId1(ovoc1.getId());
         entry.setId2(ovoc2.getId());
+
 
         entries.add(entry);
     }
