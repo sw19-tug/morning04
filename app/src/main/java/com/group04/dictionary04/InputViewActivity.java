@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
@@ -37,14 +39,20 @@ public class InputViewActivity  extends Activity  {
         Spinner lang_spinner2 = (Spinner) findViewById(R.id.spinner2_input);
 
 
+        SearchableSpinner spinner_tag = (SearchableSpinner) findViewById(R.id.spinner_tag);
+
+
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, languages);
 
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        //filling both lang spinners with options
         lang_spinner.setAdapter(dataAdapter);
         lang_spinner2.setAdapter(dataAdapter);
 
 
+        spinner_tag.setAdapter(dataAdapter);
 
         Button button = (Button) findViewById(R.id.button_input);
 
@@ -57,6 +65,9 @@ public class InputViewActivity  extends Activity  {
                 EditText field2 = (EditText) findViewById(R.id.txt_lang2_input);
                 Spinner spinner1 = (Spinner) findViewById(R.id.spinner1_input);
                 Spinner spinner2 = (Spinner) findViewById(R.id.spinner2_input);
+
+
+
 
                 if(spinner1.getSelectedItemPosition() == spinner2.getSelectedItemPosition())
                 {
