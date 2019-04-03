@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.util.Log;
 import com.group04.dictionary04.database.DatabaseController;
 import com.group04.dictionary04.interfaces.Dictionary;
+
 import com.group04.dictionary04.model.default_Dictionary;
+
 
 public class LearningViewActivity extends Activity {
 
@@ -23,6 +25,7 @@ public class LearningViewActivity extends Activity {
 
 
         Log.d("log", "Currently there are " + d.getEntries().size() + " entries in this dict");
+
     }
 
     @Override
@@ -48,5 +51,6 @@ public class LearningViewActivity extends Activity {
 
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
         dbController.saveCurrentDatabase(dict);
+
     }
 }

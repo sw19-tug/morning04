@@ -7,8 +7,11 @@ import java.util.List;
 
 public interface Language {
 
-    Vocabulary getVocByID(String id);
-    Vocabulary addVocabulary(String value);
+    
+
+    default_Vocabulary getVocByID(String id);
+    default_Vocabulary addVocabulary(String value);
+
 
     /* xxxxxxxxxxxx Getter & Setter xxxxxxxxxxxxxxxxx */
 

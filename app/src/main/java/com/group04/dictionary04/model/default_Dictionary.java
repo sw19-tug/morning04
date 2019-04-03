@@ -1,5 +1,6 @@
 package com.group04.dictionary04.model;
 
+import android.util.Log;
 import com.group04.dictionary.enums.DifficultyIdentifier;
 import com.group04.dictionary.enums.LanguageIdentifier;
 import com.group04.dictionary04.interfaces.*;
@@ -11,7 +12,9 @@ import java.util.List;
 public class default_Dictionary implements Dictionary {
     private List<default_Entry> entries = new ArrayList<>();
     private HashMap<LanguageIdentifier, default_Language> languages = new HashMap<>();
-    List<Exam> exams = new ArrayList<>();
+
+    List<default_Exam> exams = new ArrayList<>();
+
 
     public default_Dictionary() {
         default_Language de = new default_Language("German", LanguageIdentifier.DE);
@@ -21,14 +24,17 @@ public class default_Dictionary implements Dictionary {
         default_Language sp = new default_Language("Spanish", LanguageIdentifier.SP);
 
         languages.put(LanguageIdentifier.DE, de);
+
         languages.put(LanguageIdentifier.DE, en);
         languages.put(LanguageIdentifier.DE, fr);
         languages.put(LanguageIdentifier.DE, it);
         languages.put(LanguageIdentifier.DE, sp);
     }
 
+    
     @Override
-    public Entry getEntry(String id1, String id2) {
+    public default_Entry getEntry(String id1, String id2) {
+
         for(default_Entry entry : entries) {
             if((entry.getId1().equals(id1) && entry.getId2().equals(id2)) || (entry.getId2().equals(id1) && entry.getId1().equals(id2))) {
                 return entry;
@@ -39,12 +45,12 @@ public class default_Dictionary implements Dictionary {
     }
 
     @Override
-    public List<Entry> getEntries(Filter filter) {
+    public List<default_Entry> getEntries(default_Filter filter) {
         return null;
     }
 
     @Override
-    public Pair getTranslation(Entry entry) {
+    public default_Pair getTranslation(default_Entry entry) {
         return null;
     }
 
@@ -54,7 +60,13 @@ public class default_Dictionary implements Dictionary {
     }
 
     @Override
-    public Exam getExam(Filter filter) {
+    public default_Exam getExam(default_Filter filter) {
+        return null;
+    }
+
+    @Override
+    public default_Exam generateExam(default_Filter filter) {
+
         return null;
     }
 
@@ -68,58 +80,60 @@ public class default_Dictionary implements Dictionary {
         default_Language first = getLanguage(lang1);
         default_Language second = getLanguage(lang2);
 
-        Vocabulary ovoc1 = first.addVocabulary(voc1);
-        Vocabulary ovoc2 = second.addVocabulary(voc2);
+
+        default_Vocabulary ovoc1 = first.addVocabulary(voc1);
+        default_Vocabulary ovoc2 = second.addVocabulary(voc2);
 
         default_Entry entry = new default_Entry();
         entry.setId1(ovoc1.getId());
         entry.setId2(ovoc2.getId());
 
+
         entries.add(entry);
     }
 
     @Override
-    public void addDifficulty(Entry entry, DifficultyIdentifier diff) {
+    public void addDifficulty(default_Entry entry, DifficultyIdentifier diff) {
 
     }
 
     @Override
-    public void addTag(Entry entry, String tag) {
+    public void addTag(default_Entry entry, String tag) {
 
     }
 
     @Override
-    public void updateEntry(Entry entry) {
+    public void updateEntry(default_Entry entry) {
 
     }
 
     @Override
-    public List<Entry> getEntries() {
+    public List<default_Entry> getEntries() {
+        return entries;
+    }
+
+    @Override
+    public void setEntries(List<default_Entry> entries) {
+
+    }
+
+    @Override
+    public List<default_Language> getLanguages() {
         return null;
     }
 
     @Override
-    public void setEntries(List<Entry> entries) {
+    public void setLanguages(List<default_Language> languages) {
 
     }
 
     @Override
-    public List<Language> getLanguages() {
-        return null;
-    }
-
-    @Override
-    public void setLanguages(List<Language> languages) {
-
-    }
-
-    @Override
-    public List<Exam> getExams() {
+    public List<default_Exam> getExams() {
         return exams;
     }
 
     @Override
-    public void setExams(List<Exam> exams) {
+    public void setExams(List<default_Exam> exams) {
 
     }
 }

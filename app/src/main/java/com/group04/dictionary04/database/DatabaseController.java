@@ -3,7 +3,12 @@ package com.group04.dictionary04.database;
 import android.content.Context;
 import android.content.SharedPreferences;
 import com.google.gson.Gson;
+import com.group04.dictionary.enums.LanguageIdentifier;
+import com.group04.dictionary04.interfaces.Language;
 import com.group04.dictionary04.model.default_Dictionary;
+import com.group04.dictionary04.model.default_Entry;
+import com.group04.dictionary04.model.default_Language;
+import com.group04.dictionary04.model.default_Vocabulary;
 
 public class DatabaseController {
     private final String dbKey = "DATABASE";
@@ -21,7 +26,8 @@ public class DatabaseController {
     /*
         TODO Use this in your activity to save a test Database to the local storage
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
-        dbController.saveTestDatabase(d);
+        dbController.saveTestDatabase();
+        Dictionary d = dbController.getCurrentDatabase();
      */
 
     public DatabaseController(Context context) {
@@ -32,7 +38,10 @@ public class DatabaseController {
     public void saveTestDatabase() {
         default_Dictionary dict = new default_Dictionary();
 
-
+        dict.addTranslation("Auto", "car", LanguageIdentifier.DE, LanguageIdentifier.EN);
+        dict.addTranslation("Haus", "house", LanguageIdentifier.DE, LanguageIdentifier.EN);
+        dict.addTranslation("Rucksack", "backpack", LanguageIdentifier.DE, LanguageIdentifier.EN);
+        dict.addTranslation("Aufzug", "elevator", LanguageIdentifier.DE, LanguageIdentifier.EN);
 
         Gson gson = new Gson();
         String dictString = gson.toJson(dict);

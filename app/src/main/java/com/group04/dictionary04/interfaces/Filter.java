@@ -6,11 +6,7 @@ import com.group04.dictionary.enums.LanguageIdentifier;
 import java.util.List;
 
 public interface Filter {
-    LanguageIdentifier langID1 = null;
-    LanguageIdentifier langID2 = null;
-    Integer limit_pairs = 0; // maximum number of translations ; 0 = unlimited
-    List<String> tags = null;
-    DifficultyIdentifier difficulty = null;
+
 
     public Integer getLimit_pairs();
     public void setLimit_pairs(Integer limit);

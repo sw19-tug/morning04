@@ -6,6 +6,15 @@ public class default_Entry implements com.group04.dictionary04.interfaces.Entry 
     String tag = null;
     String rating = null;
 
+    public default_Entry() {
+
+    }
+
+    public default_Entry(String _id, String id2) {
+
+    }
+
+
     @Override
     public String getId1() {
         return this.id1;

@@ -5,6 +5,10 @@ import com.group04.dictionary04.interfaces.Entry;
 import java.util.List;
 
 public class default_Exam implements com.group04.dictionary04.interfaces.Exam {
+    List<default_Entry> vocsToTest = null;
+    List<default_Entry> failedVocs = null;
+    String result = null;
+    String filter = null;
 
     @Override
     public List<default_Entry> getVocsToTest() {
@@ -12,17 +16,17 @@ public class default_Exam implements com.group04.dictionary04.interfaces.Exam {
     }
 
     @Override
-    public void setVocsToTest(List<Entry> vocsToTest) {
+    public void setVocsToTest(List<default_Entry> vocsToTest) {
 
     }
 
     @Override
-    public List<Entry> getFailedVocs() {
+    public List<default_Entry> getFailedVocs() {
         return null;
     }
 
     @Override
-    public void setFailedVocs(List<Entry> failedVocs) {
+    public void setFailedVocs(List<default_Entry> failedVocs) {
 
     }
 

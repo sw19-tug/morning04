@@ -7,11 +7,13 @@ import java.util.List;
 
 public class default_Filter implements com.group04.dictionary04.interfaces.Filter {
 
-    LanguageIdentifier langID1 = null;
-    LanguageIdentifier langID2 = null;
-    Integer limit_pairs = 0; // maximum number of translations ; 0 = unlimited
-    List<String> tags = null;
-    DifficultyIdentifier difficulty = null;
+
+    private LanguageIdentifier langID1 = null;
+    private LanguageIdentifier langID2 = null;
+    private Integer limit_pairs = 0; // maximum number of translations ; 0 = unlimited
+    private List<String> tags = null;
+    private DifficultyIdentifier difficulty = null;
+
 
     @Override
     public Integer getLimit_pairs() {
