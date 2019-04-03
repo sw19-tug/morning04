@@ -31,6 +31,8 @@ public class InputViewActivity extends Activity {
     private LanguageIdentifier language1;
     private LanguageIdentifier language2;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +71,8 @@ public class InputViewActivity extends Activity {
                 EditText field2 = (EditText) findViewById(R.id.txt_lang2_input);
                 Spinner spinner1 = (Spinner) findViewById(R.id.spinner1_input);
                 Spinner spinner2 = (Spinner) findViewById(R.id.spinner2_input);
+
+
 
 
                 if(spinner1.getSelectedItemPosition() == spinner2.getSelectedItemPosition())
@@ -114,11 +118,12 @@ public class InputViewActivity extends Activity {
 
             }
         });
+
+
     }
 
 
     @Override
-
     public void onResume() {
         super.onResume();
 
@@ -142,4 +147,7 @@ public class InputViewActivity extends Activity {
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
         dbController.saveCurrentDatabase(dict);
     }
+
+
+
 }
