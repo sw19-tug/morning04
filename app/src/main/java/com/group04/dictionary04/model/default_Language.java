@@ -76,6 +76,16 @@ public class default_Language implements com.group04.dictionary04.interfaces.Lan
         return this.vocabularies;
     }
 
+    public List<String> getVocabularyStrings() {
+        List<String> list = new ArrayList<>();
+
+        for(Vocabulary voc : vocabularies) {
+            list.add(voc.getValue());
+        }
+
+        return list;
+    }
+
     @Override
     public void setVocabularies(List<default_Vocabulary> vocabularies) {
         this.vocabularies = vocabularies;

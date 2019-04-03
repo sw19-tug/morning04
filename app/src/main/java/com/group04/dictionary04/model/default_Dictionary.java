@@ -111,6 +111,26 @@ public class default_Dictionary implements Dictionary {
 
     @Override
     public List<default_Language> getLanguages() {
+        return new ArrayList<default_Language>(languages.values());
+    }
+
+    public List<String> getLanguagesStrings() {
+        List<String> list = new ArrayList<>();
+
+        for(default_Language language : languages.values()) {
+            list.add(language.getDisplayName());
+        }
+
+        return list;
+    }
+
+
+    public default_Language getLanguageByIndex(String name) {
+        for(default_Language language : languages.values()) {
+            if(language.getDisplayName().equals(name))
+                return language;
+        }
+
         return null;
     }
 

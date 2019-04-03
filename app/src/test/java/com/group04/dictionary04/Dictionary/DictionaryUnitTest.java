@@ -33,7 +33,7 @@ public class DictionaryUnitTest{
     public void getEntryTest(Filter filter){
         List<default_Entry> all_added_entries = dictionary.getEntries();
         assert all_added_entries.size() != total_entries : "Inserting Elements at setup failed!\n";
-        for (Entry it : all_added_entries)
+        for (default_Entry it : all_added_entries)
         {
             assert !it.getId1().contains("DE") : "Languageidentifier does not match ID\n";
             assert !it.getId2().contains("EN") : "Languageidentifier does not match ID\n";
