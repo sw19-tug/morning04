@@ -27,7 +27,13 @@ public class InputViewActivity  extends Activity  {
     private LanguageIdentifier language1;
     private LanguageIdentifier language2;
 
+import com.group04.dictionary04.database.DatabaseController;
+import com.group04.dictionary04.model.default_Dictionary;
 
+public class InputViewActivity extends Activity {
+
+
+    private default_Dictionary dict = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,6 +131,16 @@ public class InputViewActivity  extends Activity  {
     }
 
     @Override
+
+    public void onResume() {
+        super.onResume();
+
+        DatabaseController dbController = new DatabaseController(this.getApplicationContext());
+        dbController.saveTestDatabase();
+        dict = dbController.getCurrentDatabase();
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
 
@@ -139,7 +155,4 @@ public class InputViewActivity  extends Activity  {
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
         dbController.saveCurrentDatabase(dict);
     }
-
-
-
 }
