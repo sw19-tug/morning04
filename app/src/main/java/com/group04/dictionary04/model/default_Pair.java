@@ -3,12 +3,13 @@ package com.group04.dictionary04.model;
 import com.group04.dictionary04.interfaces.Vocabulary;
 
 public class default_Pair implements com.group04.dictionary04.interfaces.Pair {
+
     private default_Vocabulary voc1 = null;
     private default_Vocabulary voc2 = null;
-
-
+  
     @Override
     public default_Vocabulary getVoc1() {
+
         return this.voc1;
     }
 

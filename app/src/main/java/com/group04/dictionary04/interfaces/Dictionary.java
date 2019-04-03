@@ -8,12 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface Dictionary {
+
     default_Entry getEntry(String id1, String id2);
     List<default_Entry> getEntries(default_Filter filter);
     default_Pair getTranslation(default_Entry entry);
     default_Language getLanguage(LanguageIdentifier ident);
     default_Exam getExam(default_Filter filter);
     default_Exam generateExam(default_Filter filter);
+
 
     void addTranslation(String voc1, String voc2, LanguageIdentifier lang1, LanguageIdentifier lang2);
     void addDifficulty(default_Entry entry, DifficultyIdentifier diff);
