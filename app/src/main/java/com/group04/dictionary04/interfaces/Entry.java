@@ -1,10 +1,6 @@
 package com.group04.dictionary04.interfaces;
 
 public interface Entry {
-    String id1 = null;
-    String id2 = null;
-    String tag = null;
-    String rating = null;
 
     String getId1();
     void setId1(String id1);

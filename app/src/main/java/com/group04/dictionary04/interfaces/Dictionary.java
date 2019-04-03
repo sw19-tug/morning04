@@ -2,31 +2,32 @@ package com.group04.dictionary04.interfaces;
 
 import com.group04.dictionary.enums.DifficultyIdentifier;
 import com.group04.dictionary.enums.LanguageIdentifier;
+import com.group04.dictionary04.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public interface Dictionary {
-    List<Entry> entries = new ArrayList<>();
-    List<Language> languages = new ArrayList<>();
-    List<Exam> exams = new ArrayList<>();
 
-    Entry getEntry(String id1, String id2);
-    List<Entry> getEntries(Filter filter);
-    Pair getTranslation(Entry entry);
-    Exam getExam(Filter filter);
+    default_Entry getEntry(String id1, String id2);
+    List<default_Entry> getEntries(default_Filter filter);
+    default_Pair getTranslation(default_Entry entry);
+    default_Language getLanguage(LanguageIdentifier ident);
+    default_Exam getExam(default_Filter filter);
+    default_Exam generateExam(default_Filter filter);
+
 
     void addTranslation(String voc1, String voc2, LanguageIdentifier lang1, LanguageIdentifier lang2);
-    void addDifficulty(Entry entry, DifficultyIdentifier diff);
-    void addTag(Entry entry, String tag);
-    void updateEntry(Entry entry);
+    void addDifficulty(default_Entry entry, DifficultyIdentifier diff);
+    void addTag(default_Entry entry, String tag);
+    void updateEntry(default_Entry entry);
 
     /* xxxxxxxxxxxx Getter & Setter xxxxxxxxxxxxxxxxx */
 
-    List<Entry> getEntries();
-    void setEntries(List<Entry> entries);
-    List<Language> getLanguages();
-    void setLanguages(List<Language> languages);
-    List<Exam> getExams();
-    void setExams(List<Exam> exams);
+    List<default_Entry> getEntries();
+    void setEntries(List<default_Entry> entries);
+    List<default_Language> getLanguages();
+    void setLanguages(List<default_Language> languages);
+    List<default_Exam> getExams();
+    void setExams(List<default_Exam> exams);
 }
