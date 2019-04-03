@@ -3,6 +3,7 @@ package com.group04.dictionary04;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -10,7 +11,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+import com.group04.dictionary.enums.LanguageIdentifier;
+import com.group04.dictionary04.database.DatabaseController;
+import com.group04.dictionary04.interfaces.Dictionary;
+import com.group04.dictionary04.model.default_Dictionary;
 
 import org.w3c.dom.Text;
 
@@ -19,17 +23,21 @@ import java.util.Arrays;
 import java.util.List;
 
 public class InputViewActivity  extends Activity  {
+    private default_Dictionary dict = null;
+    private LanguageIdentifier language1;
+    private LanguageIdentifier language2;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final DatabaseController dbController = new DatabaseController(getApplicationContext());
+        dbController.saveTestDatabase();
+        dict = dbController.getCurrentDatabase();
+
         setContentView(R.layout.inputview);
-
         List<String> languages = new ArrayList<>();
-
-
 
         languages.add(0, "German");
         languages.add(1, "English");
@@ -37,10 +45,6 @@ public class InputViewActivity  extends Activity  {
 
         Spinner lang_spinner = (Spinner) findViewById(R.id.spinner1_input);
         Spinner lang_spinner2 = (Spinner) findViewById(R.id.spinner2_input);
-
-
-        SearchableSpinner spinner_tag = (SearchableSpinner) findViewById(R.id.spinner_tag);
-
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, languages);
@@ -51,8 +55,6 @@ public class InputViewActivity  extends Activity  {
         lang_spinner.setAdapter(dataAdapter);
         lang_spinner2.setAdapter(dataAdapter);
 
-
-        spinner_tag.setAdapter(dataAdapter);
 
         Button button = (Button) findViewById(R.id.button_input);
 
@@ -84,13 +86,66 @@ public class InputViewActivity  extends Activity  {
                     String toast_success1 = "Successful";
                     Toast toast_success = Toast.makeText(getApplicationContext(),toast_success1, Toast.LENGTH_LONG);
                     toast_success.show();
+
+                    switch (spinner1.getSelectedItemPosition())
+                    {
+                        case 0:
+                            language1 = LanguageIdentifier.valueOf("DE");
+                        case 1:
+                            language1 = LanguageIdentifier.valueOf("EN");
+                        case 2:
+                            language1 = LanguageIdentifier.valueOf("SP");
+                    }
+                    switch (spinner2.getSelectedItemPosition())
+                    {
+                        case 0:
+                            language2 = LanguageIdentifier.valueOf("DE");
+                        case 1:
+                            language2 = LanguageIdentifier.valueOf("EN");
+                        case 2:
+                            language2 = LanguageIdentifier.valueOf("SP");
+                    }
+
+                    dict.addTranslation(field1.toString(), field2.toString(), language1, language2);
+
+                    Log.d("log", "Currently there are " + dict.getEntries().size() + " entries in this dict");
+                    for(int i = 0; i < dict.getEntries().size(); i++)
+                    {
+                        Log.d("log", "current list " + dict.getEntries().get(i));
+                    }
+
                 }
 
             }
         });
 
 
+    }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        DatabaseController dbController = new DatabaseController(this.getApplicationContext());
+        dbController.saveTestDatabase();
+        dict = dbController.getCurrentDatabase();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        DatabaseController dbController = new DatabaseController(this.getApplicationContext());
+        dbController.saveCurrentDatabase(dict);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        DatabaseController dbController = new DatabaseController(this.getApplicationContext());
+        dbController.saveCurrentDatabase(dict);
     }
 
 
