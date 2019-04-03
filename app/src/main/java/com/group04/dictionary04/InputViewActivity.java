@@ -69,8 +69,6 @@ public class InputViewActivity  extends Activity  {
                 Spinner spinner2 = (Spinner) findViewById(R.id.spinner2_input);
 
 
-
-
                 if(spinner1.getSelectedItemPosition() == spinner2.getSelectedItemPosition())
                 {
                     Toast lang_error = Toast.makeText(getApplicationContext(),"Need to select diff lang", Toast.LENGTH_LONG);
@@ -108,18 +106,12 @@ public class InputViewActivity  extends Activity  {
 
                     dict.addTranslation(field1.toString(), field2.toString(), language1, language2);
 
-                    Log.d("log", "Currently there are " + dict.getEntries().size() + " entries in this dict");
-                    for(int i = 0; i < dict.getEntries().size(); i++)
-                    {
-                        Log.d("log", "current list " + dict.getEntries().get(i));
-                    }
+//                    Log.d("log", "Currently there are " + dict.getEntries().size() + " entries in this dict");
 
                 }
 
             }
         });
-
-
     }
 
 
