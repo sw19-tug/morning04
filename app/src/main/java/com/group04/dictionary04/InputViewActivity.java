@@ -22,7 +22,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class InputViewActivity  extends Activity  {
+import com.group04.dictionary04.database.DatabaseController;
+import com.group04.dictionary04.model.default_Dictionary;
+
+public class InputViewActivity extends Activity {
+
     private default_Dictionary dict = null;
     private LanguageIdentifier language1;
     private LanguageIdentifier language2;
@@ -109,7 +113,7 @@ public class InputViewActivity  extends Activity  {
                     dict.addTranslation(field1.toString(), field2.toString(), language1, language2);
 
                     Log.d("log", "Currently there are " + dict.getEntries().size() + " entries in this dict");
-                   
+
                 }
 
             }

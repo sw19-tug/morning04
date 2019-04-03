@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface Filter {
 
+
     public Integer getLimit_pairs();
     public void setLimit_pairs(Integer limit);
     public LanguageIdentifier getLangID1();

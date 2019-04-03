@@ -7,9 +7,11 @@ import java.util.List;
 public interface Exam {
 
     List<default_Entry> getVocsToTest();
+
     void setVocsToTest(List<default_Entry> vocsToTest);
     List<default_Entry> getFailedVocs();
     void setFailedVocs(List<default_Entry> failedVocs);
+
     String getResult();
     void setResult(String result);
     String getFilter();
