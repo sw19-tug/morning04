@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -34,5 +35,18 @@ public class MainActivityRatingTest
         onView(withId(R.id.tv_sort)).check(matches(isDisplayed()));
         onView(withId(R.id.tv_rate)).check(matches(withText("Rate:")));
         onView(withId(R.id.tv_rate)).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testButtonsClickable() {
+        onView(withId(R.id.btn_descending)).check(matches(isClickable()));
+        onView(withId(R.id.btn_ascending)).check(matches(isClickable()));
+        onView(withId(R.id.btn_filter)).check(matches(isClickable()));
+    }
+
+    @Test
+    public void testList() {
+        onView(withId(R.id.list_items)).check(matches(isDisplayed()));
+        onView(withId(R.id.list_items)).check(matches(isClickable()));
     }
 }

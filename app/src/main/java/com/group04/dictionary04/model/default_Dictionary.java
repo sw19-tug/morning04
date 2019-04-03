@@ -25,10 +25,10 @@ public class default_Dictionary implements Dictionary {
 
         languages.put(LanguageIdentifier.DE, de);
 
-        languages.put(LanguageIdentifier.DE, en);
-        languages.put(LanguageIdentifier.DE, fr);
-        languages.put(LanguageIdentifier.DE, it);
-        languages.put(LanguageIdentifier.DE, sp);
+        languages.put(LanguageIdentifier.EN, en);
+        languages.put(LanguageIdentifier.FR, fr);
+        languages.put(LanguageIdentifier.IT, it);
+        languages.put(LanguageIdentifier.SP, sp);
     }
 
     
@@ -70,10 +70,10 @@ public class default_Dictionary implements Dictionary {
         return null;
     }
 
-    @Override
+    /*@Override
     public Exam generateExam(Filter filter) {
         return null;
-    }
+    }*/
 
     @Override
     public void addTranslation(String voc1, String voc2, LanguageIdentifier lang1, LanguageIdentifier lang2) {
