@@ -74,11 +74,12 @@ public class default_Dictionary implements Dictionary {
 
 
         default_Vocabulary ovoc1 = first.addVocabulary(voc1);
+        ovoc1.setLanguage(lang1);
         default_Vocabulary ovoc2 = second.addVocabulary(voc2);
-
+        ovoc2.setLanguage(lang2);
         default_Entry entry = new default_Entry();
-        entry.setId1(ovoc1.getId());
-        entry.setId2(ovoc2.getId());
+        entry.setId1(ovoc1);
+        entry.setId2(ovoc2);
 
 
         entries.add(entry);
@@ -124,6 +125,20 @@ public class default_Dictionary implements Dictionary {
         return list;
     }
 
+    public String getTranslationString(default_Vocabulary voc) {
+        String idToSearch = voc.getId();
+        String returnString = "";
+
+        for(default_Entry entry : entries) {
+            if(entry.getId1().getId().equals(idToSearch)) {
+                returnString += entry.getId2().getLanguage() + ": " + entry.getId2() + "\n";
+            } else if(entry.getId2().getId().equals(idToSearch)) {
+                returnString += entry.getId1().getLanguage() + ": " + entry.getId1() + "\n";
+            }
+        }
+
+        return returnString;
+    }
 
     public default_Language getLanguageByIndex(String name) {
         for(default_Language language : languages.values()) {

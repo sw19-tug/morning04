@@ -1,8 +1,8 @@
 package com.group04.dictionary04.model;
 
 public class default_Entry implements com.group04.dictionary04.interfaces.Entry {
-    String id1 = null;
-    String id2 = null;
+    default_Vocabulary id1 = null;
+    default_Vocabulary id2 = null;
     String tag = null;
     String rating = null;
 
@@ -16,22 +16,22 @@ public class default_Entry implements com.group04.dictionary04.interfaces.Entry 
 
 
     @Override
-    public String getId1() {
+    public default_Vocabulary getId1() {
         return this.id1;
     }
 
     @Override
-    public void setId1(String id1) {
+    public void setId1(default_Vocabulary id1) {
         this.id1 = id1;
     }
 
     @Override
-    public String getId2() {
+    public default_Vocabulary getId2() {
         return this.id2;
     }
 
     @Override
-    public void setId2(String id2) {
+    public void setId2(default_Vocabulary id2) {
         this.id2 = id2;
     }
 

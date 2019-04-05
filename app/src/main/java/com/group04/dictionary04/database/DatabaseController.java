@@ -43,6 +43,11 @@ public class DatabaseController {
         dict.addTranslation("Rucksack", "backpack", LanguageIdentifier.DE, LanguageIdentifier.EN);
         dict.addTranslation("Aufzug", "elevator", LanguageIdentifier.DE, LanguageIdentifier.EN);
 
+        dict.addTranslation("Auto", "coche", LanguageIdentifier.DE, LanguageIdentifier.SP);
+        dict.addTranslation("Haus", "casa", LanguageIdentifier.DE, LanguageIdentifier.SP);
+        dict.addTranslation("Rucksack", "mochila", LanguageIdentifier.DE, LanguageIdentifier.SP);
+        dict.addTranslation("Aufzug", "ascensor", LanguageIdentifier.DE, LanguageIdentifier.SP);
+
         Gson gson = new Gson();
         String dictString = gson.toJson(dict);
         editor.putString("dictionary04", dictString);
