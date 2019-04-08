@@ -15,7 +15,7 @@
 
         <TextView
             android:id="@+id/tv_lang"
-            android:layout_width="208dp"
+            android:layout_width="184dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="Choose Language:"
@@ -24,7 +24,7 @@
         <Spinner
             android:id="@+id/spinner_langt"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="40dp"
             android:background="@android:drawable/btn_dropdown"
             android:spinnerMode="dropdown" />
 
@@ -84,16 +84,14 @@
 
 
         <RatingBar
-            android:id="@+id/ratingbar"
-            style="?android:attr/ratingBarStyleIndicator"
+            android:id="@+id/ratingBar_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@android:dimen/app_icon_size"
-            android:clickable="true"
+            style = "?android:attr/ratingBarStyleIndicator"
+            android:isIndicator="false"
             android:numStars="4"
-            android:stepSize="1">
+            android:stepSize="1" />
 
-        </RatingBar>
 
     </LinearLayout>
 
@@ -122,8 +120,6 @@
             android:scrollbars="vertical">
 
         </ListView>
-
-
 
 
     </LinearLayout>

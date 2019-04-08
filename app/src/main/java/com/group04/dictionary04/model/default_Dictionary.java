@@ -31,7 +31,6 @@ public class default_Dictionary implements Dictionary {
         languages.put(LanguageIdentifier.SP, sp);
     }
 
-    
     @Override
     public default_Entry getEntry(String id1, String id2) {
 
@@ -70,11 +69,6 @@ public class default_Dictionary implements Dictionary {
         return null;
     }
 
-    /*@Override
-    public Exam generateExam(Filter filter) {
-        return null;
-    }*/
-
     @Override
     public void addTranslation(String voc1, String voc2, LanguageIdentifier lang1, LanguageIdentifier lang2) {
         default_Language first = getLanguage(lang1);
@@ -87,19 +81,17 @@ public class default_Dictionary implements Dictionary {
         default_Entry entry = new default_Entry();
         entry.setId1(ovoc1.getId());
         entry.setId2(ovoc2.getId());
-
-
         entries.add(entry);
     }
 
     @Override
     public void addDifficulty(default_Entry entry, DifficultyIdentifier diff) {
-
+        entry.setRating(diff.toString());
     }
 
     @Override
     public void addTag(default_Entry entry, String tag) {
-
+        entry.setTag(tag);
     }
 
     @Override
@@ -120,6 +112,16 @@ public class default_Dictionary implements Dictionary {
     @Override
     public List<default_Language> getLanguages() {
         return null;
+    }
+
+    public List<String> getLanguagesStrings() {
+        List<String> list = new ArrayList<>();
+
+        for(default_Language language : languages.values()) {
+            list.add(language.getDisplayName());
+        }
+
+        return list;
     }
 
     @Override
