@@ -1,9 +1,7 @@
 package com.group04.dictionary04.Dictionary;
 
 
-import com.group04.dictionary.enums.LanguageIdentifier;
-import com.group04.dictionary04.interfaces.Dictionary;
-import com.group04.dictionary04.interfaces.Entry;
+import com.group04.dictionary04.enums.LanguageIdentifier;
 import com.group04.dictionary04.interfaces.Exam;
 import com.group04.dictionary04.interfaces.Filter;
 import com.group04.dictionary04.interfaces.Pair;
@@ -34,7 +32,7 @@ public class DictionaryUnitTest{
     public void getEntryTest(Filter filter){
         List<default_Entry> all_added_entries = dictionary.getEntries();
         assert all_added_entries.size() != total_entries : "Inserting Elements at setup failed!\n";
-        for (Entry it : all_added_entries)
+        for (default_Entry it : all_added_entries)
         {
             assert !it.getId1().contains("DE") : "Languageidentifier does not match ID\n";
             assert !it.getId2().contains("EN") : "Languageidentifier does not match ID\n";
