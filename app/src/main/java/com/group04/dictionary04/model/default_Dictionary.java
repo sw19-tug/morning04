@@ -27,7 +27,7 @@ public class default_Dictionary implements Dictionary {
         languages.put(LanguageIdentifier.SP, sp);
     }
 
-    
+
     @Override
     public default_Entry getEntry(String id1, String id2) {
 
@@ -79,6 +79,8 @@ public class default_Dictionary implements Dictionary {
         default_Entry entry = new default_Entry();
         entry.setId1(ovoc1);
         entry.setId2(ovoc2);
+
+
         entries.add(entry);
     }
 
