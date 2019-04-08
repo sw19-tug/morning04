@@ -139,6 +139,16 @@ public class default_Dictionary implements Dictionary {
         return null;
     }
 
+    public List<String> getLanguagesStrings() {
+        List<String> list = new ArrayList<>();
+
+        for(default_Language language : languages.values()) {
+            list.add(language.getDisplayName());
+        }
+
+        return list;
+    }
+
     @Override
     public void setLanguages(List<default_Language> languages) {
 

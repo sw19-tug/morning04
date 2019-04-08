@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              tools:context=".MainActivity">
+              tools:context=".MainActivity"
+              android:gravity="center_horizontal">
 
 
 
@@ -93,7 +94,7 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="331dp"
         android:layout_height="73dp"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="16dp"
         android:paddingRight="16dp">
@@ -102,7 +103,7 @@
             android:id="@+id/textView_difficulty"
             android:layout_width="wrap_content"
             android:layout_height="31dp"
-            android:text="How hard is it?"
+            android:text="Rate the Difficult: "
             android:textSize="15sp" />
 
 
@@ -138,7 +139,6 @@
             android:inputType="textPersonName" />
 
 
-
     </LinearLayout>
 
 
@@ -146,9 +146,12 @@
 
     <Button
         android:id="@+id/button_input"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Insert your words!" />
+        android:text="Insert your words!"
+        android:background="@drawable/input_btn_design"
+        tools:layout_width="120dp"
+        tools:layout_gravity="center_horizontal"/>
 
 
 

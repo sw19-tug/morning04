@@ -1,6 +1,8 @@
 package com.group04.dictionary04;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.media.Rating;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -49,11 +51,9 @@ public class InputViewActivity extends Activity {
         setContentView(R.layout.inputview);
         List<String> languages = new ArrayList<>();
 
+        //Adding all usable languages to List
+        languages = dict.getLanguagesStrings();
 
-
-        languages.add(0, "German");
-        languages.add(1, "English");
-        languages.add(2, "Spanish");
 
         Spinner lang_spinner = (Spinner) findViewById(R.id.spinner1_input);
         Spinner lang_spinner2 = (Spinner) findViewById(R.id.spinner2_input);
@@ -68,12 +68,11 @@ public class InputViewActivity extends Activity {
         lang_spinner2.setAdapter(dataAdapter);
 
 
-        Button button = (Button) findViewById(R.id.button_input);
+        final Button button = (Button) findViewById(R.id.button_input);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 
                 EditText field1 = (EditText) findViewById(R.id.txt_lang1_input);
                 EditText field2 = (EditText) findViewById(R.id.txt_lang2_input);
@@ -82,7 +81,6 @@ public class InputViewActivity extends Activity {
 
                 RatingBar difficulty = (RatingBar) findViewById(R.id.ratingBar_difficulty);
                 EditText tag = (EditText) findViewById(R.id.txt_tag_input);
-
 
 
                 if(spinner1.getSelectedItemPosition() == spinner2.getSelectedItemPosition())
@@ -98,39 +96,46 @@ public class InputViewActivity extends Activity {
                 }
                 else
                 {
-                    String toast_success1 = "Successful";
-                    Toast toast_success = Toast.makeText(getApplicationContext(),toast_success1, Toast.LENGTH_LONG);
-                    toast_success.show();
 
-                    switch (spinner1.getSelectedItemPosition())
+                    switch(spinner1.getSelectedItem().toString())
                     {
-                        case 0:
-                            language1 = LanguageIdentifier.valueOf("DE");
-                        case 1:
-                            language1 = LanguageIdentifier.valueOf("EN");
-                        case 2:
-                            language1 = LanguageIdentifier.valueOf("SP");
+                        case "Spanish":
+                            language1 = LanguageIdentifier.SP;
+                        case "German":
+                            language1 = LanguageIdentifier.DE;
+                        case "English":
+                            language1 = LanguageIdentifier.EN;
+                        case "French":
+                            language1 = LanguageIdentifier.FR;
+                        case "Italy":
+                            language1 = LanguageIdentifier.IT;
                     }
-                    switch (spinner2.getSelectedItemPosition())
+
+                    switch(spinner2.getSelectedItem().toString())
                     {
-                        case 0:
-                            language2 = LanguageIdentifier.valueOf("DE");
-                        case 1:
-                            language2 = LanguageIdentifier.valueOf("EN");
-                        case 2:
-                            language2 = LanguageIdentifier.valueOf("SP");
+                        case "Spanish":
+                            language2 = LanguageIdentifier.SP;
+                        case "German":
+                            language2 = LanguageIdentifier.DE;
+                        case "English":
+                            language2 = LanguageIdentifier.EN;
+                        case "French":
+                            language2 = LanguageIdentifier.FR;
+                        case "Italy":
+                            language2 = LanguageIdentifier.IT;
                     }
+
 
                     switch((int)difficulty.getRating())
                     {
                         case 1:
-                            difficult = DifficultyIdentifier.valueOf("BEGINNER");
+                            difficult = DifficultyIdentifier.BEGINNER;
                         case 2:
-                            difficult = DifficultyIdentifier.valueOf("INTERMEDIATE");
+                            difficult = DifficultyIdentifier.INTERMEDIATE;
                         case 3:
-                            difficult = DifficultyIdentifier.valueOf("ADVANCED");
+                            difficult = DifficultyIdentifier.ADVANCED;
                         case 4:
-                            difficult = DifficultyIdentifier.valueOf("NATIVE");
+                            difficult = DifficultyIdentifier.NATIVE;
                     }
 
 
@@ -138,14 +143,51 @@ public class InputViewActivity extends Activity {
                     if(difficulty.getRating() != 0 && !tag.getText().toString().isEmpty())
                     {
                         dict.addTranslationWithDiffAndTag(field1.getText().toString(), field2.getText().toString(), language1, language2, difficult, tag.getText().toString());
+
+                        String toast_success1 = "added successfully";
+                        Toast toast_success = Toast.makeText(getApplicationContext(),toast_success1, Toast.LENGTH_LONG);
+                        toast_success.show();
+                        field1.setText("");
+                        field2.setText("");
+                        tag.setText("");
+                        difficulty.setRating(0);
+
                     }
                     else
                     {
-                        dict.addTranslation(field1.toString(), field2.toString(), language1, language2);
+                        AlertDialog.Builder alertdial = new AlertDialog.Builder(InputViewActivity.this);
+                        alertdial.setMessage("Do you want to continue without setting a difficult and adding a tag?").setCancelable(false)
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                        EditText field1 = (EditText) findViewById(R.id.txt_lang1_input);
+                                        EditText field2 = (EditText) findViewById(R.id.txt_lang2_input);
+                                        EditText tag = (EditText) findViewById(R.id.txt_tag_input);
+
+                                        dict.addTranslation(field1.toString(), field2.toString(), language1, language2);
+
+                                        String toast_success1 = "added successfully w/o tag and diff";
+                                        Toast toast_success = Toast.makeText(getApplicationContext(),toast_success1, Toast.LENGTH_LONG);
+                                        toast_success.show();
+                                        field1.setText("");
+                                        field2.setText("");
+
+
+                                    }
+                                })
+                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                        AlertDialog alert = alertdial.create();
+                        alert.setTitle("Continue without adding all info's?");
+                        alert.show();
+
                     }
-
-
-
 
                     Log.d("log", "Currently there are " + dict.getEntries().size() + " entries in this dict");
 
