@@ -23,7 +23,6 @@ public class LearningViewActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.learningview);
-
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
         dbController.saveTestDatabase();
         dict = dbController.getCurrentDatabase();

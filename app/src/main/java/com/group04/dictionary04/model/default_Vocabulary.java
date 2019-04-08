@@ -1,6 +1,6 @@
 package com.group04.dictionary04.model;
 
-import com.group04.dictionary.enums.LanguageIdentifier;
+import com.group04.dictionary04.enums.LanguageIdentifier;
 
 public class default_Vocabulary implements com.group04.dictionary04.interfaces.Vocabulary {
 

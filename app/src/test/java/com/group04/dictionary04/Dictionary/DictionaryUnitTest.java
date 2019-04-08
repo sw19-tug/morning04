@@ -1,8 +1,7 @@
 package com.group04.dictionary04.Dictionary;
 
 
-import com.group04.dictionary.enums.LanguageIdentifier;
-import com.group04.dictionary04.interfaces.Entry;
+import com.group04.dictionary04.enums.LanguageIdentifier;
 import com.group04.dictionary04.interfaces.Exam;
 import com.group04.dictionary04.interfaces.Filter;
 import com.group04.dictionary04.interfaces.Pair;

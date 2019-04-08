@@ -1,6 +1,6 @@
 package com.group04.dictionary04.model;
 
-import com.group04.dictionary.enums.LanguageIdentifier;
+import com.group04.dictionary04.enums.LanguageIdentifier;
 import com.group04.dictionary04.interfaces.Vocabulary;
 
 import java.util.ArrayList;
