@@ -16,7 +16,7 @@ public interface Dictionary {
     default_Exam getExam(default_Filter filter);
     default_Exam generateExam(default_Filter filter);
 
-
+    void addTranslationWithDiffAndTag(String voc1, String voc2, LanguageIdentifier lang1, LanguageIdentifier lang2,DifficultyIdentifier diff, String tag);
     void addTranslation(String voc1, String voc2, LanguageIdentifier lang1, LanguageIdentifier lang2);
     void addDifficulty(default_Entry entry, DifficultyIdentifier diff);
     void addTag(default_Entry entry, String tag);
