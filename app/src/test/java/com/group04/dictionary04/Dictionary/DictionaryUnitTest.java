@@ -32,7 +32,7 @@ public class DictionaryUnitTest{
 
     @Test
     public void getEntryTest(Filter filter){
-        List<Entry> all_added_entries = dictionary.getEntries();
+        List<default_Entry> all_added_entries = dictionary.getEntries();
         assert all_added_entries.size() != total_entries : "Inserting Elements at setup failed!\n";
         for (Entry it : all_added_entries)
         {

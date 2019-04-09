@@ -47,6 +47,8 @@ public class VocabularyInputTest001 {
         String german_spinner_text = "German";
         String english_spinner_text = "English";
         String spanish_spinner_text = "Spanish";
+        String french_spinner_text = "French";
+        String italy_spinner_text = "Italy";
 
         // submit button
         onView(withId(R.id.button_input)).check(matches(isDisplayed()));
@@ -67,6 +69,15 @@ public class VocabularyInputTest001 {
         onData(allOf(is(instanceOf(String.class)), is(german_spinner_text))).perform(click()); // clickable
         onView(withId(R.id.spinner1_input)).check(matches(withSpinnerText(containsString(german_spinner_text)))); // default value
 
+        // dropdown spinner 1_change_language
+        onView(withId(R.id.spinner1_input)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is(spanish_spinner_text))).perform(click()); // clickable
+        onView(withId(R.id.spinner2_input)).check(matches(withSpinnerText(containsString(german_spinner_text))));
+
+        // dropdown spinner 2_change_language
+        onView(withId(R.id.spinner2_input)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is(french_spinner_text))).perform(click()); // clickable
+        onView(withId(R.id.spinner1_input)).check(matches(withSpinnerText(containsString(spanish_spinner_text))));
 //        String sucessful_text = "Successful";
 //        onView(withText(sucessful_text)).inRoot(withDecorView(not(is(InputViewActivityTestRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
     }
@@ -78,7 +89,12 @@ public class VocabularyInputTest001 {
 
         onView(withId(R.id.txt_lang1_input)).perform(typeText("German Word"));
         onView(withId(R.id.txt_lang2_input)).perform(typeText("English Word"));
+        onView(withId(R.id.ratingBar_difficulty)).perform(click());
+        onView(withId(R.id.txt_tag_input)).perform(typeText("holiday"));
         onView(withId(R.id.button_input)).perform(click());
+
+
+
 //
 //        String sucessful_text = "Successful";
 //        onView(withText(sucessful_text)).inRoot(withDecorView(not(is(InputViewActivityTestRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
