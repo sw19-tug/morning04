@@ -61,7 +61,12 @@ public class DatabaseController {
         try {
             Gson gson = new Gson();
             String dictString = reader.getString("dictionary04", null);
-            return gson.fromJson(dictString, default_Dictionary.class);
+            default_Dictionary d = gson.fromJson(dictString, default_Dictionary.class);
+            if(d == null)
+            {
+                d = new default_Dictionary();
+            }
+            return d;
         } catch(Exception e) {
             return null;
         }

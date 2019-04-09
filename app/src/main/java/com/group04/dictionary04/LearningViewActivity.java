@@ -24,10 +24,9 @@ public class LearningViewActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.learningview);
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
-        dbController.saveTestDatabase();
+        //dbController.saveTestDatabase();
         dict = dbController.getCurrentDatabase();
 
-        Log.d("asdfasdf", dict.getLanguagesStrings().size() + "sizuasdfasdfasd");
         search = (EditText) findViewById(R.id.search);
         vocList = (ListView) findViewById(R.id.vocList);
         final Spinner lang_spinner = (Spinner) findViewById(R.id.languageSelection);
@@ -101,7 +100,7 @@ public class LearningViewActivity extends Activity {
         super.onResume();
 
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
-        dbController.saveTestDatabase();
+        //dbController.saveTestDatabase();
         dict = dbController.getCurrentDatabase();
 
         Log.d("log", "Currently there are " + dict.getEntries().size() + " entries in this dict");
