@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.media.Rating;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -15,8 +14,9 @@ import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.group04.dictionary.enums.DifficultyIdentifier;
-import com.group04.dictionary.enums.LanguageIdentifier;
+import com.group04.dictionary04.enums.LanguageIdentifier;
+import com.group04.dictionary04.enums.DifficultyIdentifier;
+import com.group04.dictionary04.enums.LanguageIdentifier;
 import com.group04.dictionary04.database.DatabaseController;
 import com.group04.dictionary04.interfaces.Dictionary;
 import com.group04.dictionary04.model.default_Dictionary;
@@ -45,7 +45,7 @@ public class InputViewActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final DatabaseController dbController = new DatabaseController(getApplicationContext());
-        dbController.saveTestDatabase();
+        //dbController.saveTestDatabase();
         dict = dbController.getCurrentDatabase();
 
         setContentView(R.layout.inputview);
@@ -66,9 +66,7 @@ public class InputViewActivity extends Activity {
         //filling both lang spinners with options
         lang_spinner.setAdapter(dataAdapter);
         lang_spinner2.setAdapter(dataAdapter);
-
-
-        final Button button = (Button) findViewById(R.id.button_input);
+        Button button = (Button) findViewById(R.id.button_input);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,28 +99,38 @@ public class InputViewActivity extends Activity {
                     {
                         case "Spanish":
                             language1 = LanguageIdentifier.SP;
+                            break;
                         case "German":
                             language1 = LanguageIdentifier.DE;
+                            break;
                         case "English":
                             language1 = LanguageIdentifier.EN;
+                            break;
                         case "French":
                             language1 = LanguageIdentifier.FR;
+                            break;
                         case "Italy":
                             language1 = LanguageIdentifier.IT;
+                            break;
                     }
 
                     switch(spinner2.getSelectedItem().toString())
                     {
                         case "Spanish":
                             language2 = LanguageIdentifier.SP;
+                            break;
                         case "German":
                             language2 = LanguageIdentifier.DE;
+                            break;
                         case "English":
                             language2 = LanguageIdentifier.EN;
+                            break;
                         case "French":
                             language2 = LanguageIdentifier.FR;
+                            break;
                         case "Italy":
                             language2 = LanguageIdentifier.IT;
+                            break;
                     }
 
 
@@ -130,12 +138,16 @@ public class InputViewActivity extends Activity {
                     {
                         case 1:
                             difficult = DifficultyIdentifier.BEGINNER;
+                            break;
                         case 2:
                             difficult = DifficultyIdentifier.INTERMEDIATE;
+                            break;
                         case 3:
                             difficult = DifficultyIdentifier.ADVANCED;
+                            break;
                         case 4:
                             difficult = DifficultyIdentifier.NATIVE;
+                            break;
                     }
 
 
@@ -165,7 +177,7 @@ public class InputViewActivity extends Activity {
                                         EditText field2 = (EditText) findViewById(R.id.txt_lang2_input);
                                         EditText tag = (EditText) findViewById(R.id.txt_tag_input);
 
-                                        dict.addTranslation(field1.toString(), field2.toString(), language1, language2);
+                                        dict.addTranslation(field1.getText().toString(), field2.getText().toString(), language1, language2);
 
                                         String toast_success1 = "added successfully w/o tag and diff";
                                         Toast toast_success = Toast.makeText(getApplicationContext(),toast_success1, Toast.LENGTH_LONG);
@@ -205,7 +217,7 @@ public class InputViewActivity extends Activity {
         super.onResume();
 
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
-        dbController.saveTestDatabase();
+        //dbController.saveTestDatabase();
         dict = dbController.getCurrentDatabase();
     }
 
@@ -215,6 +227,7 @@ public class InputViewActivity extends Activity {
 
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
         dbController.saveCurrentDatabase(dict);
+        System.out.println(dict.getEntries().size());
     }
 
     @Override

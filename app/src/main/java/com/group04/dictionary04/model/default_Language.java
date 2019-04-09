@@ -40,15 +40,27 @@ public class default_Language implements com.group04.dictionary04.interfaces.Lan
 
     @Override
     public default_Vocabulary addVocabulary(String value) {
+        //TODO bug we first have to check if the vocabulary is existent
+        default_Vocabulary found = null;
+        for(default_Vocabulary voc : vocabularies) {
+            if(voc.getValue().equals(value)) {
+                found = voc;
+                break;
+            }
+        }
 
-        default_Vocabulary voc = new default_Vocabulary();
-        voc.setValue(value);
+        if(found != null) {
+            return found;
+        } else {
+            default_Vocabulary voc = new default_Vocabulary();
+            voc.setValue(value);
 
-        int i = vocabularies.size();
-        voc.setId(this.getLangAbbrev() + "-" + i);
+            int i = vocabularies.size();
+            voc.setId(this.getLangAbbrev() + "-" + i);
 
-        this.vocabularies.add(voc);
-        return voc;
+            this.vocabularies.add(voc);
+            return voc;
+        }
     }
 
     @Override
@@ -74,6 +86,34 @@ public class default_Language implements com.group04.dictionary04.interfaces.Lan
     @Override
     public List<default_Vocabulary> getVocabularies() {
         return this.vocabularies;
+    }
+
+    public List<default_Vocabulary> getVocabulariesQuery(String search) {
+        if(search != null && search.length() > 0) {
+            List<default_Vocabulary> list = new ArrayList<>();
+
+            for(default_Vocabulary voc : vocabularies) {
+                if(voc.getValue().toLowerCase().contains(search.toLowerCase())) {
+                    list.add(voc);
+                }
+
+            }
+
+            return list;
+        } else {
+            return getVocabularies();
+        }
+
+    }
+
+    public List<String> getVocabularyStrings() {
+        List<String> list = new ArrayList<>();
+
+        for(Vocabulary voc : vocabularies) {
+            list.add(voc.getValue());
+        }
+
+        return list;
     }
 
     @Override
