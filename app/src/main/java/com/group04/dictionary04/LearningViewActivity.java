@@ -10,8 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import com.group04.dictionary04.database.DatabaseController;
-import com.group04.dictionary04.interfaces.Dictionary;
-
 import com.group04.dictionary04.model.default_Dictionary;
 import com.group04.dictionary04.model.default_Language;
 import com.group04.dictionary04.model.default_Vocabulary;
