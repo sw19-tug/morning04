@@ -22,6 +22,7 @@ import com.group04.dictionary04.enums.LanguageIdentifier;
 import com.group04.dictionary04.database.DatabaseController;
 import com.group04.dictionary04.interfaces.Dictionary;
 import com.group04.dictionary04.model.default_Dictionary;
+import com.group04.dictionary04.model.default_Entry;
 import com.group04.dictionary04.model.default_Filter;
 import com.group04.dictionary04.model.default_Language;
 import com.group04.dictionary04.model.default_Vocabulary;
@@ -102,7 +103,7 @@ public class RatingViewActivity extends Activity {
                 }
                 else {
 
-                    Log.d("log", "Currently there are " + dict.getEntries().size() + " entries in this dict");
+
 
                     //GET DIFFICULTY
                     if((int) ratingBar.getRating() == 1)
@@ -114,22 +115,8 @@ public class RatingViewActivity extends Activity {
                     else
                         difficult = DifficultyIdentifier.NATIVE;
 
-                   //GET LANGUAGE
-                    /*
-                   if(lang_spinner.getSelectedItem().equals("Spanish"))
-                   {
-                       language1 = LanguageIdentifier.SP;
-                   }
-                   else if(lang_spinner.getSelectedItem().equals("German"))
-                       language1 = LanguageIdentifier.DE;
-                   else if(lang_spinner.getSelectedItem().equals("English"))
-                       language1 = LanguageIdentifier.EN;
-                   else if(lang_spinner.getSelectedItem().equals("French"))
-                       language1 = LanguageIdentifier.FR;
-                   else if(lang_spinner.getSelectedItem().equals("Italy"))
-                       language1 = LanguageIdentifier.IT;
-                       */
-                    loadCurrentLanguageList(dict.getLanguageByIndex(lang_spinner.getSelectedItem().toString()));
+
+                    loadCurrentLanguageList(dict.getLanguageByIndex(lang_spinner.getSelectedItem().toString()), difficult);
 
                 }
             }
@@ -165,7 +152,38 @@ public class RatingViewActivity extends Activity {
 
 
 
-    private void loadCurrentLanguageList(default_Language language) {
+    private void loadCurrentLanguageList(default_Language language, DifficultyIdentifier difficulty) {
+
+        // here we need a list of default entries
+        // fetch all words from the selected language
+        // get id's from this words
+        // search in the default dictionary - in the default entry list for this id
+        // get the id of the second word
+        // get the rating of the entry
+        // if the rating matches the difficulty - add the entry to our default_entries-list for printing
+        // print the entries list
+
+        List<default_Entry> entries = new ArrayList<>();
+        List<default_Vocabulary> vocabularie = new ArrayList<>();
+        vocabularie = language.getVocabularies();
+
+        for(default_Vocabulary vocIt : vocabularie)
+        {
+            Log.d("log", "looking for vocabulary " + vocIt.getId() + " " + vocIt.getValue());
+            for(default_Entry entryIt : dict.getEntries())
+            {
+                Log.d("log", "check matching in Entry " + entryIt.getId1() + " " + entryIt.getId2());
+                if(vocIt.getId().equals(entryIt.getId1()) || vocIt.getId().equals(entryIt.getId2()))
+                {
+                    Log.d("log", "MATCHING FOUND AND ADD TO LIST " + vocIt.getId());
+                    entries.add(entryIt);
+                }
+            }
+        }
+
+        Log.d("log", "now there are " + entries.size() + " in the new atries list");
+
+
         ArrayAdapter<default_Vocabulary> dataAdapter = new ArrayAdapter<default_Vocabulary>(this, android.R.layout.simple_list_item_1, language.getVocabularies());
         items.setAdapter(dataAdapter);
 
