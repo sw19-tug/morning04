@@ -15,7 +15,6 @@ import com.group04.dictionary04.model.default_Language;
 import com.group04.dictionary04.model.default_Vocabulary;
 
 public class LearningViewActivity extends Activity {
-
     private default_Dictionary dict = null;
     private ListView vocList = null;
     private EditText search = null;
