@@ -1,7 +1,7 @@
 package com.group04.dictionary04.model;
 
-import com.group04.dictionary.enums.DifficultyIdentifier;
-import com.group04.dictionary.enums.LanguageIdentifier;
+import com.group04.dictionary04.enums.DifficultyIdentifier;
+import com.group04.dictionary04.enums.LanguageIdentifier;
 
 import java.util.List;
 
