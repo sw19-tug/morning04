@@ -46,7 +46,15 @@ public class default_Dictionary implements Dictionary {
     }
 
     @Override
-    public default_Pair getTranslation(default_Entry entry) {
+    public default_Entry getTranslation(default_Entry entry) {
+        for(default_Entry temp : entries) {
+            if(temp.getId1().getId().equals(entry.getId1().getId()) && temp.getId2().getId().equals(entry.getId2().getId())) {
+                return temp;
+            } else if(temp.getId1().getId().equals(entry.getId2().getId()) && temp.getId2().getId().equals(entry.getId1().getId())) {
+                return temp;
+            }
+        }
+
         return null;
     }
 
@@ -66,6 +74,7 @@ public class default_Dictionary implements Dictionary {
         return null;
     }
 
+    //TODO do we really need this function?
     @Override
     public void addTranslation(String voc1, String voc2, LanguageIdentifier lang1, LanguageIdentifier lang2) {
         default_Language first = getLanguage(lang1);

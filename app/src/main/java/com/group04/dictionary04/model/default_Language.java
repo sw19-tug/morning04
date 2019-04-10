@@ -33,7 +33,7 @@ public class default_Language implements com.group04.dictionary04.interfaces.Lan
 
     @Override
     public default_Vocabulary getVocByID(String id) {
-        String index = id.substring(3, id.length() - 1);
+        String index = id.substring(3, id.length());
         int i = Integer.parseInt(index);
         return vocabularies.get(i);
     }
