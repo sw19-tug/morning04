@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,6 +24,7 @@ import com.group04.dictionary04.interfaces.Dictionary;
 import com.group04.dictionary04.model.default_Dictionary;
 import com.group04.dictionary04.model.default_Filter;
 import com.group04.dictionary04.model.default_Language;
+import com.group04.dictionary04.model.default_Vocabulary;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +39,8 @@ public class RatingViewActivity extends Activity {
     private RatingBar ratingBar;
     private Button btnFilter;
     private ListView items;
+    private List<String> vocabs = new ArrayList<String>();
+
 
 
 
@@ -70,8 +74,8 @@ public class RatingViewActivity extends Activity {
 
         lang_spinner.setAdapter(dataAdapter);
 
+
         //TEST LIST INPUT
-        List<String> vocabs = new ArrayList<String>();
         vocabs.add("Vocab1");
         vocabs.add("Vocab2");
         vocabs.add("Vocab3");
@@ -98,6 +102,8 @@ public class RatingViewActivity extends Activity {
                 }
                 else {
 
+                    Log.d("log", "Currently there are " + dict.getEntries().size() + " entries in this dict");
+
                     //GET DIFFICULTY
                     if((int) ratingBar.getRating() == 1)
                         difficult = DifficultyIdentifier.BEGINNER;
@@ -109,22 +115,21 @@ public class RatingViewActivity extends Activity {
                         difficult = DifficultyIdentifier.NATIVE;
 
                    //GET LANGUAGE
+                    /*
                    if(lang_spinner.getSelectedItem().equals("Spanish"))
+                   {
                        language1 = LanguageIdentifier.SP;
+                   }
                    else if(lang_spinner.getSelectedItem().equals("German"))
-                        language1 = LanguageIdentifier.DE;
+                       language1 = LanguageIdentifier.DE;
                    else if(lang_spinner.getSelectedItem().equals("English"))
-                        language1 = LanguageIdentifier.EN;
+                       language1 = LanguageIdentifier.EN;
                    else if(lang_spinner.getSelectedItem().equals("French"))
-                        language1 = LanguageIdentifier.FR;
+                       language1 = LanguageIdentifier.FR;
                    else if(lang_spinner.getSelectedItem().equals("Italy"))
-                        language1 = LanguageIdentifier.IT;
-
-
-                    Toast.makeText(RatingViewActivity.this, difficult.toString() + " "
-                            + (int) ratingBar.getRating() + " " + language1.toString(),
-                            Toast.LENGTH_SHORT).show();
-
+                       language1 = LanguageIdentifier.IT;
+                       */
+                    loadCurrentLanguageList(dict.getLanguageByIndex(lang_spinner.getSelectedItem().toString()));
 
                 }
             }
@@ -154,11 +159,20 @@ public class RatingViewActivity extends Activity {
                 AlertDialog dia_alert = dialog.create();
                 dia_alert.setTitle("Difficulty");
                 dia_alert.show();
-
             }
         });
+    }
+
+
+
+    private void loadCurrentLanguageList(default_Language language) {
+        ArrayAdapter<default_Vocabulary> dataAdapter = new ArrayAdapter<default_Vocabulary>(this, android.R.layout.simple_list_item_1, language.getVocabularies());
+        items.setAdapter(dataAdapter);
 
     }
+
+
+
 
     @Override
     public void onResume() {
