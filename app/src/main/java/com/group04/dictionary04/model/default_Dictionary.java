@@ -1,8 +1,7 @@
 package com.group04.dictionary04.model;
 
-import android.util.Log;
-import com.group04.dictionary.enums.DifficultyIdentifier;
-import com.group04.dictionary.enums.LanguageIdentifier;
+import com.group04.dictionary04.enums.DifficultyIdentifier;
+import com.group04.dictionary04.enums.LanguageIdentifier;
 import com.group04.dictionary04.interfaces.*;
 
 import java.util.ArrayList;
@@ -31,7 +30,7 @@ public class default_Dictionary implements Dictionary {
         languages.put(LanguageIdentifier.SP, sp);
     }
 
-    
+
     @Override
     public default_Entry getEntry(String id1, String id2) {
 
@@ -50,7 +49,15 @@ public class default_Dictionary implements Dictionary {
     }
 
     @Override
-    public default_Pair getTranslation(default_Entry entry) {
+    public default_Entry getTranslation(default_Entry entry) {
+        for(default_Entry temp : entries) {
+            if(temp.getId1().getId().equals(entry.getId1().getId()) && temp.getId2().getId().equals(entry.getId2().getId())) {
+                return temp;
+            } else if(temp.getId1().getId().equals(entry.getId2().getId()) && temp.getId2().getId().equals(entry.getId1().getId())) {
+                return temp;
+            }
+        }
+
         return null;
     }
 
@@ -70,6 +77,7 @@ public class default_Dictionary implements Dictionary {
         return null;
     }
 
+    //TODO do we really need this function?
     @Override
     public void addTranslation(String voc1, String voc2, LanguageIdentifier lang1, LanguageIdentifier lang2) {
         default_Language first = getLanguage(lang1);
@@ -77,24 +85,48 @@ public class default_Dictionary implements Dictionary {
 
 
         default_Vocabulary ovoc1 = first.addVocabulary(voc1);
+        ovoc1.setLanguage(lang1);
         default_Vocabulary ovoc2 = second.addVocabulary(voc2);
-
+        ovoc2.setLanguage(lang2);
         default_Entry entry = new default_Entry();
-        entry.setId1(ovoc1.getId());
-        entry.setId2(ovoc2.getId());
+        entry.setId1(ovoc1);
+        entry.setId2(ovoc2);
 
 
         entries.add(entry);
     }
 
     @Override
-    public void addDifficulty(default_Entry entry, DifficultyIdentifier diff) {
+    public void addTranslationWithDiffAndTag(String voc1, String voc2, LanguageIdentifier lang1, LanguageIdentifier lang2,DifficultyIdentifier diff, String tag)
+    {
+        default_Language first = getLanguage(lang1);
+        default_Language second = getLanguage(lang2);
 
+
+        default_Vocabulary ovoc1 = first.addVocabulary(voc1);
+        ovoc1.setLanguage(lang1);
+        default_Vocabulary ovoc2 = second.addVocabulary(voc2);
+        ovoc2.setLanguage(lang2);
+        default_Entry entry = new default_Entry();
+        entry.setId1(ovoc1);
+        entry.setId2(ovoc2);
+        entry.setRating(diff.toString());
+        entry.setTag(tag);
+
+
+        entries.add(entry);
+    }
+
+
+
+    @Override
+    public void addDifficulty(default_Entry entry, DifficultyIdentifier diff) {
+        entry.setRating(diff.toString());
     }
 
     @Override
     public void addTag(default_Entry entry, String tag) {
-
+        entry.setTag(tag);
     }
 
     @Override
@@ -114,7 +146,42 @@ public class default_Dictionary implements Dictionary {
 
     @Override
     public List<default_Language> getLanguages() {
+        return new ArrayList<default_Language>(languages.values());
+    }
+
+
+    public String getTranslationString(default_Vocabulary voc) {
+        String idToSearch = voc.getId();
+        String returnString = "";
+
+        for(default_Entry entry : entries) {
+            if(entry.getId1().getId().equals(idToSearch)) {
+                returnString += entry.getId2().getLanguage() + ": " + entry.getId2() + "\n";
+            } else if(entry.getId2().getId().equals(idToSearch)) {
+                returnString += entry.getId1().getLanguage() + ": " + entry.getId1() + "\n";
+            }
+        }
+
+        return returnString;
+    }
+
+    public default_Language getLanguageByIndex(String name) {
+        for(default_Language language : languages.values()) {
+            if(language.getDisplayName().equals(name))
+                return language;
+        }
+
         return null;
+    }
+
+    public List<String> getLanguagesStrings() {
+        List<String> list = new ArrayList<>();
+
+        for(default_Language language : languages.values()) {
+            list.add(language.getDisplayName());
+        }
+
+        return list;
     }
 
     @Override

@@ -1,9 +1,12 @@
 package com.group04.dictionary04.model;
 
+import com.group04.dictionary04.enums.LanguageIdentifier;
+
 public class default_Vocabulary implements com.group04.dictionary04.interfaces.Vocabulary {
 
     private String id = null;
     private String value = null;
+    private LanguageIdentifier language = null;
 
     public default_Vocabulary() {
 
@@ -13,6 +16,17 @@ public class default_Vocabulary implements com.group04.dictionary04.interfaces.V
 
     }
 
+    public default_Vocabulary(String _id, String value, LanguageIdentifier lang) {
+
+    }
+
+    public LanguageIdentifier getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(LanguageIdentifier language) {
+        this.language = language;
+    }
 
     @Override
     public String getId() {
@@ -32,5 +46,10 @@ public class default_Vocabulary implements com.group04.dictionary04.interfaces.V
     @Override
     public void setValue(String value) {
         this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return value;
     }
 }

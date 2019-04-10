@@ -1,22 +1,21 @@
 package com.group04.dictionary04.interfaces;
 
-import com.group04.dictionary.enums.DifficultyIdentifier;
-import com.group04.dictionary.enums.LanguageIdentifier;
+import com.group04.dictionary04.enums.DifficultyIdentifier;
+import com.group04.dictionary04.enums.LanguageIdentifier;
 import com.group04.dictionary04.model.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface Dictionary {
 
     default_Entry getEntry(String id1, String id2);
     List<default_Entry> getEntries(default_Filter filter);
-    default_Pair getTranslation(default_Entry entry);
+    default_Entry getTranslation(default_Entry entry);
     default_Language getLanguage(LanguageIdentifier ident);
     default_Exam getExam(default_Filter filter);
     default_Exam generateExam(default_Filter filter);
 
-
+    void addTranslationWithDiffAndTag(String voc1, String voc2, LanguageIdentifier lang1, LanguageIdentifier lang2,DifficultyIdentifier diff, String tag);
     void addTranslation(String voc1, String voc2, LanguageIdentifier lang1, LanguageIdentifier lang2);
     void addDifficulty(default_Entry entry, DifficultyIdentifier diff);
     void addTag(default_Entry entry, String tag);
