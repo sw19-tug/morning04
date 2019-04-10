@@ -7,6 +7,7 @@ import com.group04.dictionary04.interfaces.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 public class default_Dictionary implements Dictionary {
     private List<default_Entry> entries = new ArrayList<>();
@@ -70,11 +71,17 @@ public class default_Dictionary implements Dictionary {
 
     @Override
     public default_Exam generateExam(default_Filter filter) {
+        default_Exam exam = new default_Exam();
         if (filter == null)
         {
-
+            for (int i = 0; i < exam.limitVocs; ++i)
+            {
+                Random rand = new Random();
+                int random = rand.nextInt(entries.size());
+                exam.getVocsToTest().add(entries.get(random));
+            }
         }
-        return null;
+        return exam;
     }
 
     //TODO do we really need this function?

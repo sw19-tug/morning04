@@ -5,4 +5,5 @@ public interface Vocabulary {
     void setId(String id);
     String getValue();
     void setValue(String value);
+    String getLangString();
 }

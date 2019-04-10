@@ -2,15 +2,22 @@ package com.group04.dictionary04;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.group04.dictionary04.database.DatabaseController;
 import com.group04.dictionary04.model.default_Dictionary;
 import com.group04.dictionary04.model.default_Exam;
 
-public class TestViewActivity extends Activity {
+public class TestViewActivity extends Activity implements View.OnClickListener {
 
     private default_Dictionary dict = null;
+
+    int index = 0;
+
+    TextView lang1;
+    TextView lang2;
+    TextView givenVocab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,12 +27,15 @@ public class TestViewActivity extends Activity {
         dict = dbController.getCurrentDatabase();
 
         setContentView(R.layout.testview);
-        TextView lang1 = findViewById(R.id.textView3);
-        TextView lang2 = findViewById(R.id.textView5);
-        TextView givenVocab = findViewById(R.id.textView4);
-        lang1.setText("Language 1");
+        lang1 = findViewById(R.id.textView3);
+        lang2 = findViewById(R.id.textView5);
+        givenVocab = findViewById(R.id.textView4);
+
         default_Exam exam = dict.generateExam(null);
 
+        lang1.setText(exam.getVocsToTest().get(index).getId1().getLangString());
+        lang2.setText(exam.getVocsToTest().get(index).getId2().getLangString());
+        givenVocab.setText(exam.getVocsToTest().get(0).getId1().getValue());
     }
 
     @Override
@@ -51,5 +61,15 @@ public class TestViewActivity extends Activity {
 
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
         dbController.saveCurrentDatabase(dict);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.button3:
+
+                break;
+        }
+
     }
 }

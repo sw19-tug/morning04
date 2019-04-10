@@ -14,7 +14,6 @@ public class default_Entry implements com.group04.dictionary04.interfaces.Entry 
 
     }
 
-
     @Override
     public default_Vocabulary getId1() {
         return this.id1;
