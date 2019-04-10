@@ -10,6 +10,13 @@ public class default_Exam implements com.group04.dictionary04.interfaces.Exam {
     String result = null;
     String filter = null;
 
+    public default_Exam(default_Filter filter){
+       if (filter == null)
+       {
+
+       }
+    }
+
     @Override
     public List<default_Entry> getVocsToTest() {
         return null;

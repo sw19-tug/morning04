@@ -62,7 +62,10 @@ public class default_Dictionary implements Dictionary {
 
     @Override
     public default_Exam generateExam(default_Filter filter) {
+        if (filter == null)
+        {
 
+        }
         return null;
     }
 
