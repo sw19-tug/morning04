@@ -18,13 +18,11 @@ import com.group04.dictionary04.enums.LanguageIdentifier;
 import com.group04.dictionary04.enums.DifficultyIdentifier;
 import com.group04.dictionary04.enums.LanguageIdentifier;
 import com.group04.dictionary04.database.DatabaseController;
-import com.group04.dictionary04.interfaces.Dictionary;
 import com.group04.dictionary04.model.default_Dictionary;
 
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.group04.dictionary04.database.DatabaseController;

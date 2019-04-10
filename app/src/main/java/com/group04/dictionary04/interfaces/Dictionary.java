@@ -4,7 +4,6 @@ import com.group04.dictionary04.enums.DifficultyIdentifier;
 import com.group04.dictionary04.enums.LanguageIdentifier;
 import com.group04.dictionary04.model.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface Dictionary {
