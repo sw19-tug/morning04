@@ -10,7 +10,7 @@ public interface Dictionary {
 
     default_Entry getEntry(String id1, String id2);
     List<default_Entry> getEntries(default_Filter filter);
-    default_Pair getTranslation(default_Entry entry);
+    default_Entry getTranslation(default_Entry entry);
     default_Language getLanguage(LanguageIdentifier ident);
     default_Exam getExam(default_Filter filter);
     default_Exam generateExam(default_Filter filter);
