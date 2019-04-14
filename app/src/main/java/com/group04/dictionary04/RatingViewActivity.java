@@ -28,6 +28,8 @@ import com.group04.dictionary04.model.default_Language;
 import com.group04.dictionary04.model.default_Vocabulary;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class RatingViewActivity extends Activity {
@@ -154,35 +156,37 @@ public class RatingViewActivity extends Activity {
 
     private void loadCurrentLanguageList(default_Language language, DifficultyIdentifier difficulty) {
 
-        // here we need a list of default entries
-        // fetch all words from the selected language
-        // get id's from this words
-        // search in the default dictionary - in the default entry list for this id
-        // get the id of the second word
-        // get the rating of the entry
-        // if the rating matches the difficulty - add the entry to our default_entries-list for printing
-        // print the entries list
 
         List<default_Entry> entries = new ArrayList<>();
-        List<default_Vocabulary> vocabularie = new ArrayList<>();
-        vocabularie = language.getVocabularies();
+        List<default_Vocabulary> vocabularie = language.getVocabularies();
 
         for(default_Vocabulary vocIt : vocabularie)
         {
-            Log.d("log", "looking for vocabulary " + vocIt.getId() + " " + vocIt.getValue());
+            Log.d("log", "looking for vocabulary " + vocIt.getId() + " " + vocIt.getValue() + " Difficulty: " +
+                    difficulty);
             for(default_Entry entryIt : dict.getEntries())
             {
-                Log.d("log", "check matching in Entry " + entryIt.getId1() + " " + entryIt.getId2());
-                if(vocIt.getId().equals(entryIt.getId1()) || vocIt.getId().equals(entryIt.getId2()))
+                Log.d("log", "check matching in Entry " +
+                        entryIt.getId1().getId() + " " + entryIt.getId1().getValue() + " " +
+                        entryIt.getId2().getId() + " " + entryIt.getId2().getValue() + " Rating:" + entryIt.getRating());
+                if((vocIt.getId().equals(entryIt.getId1().getId()) || vocIt.getId().equals(entryIt.getId2().getId())))
                 {
                     Log.d("log", "MATCHING FOUND AND ADD TO LIST " + vocIt.getId());
                     entries.add(entryIt);
                 }
+
+//                 currently not working because no difficulty set by the entries
+//                if((vocIt.getId().equals(entryIt.getId1().getId()) || vocIt.getId().equals(entryIt.getId2().getId())) &&
+//                        difficulty.equals(entryIt.getRating()))
+//                {
+//                    Log.d("log", "MATCHING FOUND AND ADD TO LIST " + vocIt.getId());
+//                    entries.add(entryIt);
+//                }
             }
         }
+        // TODO: Sorting
 
         Log.d("log", "now there are " + entries.size() + " in the new atries list");
-
 
         ArrayAdapter<default_Vocabulary> dataAdapter = new ArrayAdapter<default_Vocabulary>(this, android.R.layout.simple_list_item_1, language.getVocabularies());
         items.setAdapter(dataAdapter);
