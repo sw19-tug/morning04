@@ -80,7 +80,6 @@ public class default_Dictionary implements Dictionary {
         entry.setId1(ovoc1);
         entry.setId2(ovoc2);
 
-
         entries.add(entry);
     }
 
