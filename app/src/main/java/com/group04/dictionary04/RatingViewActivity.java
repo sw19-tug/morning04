@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,6 +16,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.group04.dictionary04.enums.DifficultyIdentifier;
@@ -77,11 +79,9 @@ public class RatingViewActivity extends Activity {
 
         lang_spinner.setAdapter(dataAdapter);
 
-
         //TEST LIST INPUT
-        vocabs.add("Vocab1");
-        vocabs.add("Vocab2");
-        vocabs.add("Vocab3");
+        vocabs.add("");
+
 
         ArrayAdapter<String> rateAdapter = new ArrayAdapter<>(RatingViewActivity.this,
                 android.R.layout.simple_list_item_1, vocabs);
@@ -148,16 +148,15 @@ public class RatingViewActivity extends Activity {
                 AlertDialog dia_alert = dialog.create();
                 dia_alert.setTitle("Difficulty");
                 dia_alert.show();
+
             }
         });
     }
 
-
-
     private void loadCurrentLanguageList(default_Language language, DifficultyIdentifier difficulty) {
 
 
-        List<default_Entry> entries = new ArrayList<>();
+        final List<default_Entry> entries = new ArrayList<>();
         List<default_Vocabulary> vocabularie = language.getVocabularies();
 
         for(default_Vocabulary vocIt : vocabularie)
@@ -169,6 +168,7 @@ public class RatingViewActivity extends Activity {
                 Log.d("log", "check matching in Entry " +
                         entryIt.getId1().getId() + " " + entryIt.getId1().getValue() + " " +
                         entryIt.getId2().getId() + " " + entryIt.getId2().getValue() + " Rating:" + entryIt.getRating());
+
                 if((vocIt.getId().equals(entryIt.getId1().getId()) || vocIt.getId().equals(entryIt.getId2().getId())))
                 {
                     Log.d("log", "MATCHING FOUND AND ADD TO LIST " + vocIt.getId());
@@ -188,7 +188,23 @@ public class RatingViewActivity extends Activity {
 
         Log.d("log", "now there are " + entries.size() + " in the new atries list");
 
-        ArrayAdapter<default_Vocabulary> dataAdapter = new ArrayAdapter<default_Vocabulary>(this, android.R.layout.simple_list_item_1, language.getVocabularies());
+//        ArrayAdapter<default_Vocabulary> dataAdapter = new ArrayAdapter<default_Vocabulary>(this, android.R.layout.simple_list_item_1, vocabularie);
+//        ArrayAdapter<default_Entry> dataAdapter = new ArrayAdapter<default_Entry>(this, android.R.layout.simple_list_item_2, entries);
+
+
+        ArrayAdapter<default_Entry> dataAdapter = new ArrayAdapter<default_Entry>(this, android.R.layout.simple_list_item_2, android.R.id.text1, entries) {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                TextView text1 = (TextView) view.findViewById(android.R.id.text1);
+                TextView text2 = (TextView) view.findViewById(android.R.id.text2);
+
+                text1.setText(entries.get(position).getId1().getValue());
+                text2.setText(entries.get(position).getId2().getValue());
+                return view;
+            }
+        };
+
         items.setAdapter(dataAdapter);
 
     }
