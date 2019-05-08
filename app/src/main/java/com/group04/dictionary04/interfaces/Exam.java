@@ -18,4 +18,6 @@ public interface Exam {
     void setResult(String result);
     String getFilter();
     void setFilter(String filter);
+    int countVocsToTest();
+    int countFailedVocs();
 }

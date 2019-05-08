@@ -17,15 +17,6 @@ public class default_Exam implements com.group04.dictionary04.interfaces.Exam {
         failedVocs = new ArrayList<>();
     }
 
-    /*
-    public default_Exam(default_Filter filter){
-       if (filter == null)
-       {
-
-       }
-    }
-    */
-
     @Override
     public List<default_Entry> getVocsToTest() {
         return vocsToTest;
@@ -64,5 +55,16 @@ public class default_Exam implements com.group04.dictionary04.interfaces.Exam {
     @Override
     public void setFilter(String filter) {
 
+    }
+
+    @Override
+    public int countVocsToTest(){
+        return vocsToTest.size();
+    }
+
+    @Override
+    public int countFailedVocs(){
+
+        return failedVocs.size();
     }
 }
