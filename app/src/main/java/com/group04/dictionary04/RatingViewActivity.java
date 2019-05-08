@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -43,6 +44,10 @@ public class RatingViewActivity extends Activity {
     private Button btnFilter;
     private ListView items;
     private List<String> vocabs = new ArrayList<String>();
+
+    private RatingBar ratingPopup;
+    private Button btnPopup;
+    private View ratingPopupView;
 
 
 
@@ -129,7 +134,12 @@ public class RatingViewActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 AlertDialog.Builder dialog = new AlertDialog.Builder(RatingViewActivity.this);
-                dialog.setMessage("Do you want to change the difficulty?").setCancelable(false)
+
+                initPopupViewControls();
+
+                dialog.setView(ratingPopupView);
+
+                /*dialog.setMessage("Do you want to change the difficulty?").setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -143,7 +153,7 @@ public class RatingViewActivity extends Activity {
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.cancel();
                             }
-                        });
+                        });*/
 
                 AlertDialog dia_alert = dialog.create();
                 dia_alert.setTitle("Difficulty");
@@ -152,6 +162,15 @@ public class RatingViewActivity extends Activity {
         });
     }
 
+    private void initPopupViewControls()
+    {
+        // Get layout inflater object.
+        LayoutInflater layoutInflater = LayoutInflater.from(RatingViewActivity.this);
+
+        // Inflate the popup dialog from a layout xml file.
+        ratingPopupView = layoutInflater.inflate(R.layout.ratingpopup, null);
+
+    }
 
 
     private void loadCurrentLanguageList(default_Language language, DifficultyIdentifier difficulty) {
