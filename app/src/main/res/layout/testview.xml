@@ -113,7 +113,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="onClick"
-            android:text="@string/quit_exam" />
+            android:text="@string/save_exam" />
 
         <Button
             android:id="@+id/button5"

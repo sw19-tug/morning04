@@ -5,11 +5,11 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.group04.dictionary04.database.DatabaseController;
 import com.group04.dictionary04.model.default_Dictionary;
+import com.group04.dictionary04.model.default_Entry;
 import com.group04.dictionary04.model.default_Exam;
 
 public class TestViewActivity extends Activity implements View.OnClickListener {
@@ -22,8 +22,6 @@ public class TestViewActivity extends Activity implements View.OnClickListener {
     TextView lang2;
     TextView givenVocab;
     default_Exam exam;
-    Button quit_yes = null;
-    Button quit_no = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,49 +67,101 @@ public class TestViewActivity extends Activity implements View.OnClickListener {
         dbController.saveCurrentDatabase(dict);
     }
 
+    public void refreshContent(){
+
+        if(exam.getVocsToTest().size() == 0 || index < 0 || index >= exam.getVocsToTest().size())
+        {
+            AlertDialog.Builder notification=new AlertDialog.Builder(this);
+            notification.setTitle("Your Exam has been saved!");
+            notification.setNeutralButton("Ok", null);
+            return;
+        }
+
+        lang1.setText(exam.getVocsToTest().get(index).getId1().getLangString());
+        lang2.setText(exam.getVocsToTest().get(index).getId2().getLangString());
+        givenVocab.setText(exam.getVocsToTest().get(index).getId1().getValue());
+        //clear the input box
+
+    }
+
+    public void displayPopUp(String title, String NeutralButton){
+        AlertDialog.Builder notification=new AlertDialog.Builder(this);
+        notification.setTitle(title);
+        notification.setMessage(NeutralButton);
+        notification.setNeutralButton("OK", null);
+        notification.show();
+    }
+
+    public void removeEntry(){
+        exam.getVocsToTest().remove(index);
+        if(index == exam.getVocsToTest().size() && index != 0)
+        {
+            index--;
+        }else if(index == exam.getVocsToTest().size() && index == 0)
+        {
+            saveButtonHandler();
+        }
+    }
+
     public void checkButtonHandler(){
         AlertDialog.Builder dialog=new AlertDialog.Builder(this);
         dialog.setTitle("Is your Answer correct?");
+        String answer = exam.getVocsToTest().get(index).getId2().getValue();
         dialog.setNegativeButton("no", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                default_Entry entry = exam.getVocsToTest().get(index);
+                exam.getFailedVocs().add(entry);
+                removeEntry();
             }
         });
         dialog.setPositiveButton("yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                exam.getVocsToTest().remove(index);
-                nextButtonHandler();
+                    removeEntry();
             }
         });
         AlertDialog alertDialog=dialog.create();
-        alertDialog.setMessage("Correct Answer:\n" + exam.getVocsToTest().get(index).getId2().getValue());
+        alertDialog.setMessage("Correct Answer:\n" + answer);
         alertDialog.show();
+        refreshContent();
 
     }
 
     public void prevButtonHandler(){
-        index--;
-        if(!(index > 0)){
-            index = exam.countVocsToTest() - 1;
+        if (index > 0)
+            index--;
+        else {
+            displayPopUp("Notification", "You are already at the first Vocab.");
         }
-        lang1.setText(exam.getVocsToTest().get(index).getId1().getLangString());
-        lang2.setText(exam.getVocsToTest().get(index).getId2().getLangString());
-        givenVocab.setText(exam.getVocsToTest().get(index).getId1().getValue());
 
+        refreshContent();
     }
 
+    public void nextButtonHandler(){
+        if(index < exam.getVocsToTest().size() - 1)
+        {
+            index ++;
+        }else {
+            displayPopUp("Notification", "You are already at the last Vocab.");
+        }
+        refreshContent();
+    }
 
-    public void quitButtonHandler(){
+    public void saveButtonHandler(){
         AlertDialog.Builder dialog=new AlertDialog.Builder(this);
-        dialog.setTitle("Are you sure you want to quit?");
-        dialog.setNegativeButton("stay", null);
-        //issue with quit
-        dialog.setPositiveButton("quit", new DialogInterface.OnClickListener() {
+        dialog.setTitle("Done...");
+        dialog.setMessage("Do you want to save your exam progress?");
+        dialog.setNegativeButton("yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                setContentView(R.layout.activity_main);
+                dict.getExams().add(exam);
+            }
+        });
+
+        dialog.setPositiveButton("no", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
             }
         });
         AlertDialog alertDialog=dialog.create();
@@ -119,16 +169,6 @@ public class TestViewActivity extends Activity implements View.OnClickListener {
     }
 
 
-    public void nextButtonHandler(){
-        index++;
-        if(!(index < exam.countVocsToTest())){
-            index = 0;
-        }
-        lang1.setText(exam.getVocsToTest().get(index).getId1().getLangString());
-        lang2.setText(exam.getVocsToTest().get(index).getId2().getLangString());
-        givenVocab.setText(exam.getVocsToTest().get(index).getId1().getValue());
-
-    }
 
     @Override
     public void onClick(View v) {
@@ -140,7 +180,7 @@ public class TestViewActivity extends Activity implements View.OnClickListener {
                 prevButtonHandler();
                 break;
             case R.id.button4:
-                quitButtonHandler();
+                saveButtonHandler();
                 break;
             case R.id.button5:
                 nextButtonHandler();
