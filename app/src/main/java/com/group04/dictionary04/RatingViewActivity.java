@@ -5,6 +5,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,7 +30,7 @@ import com.group04.dictionary04.model.default_Language;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RatingViewActivity extends Activity {
+public class RatingViewActivity extends AppCompatActivity {
 
     private LanguageIdentifier language1;
     private default_Dictionary dict = null;
@@ -49,6 +52,9 @@ public class RatingViewActivity extends Activity {
         dict = dbController.getCurrentDatabase();
 
         setContentView(R.layout.ratingview);
+        setSupportActionBar((Toolbar)findViewById(R.id.myactionbar));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         ratingBar = (RatingBar) findViewById(R.id.ratingBar_rating);
         btnFilter = (Button) findViewById(R.id.btn_filter);
@@ -183,5 +189,16 @@ public class RatingViewActivity extends Activity {
 
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
         dbController.saveCurrentDatabase(dict);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            onBackPressed();  return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

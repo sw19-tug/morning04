@@ -5,7 +5,12 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.media.Rating;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -30,7 +35,7 @@ import com.group04.dictionary04.model.default_Dictionary;
 import com.group04.dictionary04.model.default_Language;
 import com.group04.dictionary04.model.default_Vocabulary;
 
-public class InputViewActivity extends Activity {
+public class InputViewActivity extends AppCompatActivity {
 
     private default_Dictionary dict = null;
     private LanguageIdentifier language1;
@@ -38,15 +43,19 @@ public class InputViewActivity extends Activity {
     private DifficultyIdentifier difficult;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.inputview);
+        setSupportActionBar((Toolbar)findViewById(R.id.myactionbar));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         final DatabaseController dbController = new DatabaseController(getApplicationContext());
         //dbController.saveTestDatabase();
         dict = dbController.getCurrentDatabase();
 
-        setContentView(R.layout.inputview);
+
         List<String> languages = new ArrayList<>();
 
         //Adding all usable languages to List
@@ -209,6 +218,10 @@ public class InputViewActivity extends Activity {
 
     }
 
+    public void returnMenu(View view) {
+        finish();
+    }
+
 
     @Override
     public void onResume() {
@@ -236,6 +249,15 @@ public class InputViewActivity extends Activity {
         dbController.saveCurrentDatabase(dict);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
 
+        if (id == android.R.id.home) {
+            onBackPressed();  return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
 }
