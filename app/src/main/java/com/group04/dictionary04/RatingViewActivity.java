@@ -48,7 +48,6 @@ public class RatingViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
-        dbController.saveTestDatabase();
         dict = dbController.getCurrentDatabase();
 
         setContentView(R.layout.ratingview);
@@ -171,7 +170,6 @@ public class RatingViewActivity extends AppCompatActivity {
         super.onResume();
 
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
-        dbController.saveTestDatabase();
         dict = dbController.getCurrentDatabase();
     }
 

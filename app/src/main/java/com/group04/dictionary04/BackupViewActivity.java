@@ -6,13 +6,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import com.group04.dictionary04.database.DatabaseController;
 import com.group04.dictionary04.model.default_Dictionary;
 
 public class BackupViewActivity extends AppCompatActivity {
-
-    private default_Dictionary dict = null;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,29 +20,39 @@ public class BackupViewActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
+    public void backupData(View view) {
+        DatabaseController dbController = new DatabaseController(this.getApplicationContext());
+        dbController.backupDatabase();
+    }
+
+    public void restoreData(View view) {
+        DatabaseController dbController = new DatabaseController(this.getApplicationContext());
+        dbController.restoreDatabase();
+    }
+
+    public void clearTesting(View view) {
+        DatabaseController dbController = new DatabaseController(this.getApplicationContext());
+        dbController.clearTesting();
+    }
+
+    public void clearAll(View view) {
+        DatabaseController dbController = new DatabaseController(this.getApplicationContext());
+        dbController.clearDatabase();
+    }
+
     @Override
     public void onResume() {
         super.onResume();
-
-        DatabaseController dbController = new DatabaseController(this.getApplicationContext());
-        dbController.saveTestDatabase();
-        dict = dbController.getCurrentDatabase();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-
-        DatabaseController dbController = new DatabaseController(this.getApplicationContext());
-        dbController.saveCurrentDatabase(dict);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-
-        DatabaseController dbController = new DatabaseController(this.getApplicationContext());
-        dbController.saveCurrentDatabase(dict);
     }
 
     @Override

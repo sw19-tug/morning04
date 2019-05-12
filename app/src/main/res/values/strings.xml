@@ -11,4 +11,9 @@
     <string name="menuADVView">Advanced Testing</string>
     <string name="menuBackupView">Backup / Restore</string>
     <string name="menuSharingView">Sharing</string>
+
+    <string name="menuBackupData">Backup</string>
+    <string name="menuRestoreData">Restore</string>
+    <string name="menuClearTesting">Clear Testings</string>
+    <string name="menuClearAll">Reset All</string>
 </resources>

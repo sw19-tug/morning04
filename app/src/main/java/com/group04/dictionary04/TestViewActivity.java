@@ -27,7 +27,6 @@ public class TestViewActivity extends AppCompatActivity {
         super.onResume();
 
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
-        dbController.saveTestDatabase();
         dict = dbController.getCurrentDatabase();
     }
 

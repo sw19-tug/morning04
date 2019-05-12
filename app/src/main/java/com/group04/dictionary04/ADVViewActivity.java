@@ -27,7 +27,6 @@ public class ADVViewActivity extends AppCompatActivity {
         super.onResume();
 
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
-        dbController.saveTestDatabase();
         dict = dbController.getCurrentDatabase();
     }
 

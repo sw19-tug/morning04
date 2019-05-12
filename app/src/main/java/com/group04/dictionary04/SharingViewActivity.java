@@ -27,7 +27,6 @@ public class SharingViewActivity extends AppCompatActivity {
         super.onResume();
 
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
-        dbController.saveTestDatabase();
         dict = dbController.getCurrentDatabase();
     }
 

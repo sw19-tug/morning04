@@ -3,7 +3,7 @@
               xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              tools:context=".MainActivity">
+              tools:context=".BackupViewActivity">
     <android.support.v7.widget.Toolbar
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/myactionbar"
@@ -21,8 +21,24 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <TextView
-            android:text="TextView"
+    <Button
+            android:text="@string/menuBackupData"
+            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/textView"/>
+            android:layout_height="match_parent" android:onClick="backupData"/>
+    <Button
+            android:text="@string/menuRestoreData"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:onClick="restoreData"/>
+    <!--<Button
+            android:text="@string/menuClearTesting"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:onClick="clearTesting"/>-->
+    <Button
+            android:text="@string/menuClearAll"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"  android:onClick="clearAll"/>
 </LinearLayout>
