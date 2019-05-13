@@ -43,6 +43,7 @@ public class RatingViewActivity extends Activity {
     private RadioButton btnAscending;
     private RadioButton btnDescending;
     private RatingBar ratingBar;
+    private RatingBar ratingBarNew;
     private Button btnFilter;
     private ListView items;
     private List<String> vocabs = new ArrayList<String>();
@@ -132,32 +133,40 @@ public class RatingViewActivity extends Activity {
 
         items.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(final AdapterView<?> parent, View view, final int position, long id) {
+
+
                 AlertDialog.Builder dialog = new AlertDialog.Builder(RatingViewActivity.this);
 
                 initPopupViewControls();
 
                 dialog.setView(ratingPopupView);
+                Button ok_button = (Button)ratingPopupView.findViewById(R.id.btn_ok);
 
-                /*dialog.setMessage("Do you want to change the difficulty?").setCancelable(false)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                String changed = "Changed";
-                                Toast.makeText(RatingViewActivity.this, changed,
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        });*/
-
-                AlertDialog dia_alert = dialog.create();
+                final AlertDialog dia_alert = dialog.create();
                 dia_alert.setTitle("Difficulty");
                 dia_alert.show();
+
+
+                ok_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) { {
+                        ratingBarNew = (RatingBar) ratingPopupView.findViewById(R.id.ratingBar_popup);
+                        default_Entry entry_to_change = (default_Entry)parent.getAdapter().getItem(position);
+                        int new_rating = (int)ratingBarNew.getRating();
+                        entry_to_change.setRating(Integer.toString(new_rating));
+                        Toast.makeText(RatingViewActivity.this, "CHANGED " + entry_to_change.getId1().getValue() +" TO " + new_rating + " STARS",
+                                Toast.LENGTH_SHORT).show();
+
+
+                        // get Difficulty from ratingBar and set it to default entry
+                        dia_alert.cancel();
+
+                        }
+
+                    }
+
+                });
 
             }
         });
@@ -176,43 +185,45 @@ public class RatingViewActivity extends Activity {
 
     private void loadCurrentLanguageList(default_Language language, DifficultyIdentifier difficulty) {
 
-
         final List<default_Entry> entries = new ArrayList<>();
         List<default_Vocabulary> vocabularie = language.getVocabularies();
+        int difficulty_value = difficulty.getValue();
 
         for(default_Vocabulary vocIt : vocabularie)
         {
             Log.d("log", "looking for vocabulary " + vocIt.getId() + " " + vocIt.getValue() + " Difficulty: " +
-                    difficulty);
+                    difficulty_value);
             for(default_Entry entryIt : dict.getEntries())
             {
                 Log.d("log", "check matching in Entry " +
                         entryIt.getId1().getId() + " " + entryIt.getId1().getValue() + " " +
                         entryIt.getId2().getId() + " " + entryIt.getId2().getValue() + " Rating:" + entryIt.getRating());
 
-                if((vocIt.getId().equals(entryIt.getId1().getId()) || vocIt.getId().equals(entryIt.getId2().getId())))
-                {
-                    Log.d("log", "MATCHING FOUND AND ADD TO LIST " + vocIt.getId());
-                    entries.add(entryIt);
-                }
 
-//                 currently not working because no difficulty set by the entries
-//                if((vocIt.getId().equals(entryIt.getId1().getId()) || vocIt.getId().equals(entryIt.getId2().getId())) &&
-//                        difficulty.equals(entryIt.getRating()))
-//                {
-//                    Log.d("log", "MATCHING FOUND AND ADD TO LIST " + vocIt.getId());
-//                    entries.add(entryIt);
-//                }
+                if(entryIt.getRating() == null) // no rating at the current record - so add it into the list
+                {
+                    if((vocIt.getId().equals(entryIt.getId1().getId()) || vocIt.getId().equals(entryIt.getId2().getId())))
+                    {
+                        Log.d("log", "MATCHING FOUND BUT NO RATING GIVVEN AND ADD TO LIST " + vocIt.getId());
+                        entries.add(entryIt);
+                    }
+                }
+                else // there is a rating
+                {
+                    if((vocIt.getId().equals(entryIt.getId1().getId()) || vocIt.getId().equals(entryIt.getId2().getId())) &&
+                            difficulty_value == Integer.valueOf(entryIt.getRating()))
+                    {
+                        Log.d("log", "MATCHING FOUND AND ADD TO LIST " + vocIt.getId());
+                        entries.add(entryIt);
+                    }
+                }
             }
         }
         // TODO: Sorting
 
         Log.d("log", "now there are " + entries.size() + " in the new atries list");
 
-//        ArrayAdapter<default_Vocabulary> dataAdapter = new ArrayAdapter<default_Vocabulary>(this, android.R.layout.simple_list_item_1, vocabularie);
-//        ArrayAdapter<default_Entry> dataAdapter = new ArrayAdapter<default_Entry>(this, android.R.layout.simple_list_item_2, entries);
-
-
+        // Show Entries in List
         ArrayAdapter<default_Entry> dataAdapter = new ArrayAdapter<default_Entry>(this, android.R.layout.simple_list_item_2, android.R.id.text1, entries) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
