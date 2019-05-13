@@ -2,6 +2,7 @@ package com.group04.dictionary04.database;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.widget.Toast;
 import com.google.gson.Gson;
 import com.group04.dictionary04.enums.LanguageIdentifier;
 import com.group04.dictionary04.model.default_Dictionary;
@@ -9,11 +10,14 @@ import com.group04.dictionary04.model.default_Entry;
 import com.group04.dictionary04.model.default_Language;
 import com.group04.dictionary04.model.default_Vocabulary;
 
+import java.io.*;
+
 public class DatabaseController {
     private final String dbKey = "DATABASE";
     private final String rootKey = "dictionary04";
     private SharedPreferences reader = null;
     private SharedPreferences.Editor editor = null;
+    private Context context = null;
 
     /*
         TODO Use this in your activity to save and restore the database
@@ -29,7 +33,8 @@ public class DatabaseController {
         Dictionary d = dbController.getCurrentDatabase();
      */
 
-    public DatabaseController(Context context) {
+    public DatabaseController(Context _context) {
+        context = _context;
         editor = context.getSharedPreferences("DATABASE", context.MODE_PRIVATE).edit();
         reader = context.getSharedPreferences("DATABASE", context.MODE_PRIVATE);
     }
@@ -75,5 +80,53 @@ public class DatabaseController {
         }
     }
 
+    public void backupDatabase() {
+        writeStringAsFile(reader.getString("dictionary04", null), "dict04-backup");
+    }
 
+    public void restoreDatabase() {
+        String backup = readFileAsString("dict04-backup");
+        editor.putString("dictionary04", backup);
+        editor.commit();
+    }
+
+    public void clearTesting() {
+        //TODO needs implementation once testing database is ready
+    }
+
+    public void clearDatabase() {
+        saveCurrentDatabase(null);
+        Toast.makeText(context, "Database cleared", Toast.LENGTH_LONG).show();
+    }
+
+
+    public void writeStringAsFile(final String fileContents, String fileName) {
+        try {
+            FileWriter out = new FileWriter(new File(context.getFilesDir(), fileName));
+            out.write(fileContents);
+            out.close();
+            Toast.makeText(context, "Backup created in file: dict04-backup", Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
+            Toast.makeText(context, "Backup-file could not be created", Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
+    }
+
+    public String readFileAsString(String fileName) {
+        StringBuilder stringBuilder = new StringBuilder();
+        String line;
+        BufferedReader in = null;
+
+        try {
+            in = new BufferedReader(new FileReader(new File(context.getFilesDir(), fileName)));
+            while ((line = in.readLine()) != null) stringBuilder.append(line);
+            Toast.makeText(context, "Backup-file found successfully", Toast.LENGTH_LONG).show();
+        } catch (FileNotFoundException e) {
+            Toast.makeText(context, "Backup-file not found", Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
+            Toast.makeText(context, "Backup-file could not be read", Toast.LENGTH_LONG).show();
+        }
+
+        return stringBuilder.toString();
+    }
 }
