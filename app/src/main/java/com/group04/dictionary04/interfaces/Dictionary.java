@@ -1,5 +1,7 @@
 package com.group04.dictionary04.interfaces;
 
+import android.media.Rating;
+
 import com.group04.dictionary04.enums.DifficultyIdentifier;
 import com.group04.dictionary04.enums.LanguageIdentifier;
 import com.group04.dictionary04.model.*;
@@ -17,6 +19,7 @@ public interface Dictionary {
 
 
     void addTranslation(String voc1, String voc2, LanguageIdentifier lang1, LanguageIdentifier lang2);
+    void addTranslation(String voc1, String voc2, String rating, LanguageIdentifier lang1, LanguageIdentifier lang2);
     void addDifficulty(default_Entry entry, DifficultyIdentifier diff);
     void addTag(default_Entry entry, String tag);
     void updateEntry(default_Entry entry);

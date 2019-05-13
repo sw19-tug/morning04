@@ -83,6 +83,26 @@ public class default_Dictionary implements Dictionary {
         entries.add(entry);
     }
 
+
+    @Override
+    public void addTranslation(String voc1, String voc2, String rating, LanguageIdentifier lang1, LanguageIdentifier lang2) {
+        default_Language first = getLanguage(lang1);
+        default_Language second = getLanguage(lang2);
+
+
+        default_Vocabulary ovoc1 = first.addVocabulary(voc1);
+        ovoc1.setLanguage(lang1);
+        default_Vocabulary ovoc2 = second.addVocabulary(voc2);
+        ovoc2.setLanguage(lang2);
+        default_Entry entry = new default_Entry();
+        entry.setId1(ovoc1);
+        entry.setId2(ovoc2);
+        entry.setRating(rating);
+
+        entries.add(entry);
+    }
+
+
     @Override
     public void addDifficulty(default_Entry entry, DifficultyIdentifier diff) {
 

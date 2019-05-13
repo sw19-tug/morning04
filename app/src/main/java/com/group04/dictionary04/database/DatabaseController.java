@@ -34,10 +34,10 @@ public class DatabaseController {
     public void saveTestDatabase() {
         default_Dictionary dict = new default_Dictionary();
 
-        dict.addTranslation("Auto", "car", LanguageIdentifier.DE, LanguageIdentifier.EN);
-        dict.addTranslation("Haus", "house", LanguageIdentifier.DE, LanguageIdentifier.EN);
-        dict.addTranslation("Rucksack", "backpack", LanguageIdentifier.DE, LanguageIdentifier.EN);
-        dict.addTranslation("Aufzug", "elevator", LanguageIdentifier.DE, LanguageIdentifier.EN);
+        dict.addTranslation("Auto", "car", "1",LanguageIdentifier.DE, LanguageIdentifier.EN);
+        dict.addTranslation("Haus", "house","1",LanguageIdentifier.DE, LanguageIdentifier.EN);
+        dict.addTranslation("Rucksack", "backpack", "2",LanguageIdentifier.DE, LanguageIdentifier.EN);
+        dict.addTranslation("Aufzug", "elevator", "3",LanguageIdentifier.DE, LanguageIdentifier.EN);
 
         dict.addTranslation("Auto", "coche", LanguageIdentifier.DE, LanguageIdentifier.SP);
         dict.addTranslation("Haus", "casa", LanguageIdentifier.DE, LanguageIdentifier.SP);
