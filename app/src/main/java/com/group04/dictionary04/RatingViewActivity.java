@@ -31,6 +31,7 @@ import com.group04.dictionary04.model.default_Language;
 import com.group04.dictionary04.model.default_Vocabulary;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -111,8 +112,6 @@ public class RatingViewActivity extends Activity {
                 }
                 else {
 
-
-
                     //GET DIFFICULTY
                     if((int) ratingBar.getRating() == 1)
                         difficult = DifficultyIdentifier.BEGINNER;
@@ -123,9 +122,7 @@ public class RatingViewActivity extends Activity {
                     else
                         difficult = DifficultyIdentifier.NATIVE;
 
-
                     loadCurrentLanguageList(dict.getLanguageByIndex(lang_spinner.getSelectedItem().toString()), difficult);
-
                 }
             }
         });
@@ -144,7 +141,7 @@ public class RatingViewActivity extends Activity {
                 Button ok_button = (Button)ratingPopupView.findViewById(R.id.btn_ok);
 
                 final AlertDialog dia_alert = dialog.create();
-                dia_alert.setTitle("Difficulty");
+                dia_alert.setTitle("Change difficulty");
                 dia_alert.show();
 
 
@@ -179,7 +176,26 @@ public class RatingViewActivity extends Activity {
 
         // Inflate the popup dialog from a layout xml file.
         ratingPopupView = layoutInflater.inflate(R.layout.ratingpopup, null);
+    }
 
+    //Sort List ascending or descending
+    private void sortList(List<default_Entry> list){
+        if(btnAscending.isChecked()){
+            Collections.sort(list, new Comparator<default_Entry>() {
+                @Override
+                public int compare(default_Entry o1, default_Entry o2) {
+                    return o1.getId1().getValue().compareTo(o2.getId1().getValue());
+                }
+            });
+        }
+        else{
+            Collections.sort(list, new Comparator<default_Entry>() {
+                @Override
+                public int compare(default_Entry o1, default_Entry o2) {
+                    return o2.getId1().getValue().compareTo(o1.getId1().getValue());
+                }
+            });
+        }
     }
 
 
@@ -219,7 +235,6 @@ public class RatingViewActivity extends Activity {
                 }
             }
         }
-        // TODO: Sorting
 
         Log.d("log", "now there are " + entries.size() + " in the new atries list");
 
@@ -237,8 +252,9 @@ public class RatingViewActivity extends Activity {
             }
         };
 
-        items.setAdapter(dataAdapter);
+        sortList(entries);
 
+        items.setAdapter(dataAdapter);
     }
 
 
