@@ -11,7 +11,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.RootMatchers.isDialog;
 import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withHint;
@@ -27,28 +31,97 @@ public class TestActivityInstrumentedTest {
 
     @Test
     public void testButtons() {
-        onView(withId(R.id.button)).check(matches(isDisplayed()));
-        onView(withId(R.id.button)).check(matches(isClickable()));
-        //TODO: test for all button visibility in xml file, they are displayed upon advancing
-        //onView(withId(R.id.button3)).check(matches(isDisplayed()));
-        //onView(withId(R.id.button4)).check(matches(isDisplayed()));
-        //onView(withId(R.id.button5)).check(matches(isDisplayed()));
+        onView(withId(R.id.button0)).check(matches(isDisplayed()));
+        onView(withId(R.id.button5)).check(matches(isDisplayed()));
+        onView(withId(R.id.button4)).check(matches(isDisplayed()));
+        onView(withId(R.id.button3)).check(matches(isDisplayed()));
     }
 
     @Test
-    public void testTextFields(){
+    public void testButtonsClickable()
+    {
+        onView(withId(R.id.button0)).check(matches(isClickable()));
+        onView(withId(R.id.button5)).check(matches(isClickable()));
+        onView(withId(R.id.button4)).check(matches(isClickable()));
+        onView(withId(R.id.button3)).check(matches(isClickable()));
+    }
+
+
+
+    @Test
+    public void testTextFieldsVisible()
+    {
         onView(withId(R.id.textView3)).check(matches(isDisplayed()));
-        onView(withId(R.id.textView3)).check(matches(withText("Language 1")));
         onView(withId(R.id.textView4)).check(matches(isDisplayed()));
-        onView(withId(R.id.textView4)).check(matches(withText("VOCAB")));
         onView(withId(R.id.textView5)).check(matches(isDisplayed()));
-        onView(withId(R.id.textView5)).check(matches(withText("Second Language")));
+        onView(withId(R.id.editText2)).check(matches(isDisplayed()));
+        onView(withId(R.id.editText2)).check(matches(withText("")));
     }
 
+
+
+
     @Test
-    public void testEditText(){
-        onView(withId(R.id.editText2)).check(matches(isDisplayed()));
-        onView(withId(R.id.editText2)).check(matches(withHint("your answer...")));
-        onView(withId(R.id.editText2)).check(matches(isClickable()));
+    public void performQuestion()
+    {
+        onView(withId(R.id.editText2)).perform(typeText("car"),closeSoftKeyboard());
+        onView(withId(R.id.button0)).perform(click());
+
+        //positive Button
+        onView(withId(android.R.id.button1)).perform(click());
     }
+
+
+
+    @Test
+    public void performSaveExam()
+    {
+
+        onView(withId(R.id.button4)).perform(click());
+
+        //check if allertDialog has popped up
+        int titelId = TestViewActivityTestRule.getActivity().getResources().getIdentifier("alertTitle", "id", "android");
+        onView(withId(titelId)).inRoot(isDialog()).check(matches(withText("Done..."))).check(matches(isDisplayed()));
+        onView(withText("Do you want to save your exam progress?")).check(matches(isDisplayed()));
+
+        //negative(NO) btn
+        onView(withId(android.R.id.button2)).perform(click());
+
+    }
+
+    
+
+/*
+
+    public String getText(final TextView textView)
+    {
+        return textView.getText().toString();
+    }
+
+
+
+
+    @Test
+    public void checkNext()
+    {
+
+       TextView txt = TestViewActivityTestRule.getActivity().findViewById(R.id.textView4);
+
+       String check = getText(txt);
+
+       onView(withId(R.id.button5)).perform(click());
+
+       onView(withId(R.id.button3)).check(matches(isDisplayed()));
+
+       onView(withId(R.id.button3)).check(matches(isClickable()));
+
+       onView(withId(R.id.button3)).perform(click());
+       onView(withId(R.id.textView4)).check(matches(withText(check)));
+
+
+    }
+
+*/
+
+
 }
