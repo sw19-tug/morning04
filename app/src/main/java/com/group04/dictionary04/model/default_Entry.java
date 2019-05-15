@@ -15,6 +15,11 @@ public class default_Entry implements com.group04.dictionary04.interfaces.Entry 
     }
 
     @Override
+    public String toString() {
+        return id1.getValue();
+    }
+
+    @Override
     public default_Vocabulary getId1() {
         return this.id1;
     }
