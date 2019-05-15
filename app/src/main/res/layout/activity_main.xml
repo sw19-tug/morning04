@@ -5,41 +5,64 @@
               android:orientation="vertical"
               tools:context=".MainActivity">
 
-    <Button
-            android:text="InputView"
+
+    <android.support.v7.widget.Toolbar
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/myactionbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/task1" android:onClick="launchInputView"/>
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:elevation="4dp">
+
+        <TextView
+                android:text="Main-Menu"
+                android:textSize="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
+
+    </android.support.v7.widget.Toolbar>
+
+
     <Button
-            android:text="LearningView"
+            android:text="@string/menuInputView"
+            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/task2" android:onClick="launchLearningView"/>
+            android:layout_height="match_parent" android:id="@+id/task1" android:onClick="launchInputView"/>
     <Button
-            android:text="SearchView"
+            android:text="@string/menuLearningView"
+            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/task3" android:onClick="launchSearchView"/>
+            android:layout_height="match_parent" android:id="@+id/task2" android:onClick="launchLearningView"/>
     <Button
-            android:text="RatingView"
+            android:text="@string/menuSearchView"
+            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/task4" android:onClick="launchRatingView"/>
+            android:layout_height="match_parent" android:id="@+id/task3" android:onClick="launchSearchView"/>
     <Button
-            android:text="TestView"
+            android:text="@string/menuRatingView"
+            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/task5" android:onClick="launchTestView"/>
+            android:layout_height="match_parent" android:id="@+id/task4" android:onClick="launchRatingView"/>
     <Button
-            android:text="ADVView"
+            android:text="@string/menuTestView"
+            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/task6" android:onClick="launchADVView"/>
+            android:layout_height="match_parent" android:id="@+id/task5" android:onClick="launchTestView"/>
     <Button
-            android:text="SaveTestView"
+            android:text="@string/menuADVView"
+            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/task7" android:onClick="launchSaveTestView"/>
+            android:layout_height="match_parent" android:id="@+id/task6" android:onClick="launchADVView"/>
     <Button
-            android:text="BackupView"
+            android:text="@string/menuBackupView"
+            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/task8" android:onClick="launchBackupView"/>
+            android:layout_height="match_parent" android:id="@+id/task8" android:onClick="launchBackupView"/>
     <Button
-            android:text="SharingView"
+            android:text="@string/menuSharingView"
+            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/task9" android:onClick="launchSharingView"/>
+            android:layout_height="match_parent" android:id="@+id/task9" android:onClick="launchSharingView"/>
 
 </LinearLayout>

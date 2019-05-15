@@ -13,8 +13,7 @@ public class LanguageUnitTest {
     final static int init_entries = 10;
     @Before
     public void setup() {
-        lang.setLangName(LanguageIdentifier.EN);
-        lang.setDisplayName("English");
+        lang = new default_Language("English", LanguageIdentifier.EN);
 
         for (int i = 0; i < init_entries; i++){
             lang.addVocabulary(lang.getDisplayName() + "_voc_" + i);
@@ -24,7 +23,7 @@ public class LanguageUnitTest {
 
     @Test
     public void getVocByIDTest() {
-        String id = "EN-0007";
+        String id = "EN-7";
         default_Vocabulary voc = lang.getVocByID(id);
         assert id.equals(voc.getId()) : "Language: Found Voc-ID does not match requested\n";
     }
