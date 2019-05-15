@@ -110,11 +110,6 @@ public class RatingViewActivity extends AppCompatActivity {
                     Toast.makeText(RatingViewActivity.this, "Please choose a sort sequence",
                             Toast.LENGTH_SHORT).show();
                 }
-                //CHECK RATING BAR
-                else if((int)ratingBar.getRating() == 0){
-                    Toast.makeText(RatingViewActivity.this, "Please choose a difficulty",
-                            Toast.LENGTH_SHORT).show();
-                }
                 else {
 
                     //GET DIFFICULTY
@@ -124,10 +119,12 @@ public class RatingViewActivity extends AppCompatActivity {
                         difficult = DifficultyIdentifier.INTERMEDIATE;
                     else if((int) ratingBar.getRating() == 3)
                         difficult = DifficultyIdentifier.ADVANCED;
-                    else
+                    else if((int) ratingBar.getRating() == 4)
                         difficult = DifficultyIdentifier.NATIVE;
 
                     loadCurrentLanguageList(dict.getLanguageByIndex(lang_spinner.getSelectedItem().toString()), difficult);
+
+                    ratingBar.setRating(0);
                 }
             }
         });
@@ -208,38 +205,58 @@ public class RatingViewActivity extends AppCompatActivity {
 
         final List<default_Entry> entries = new ArrayList<>();
         List<default_Vocabulary> vocabularie = language.getVocabularies();
-        int difficulty_value = difficulty.getValue();
 
-        for(default_Vocabulary vocIt : vocabularie)
-        {
-            Log.d("log", "looking for vocabulary " + vocIt.getId() + " " + vocIt.getValue() + " Difficulty: " +
-                    difficulty_value);
-            for(default_Entry entryIt : dict.getEntries())
+        if(ratingBar.getRating() != 0) {
+
+            int difficulty_value = difficulty.getValue();
+
+            for(default_Vocabulary vocIt : vocabularie)
             {
-                Log.d("log", "check matching in Entry " +
-                        entryIt.getId1().getId() + " " + entryIt.getId1().getValue() + " " +
-                        entryIt.getId2().getId() + " " + entryIt.getId2().getValue() + " Rating:" + entryIt.getRating());
+                Log.d("log", "looking for vocabulary " + vocIt.getId() + " " + vocIt.getValue() + " Difficulty: " +
+                        difficulty_value);
+                for(default_Entry entryIt : dict.getEntries())
+                {
+                    Log.d("log", "check matching in Entry " +
+                            entryIt.getId1().getId() + " " + entryIt.getId1().getValue() + " " +
+                            entryIt.getId2().getId() + " " + entryIt.getId2().getValue() + " Rating:" + entryIt.getRating());
 
 
-                if(entryIt.getRating() == null) // no rating at the current record - so add it into the list
-                {
-                    if((vocIt.getId().equals(entryIt.getId1().getId()) || vocIt.getId().equals(entryIt.getId2().getId())))
+                    if(entryIt.getRating() != null) // there is a rating
                     {
-                        Log.d("log", "MATCHING FOUND BUT NO RATING GIVVEN AND ADD TO LIST " + vocIt.getId());
-                        entries.add(entryIt);
-                    }
-                }
-                else // there is a rating
-                {
-                    if((vocIt.getId().equals(entryIt.getId1().getId()) || vocIt.getId().equals(entryIt.getId2().getId())) &&
-                            difficulty_value == Integer.valueOf(entryIt.getRating()))
-                    {
-                        Log.d("log", "MATCHING FOUND AND ADD TO LIST " + vocIt.getId());
-                        entries.add(entryIt);
+                        if((vocIt.getId().equals(entryIt.getId1().getId()) || vocIt.getId().equals(entryIt.getId2().getId())) &&
+                                difficulty_value == Integer.valueOf(entryIt.getRating()))
+                        {
+                            Log.d("log", "MATCHING FOUND AND ADD TO LIST " + vocIt.getId());
+                            entries.add(entryIt);
+                        }
                     }
                 }
             }
         }
+        else {
+
+            for(default_Vocabulary vocIt : vocabularie)
+            {
+                Log.d("log", "looking for vocabulary " + vocIt.getId() + " " + vocIt.getValue());
+                for(default_Entry entryIt : dict.getEntries())
+                {
+                    Log.d("log", "check matching in Entry " +
+                            entryIt.getId1().getId() + " " + entryIt.getId1().getValue() + " " +
+                            entryIt.getId2().getId() + " " + entryIt.getId2().getValue() + " Rating:" + entryIt.getRating());
+
+
+                    if(entryIt.getRating() == null) // no rating at the current record - so add it into the list
+                    {
+                        if((vocIt.getId().equals(entryIt.getId1().getId()) || vocIt.getId().equals(entryIt.getId2().getId())))
+                        {
+                            Log.d("log", "MATCHING FOUND BUT NO RATING GIVVEN AND ADD TO LIST " + vocIt.getId());
+                            entries.add(entryIt);
+                        }
+                    }
+                }
+            }
+        }
+
 
         Log.d("log", "now there are " + entries.size() + " in the new atries list");
 
