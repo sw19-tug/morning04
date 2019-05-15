@@ -29,9 +29,8 @@ public class InputViewActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final DatabaseController dbController = new DatabaseController(getApplicationContext());
-        dbController.saveTestDatabase();
+        //dbController.saveTestDatabase();
         dict = dbController.getCurrentDatabase();
-
         setContentView(R.layout.inputview);
         List<String> languages = new ArrayList<>();
 
@@ -50,22 +49,15 @@ public class InputViewActivity extends Activity {
         //filling both lang spinners with options
         lang_spinner.setAdapter(dataAdapter);
         lang_spinner2.setAdapter(dataAdapter);
-
-
         Button button = (Button) findViewById(R.id.button_input);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 EditText field1 = (EditText) findViewById(R.id.txt_lang1_input);
                 EditText field2 = (EditText) findViewById(R.id.txt_lang2_input);
                 Spinner spinner1 = (Spinner) findViewById(R.id.spinner1_input);
                 Spinner spinner2 = (Spinner) findViewById(R.id.spinner2_input);
-
-
-
 
                 if(spinner1.getSelectedItemPosition() == spinner2.getSelectedItemPosition())
                 {
@@ -86,60 +78,55 @@ public class InputViewActivity extends Activity {
                     switch (spinner1.getSelectedItemPosition())
                     {
                         case 0:
-                            language1 = LanguageIdentifier.valueOf("DE");
+                            language1 = LanguageIdentifier.DE;
+                            break;
                         case 1:
-                            language1 = LanguageIdentifier.valueOf("EN");
+                            language1 = LanguageIdentifier.EN;
+                            break;
                         case 2:
-                            language1 = LanguageIdentifier.valueOf("SP");
+                            language1 = LanguageIdentifier.SP;
+                            break;
                     }
                     switch (spinner2.getSelectedItemPosition())
                     {
                         case 0:
-                            language2 = LanguageIdentifier.valueOf("DE");
+                            language2 = LanguageIdentifier.DE;
+                            break;
                         case 1:
-                            language2 = LanguageIdentifier.valueOf("EN");
+                            language2 = LanguageIdentifier.EN;
+                            break;
                         case 2:
-                            language2 = LanguageIdentifier.valueOf("SP");
+                            language2 = LanguageIdentifier.SP;
+                            break;
                     }
 
-                    dict.addTranslation(field1.toString(), field2.toString(), language1, language2);
-
+                    dict.addTranslation(field1.getText().toString(), field2.getText().toString(), language1, language2);
                     Log.d("log", "Currently there are " + dict.getEntries().size() + " entries in this dict");
-
                 }
-
             }
         });
-
-
     }
-
 
     @Override
     public void onResume() {
         super.onResume();
-
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
-        dbController.saveTestDatabase();
+        //dbController.saveTestDatabase();
         dict = dbController.getCurrentDatabase();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
         dbController.saveCurrentDatabase(dict);
+        System.out.println(dict.getEntries().size());
     }
 
     @Override
     public void onStop() {
         super.onStop();
-
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
         dbController.saveCurrentDatabase(dict);
     }
-
-
-
 }
