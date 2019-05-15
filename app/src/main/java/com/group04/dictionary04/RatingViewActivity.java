@@ -146,7 +146,6 @@ public class RatingViewActivity extends AppCompatActivity {
                 dia_alert.setTitle("Change difficulty");
                 dia_alert.show();
 
-
                 ok_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) { {
@@ -156,7 +155,6 @@ public class RatingViewActivity extends AppCompatActivity {
                         entry_to_change.setRating(Integer.toString(new_rating));
                         Toast.makeText(RatingViewActivity.this, "CHANGED " + entry_to_change.getId1().getValue() +" TO " + new_rating + " STARS",
                                 Toast.LENGTH_SHORT).show();
-
 
                         // get Difficulty from ratingBar and set it to default entry
                         dia_alert.cancel();
@@ -220,8 +218,7 @@ public class RatingViewActivity extends AppCompatActivity {
                             entryIt.getId1().getId() + " " + entryIt.getId1().getValue() + " " +
                             entryIt.getId2().getId() + " " + entryIt.getId2().getValue() + " Rating:" + entryIt.getRating());
 
-
-                    if(entryIt.getRating() != null) // there is a rating
+                    if(entryIt.getRating() != null)
                     {
                         if((vocIt.getId().equals(entryIt.getId1().getId()) || vocIt.getId().equals(entryIt.getId2().getId())) &&
                                 difficulty_value == Integer.valueOf(entryIt.getRating()))
@@ -245,7 +242,7 @@ public class RatingViewActivity extends AppCompatActivity {
                             entryIt.getId2().getId() + " " + entryIt.getId2().getValue() + " Rating:" + entryIt.getRating());
 
 
-                    if(entryIt.getRating() == null) // no rating at the current record - so add it into the list
+                    if(entryIt.getRating() == null)
                     {
                         if((vocIt.getId().equals(entryIt.getId1().getId()) || vocIt.getId().equals(entryIt.getId2().getId())))
                         {
