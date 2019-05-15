@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">Dictionary04</string>
+    <string name="action_settings">Settings</string>
+    <string name="search">Search</string>
+
+    <string name="menuInputView">Vocabulary Input</string>
+    <string name="menuLearningView">Learning</string>
+    <string name="menuSearchView">Browse Vocabulary</string>
+    <string name="menuRatingView">Ratings</string>
+    <string name="menuTestView">Testing</string>
+    <string name="menuADVView">Advanced Testing</string>
+    <string name="menuBackupView">Backup / Restore</string>
+    <string name="menuSharingView">Sharing</string>
+
+    <string name="menuBackupData">Backup</string>
+    <string name="menuRestoreData">Restore</string>
+    <string name="menuClearTesting">Clear Testings</string>
+    <string name="menuClearAll">Reset All</string>
 </resources>

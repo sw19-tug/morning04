@@ -9,22 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-        <activity android:name=".MainActivity" >
+        <activity android:name=".MainActivity" android:label="Dictionary04">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ADVViewActivity" ></activity>
-        <activity android:name=".BackupViewActivity" ></activity>
-        <activity android:name=".InputViewActivity" ></activity>
-        <activity android:name=".LearningViewActivity" ></activity>
-        <activity android:name=".RatingViewActivity" ></activity>
-        <activity android:name=".SaveTestViewActivity" ></activity>
-        <activity android:name=".SearchViewActivity" ></activity>
-        <activity android:name=".SharingViewActivity" ></activity>
-        <activity android:name=".TestViewActivity" ></activity>
+        <activity android:name=".ADVViewActivity" android:label="ADVView" ></activity>
+        <activity android:name=".BackupViewActivity" android:label="BackupView"></activity>
+        <activity android:name=".InputViewActivity" android:label="InputView"></activity>
+        <activity android:name=".LearningViewActivity" android:label="LearningView"></activity>
+        <activity android:name=".RatingViewActivity" android:label="RatingView"></activity>
+        <activity android:name=".SaveTestViewActivity" android:label="SaveTest"></activity>
+        <activity android:name=".SearchViewActivity" android:label="SearchView"></activity>
+        <activity android:name=".SharingViewActivity" android:label="SharingView" ></activity>
+        <activity android:name=".TestViewActivity" android:label="TestView" ></activity>
     </application>
 
 </manifest>

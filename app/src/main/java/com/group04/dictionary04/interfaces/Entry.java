@@ -1,15 +1,13 @@
 package com.group04.dictionary04.interfaces;
 
-public interface Entry {
-    String id1 = null;
-    String id2 = null;
-    String tag = null;
-    String rating = null;
+import com.group04.dictionary04.model.default_Vocabulary;
 
-    String getId1();
-    void setId1(String id1);
-    String getId2();
-    void setId2(String id2);
+public interface Entry {
+
+    default_Vocabulary getId1();
+    void setId1(default_Vocabulary id1);
+    default_Vocabulary getId2();
+    void setId2(default_Vocabulary id2);
     String getTag();
     void setTag(String tag) ;
     String getRating();
