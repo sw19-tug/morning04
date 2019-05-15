@@ -4,17 +4,21 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import com.group04.dictionary04.database.DatabaseController;
 import com.group04.dictionary04.model.default_Dictionary;
 import com.group04.dictionary04.model.default_Language;
 import com.group04.dictionary04.model.default_Vocabulary;
 
-public class LearningViewActivity extends Activity {
+public class LearningViewActivity extends AppCompatActivity {
     private default_Dictionary dict = null;
     private ListView vocList = null;
     private EditText search = null;
@@ -23,11 +27,15 @@ public class LearningViewActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.learningview);
+        setSupportActionBar((Toolbar)findViewById(R.id.myactionbar));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
-        dbController.saveTestDatabase();
+        //dbController.saveTestDatabase();
         dict = dbController.getCurrentDatabase();
 
-        Log.d("asdfasdf", dict.getLanguagesStrings().size() + "sizuasdfasdfasd");
         search = (EditText) findViewById(R.id.search);
         vocList = (ListView) findViewById(R.id.vocList);
         final Spinner lang_spinner = (Spinner) findViewById(R.id.languageSelection);
@@ -101,7 +109,7 @@ public class LearningViewActivity extends Activity {
         super.onResume();
 
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
-        dbController.saveTestDatabase();
+        //dbController.saveTestDatabase();
         dict = dbController.getCurrentDatabase();
 
         Log.d("log", "Currently there are " + dict.getEntries().size() + " entries in this dict");
@@ -114,4 +122,25 @@ public class LearningViewActivity extends Activity {
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
         dbController.saveCurrentDatabase(dict);
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        DatabaseController dbController = new DatabaseController(this.getApplicationContext());
+        dbController.saveCurrentDatabase(dict);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            onBackPressed();  return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 }
