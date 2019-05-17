@@ -25,6 +25,12 @@
         <activity android:name=".SearchViewActivity" android:label="SearchView"></activity>
         <activity android:name=".SharingViewActivity" android:label="SharingView" ></activity>
         <activity android:name=".TestViewActivity" android:label="TestView" ></activity>
+        <activity android:name=".SettingsViewActivity" android:label="SettingsView" ></activity>
+
+        <service
+            android:name="com.group04.dictionary04.NotificationActivity" >
+        </service>
+
     </application>
 
 </manifest>

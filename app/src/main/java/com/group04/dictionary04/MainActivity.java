@@ -1,13 +1,15 @@
 package com.group04.dictionary04;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatDelegate;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
+
+
+    public final static String PREFS = "PrefsFile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,4 +64,10 @@ public class MainActivity extends AppCompatActivity {
         this.startActivity(intent);
     }
 
+    public void launchSettingsView(View view){
+        Intent intent = new Intent(this, SettingsViewActivity.class);
+        this.startActivity(intent);
+    }
+
+    
 }

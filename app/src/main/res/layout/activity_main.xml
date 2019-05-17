@@ -64,5 +64,13 @@
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent" android:id="@+id/task9" android:onClick="launchSharingView"/>
+    <Button
+            android:text="@string/menuSettingsView"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:id="@+id/task10" android:onClick="launchSettingsView"/>
+
+
+
 
 </LinearLayout>
