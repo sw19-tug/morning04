@@ -69,5 +69,5 @@ public class MainActivity extends AppCompatActivity {
         this.startActivity(intent);
     }
 
-    
+
 }
