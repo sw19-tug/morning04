@@ -42,18 +42,18 @@ public class CategorizationInstrumentedTest
         onView(withId(R.id.tv_sort)).check(matches(isDisplayed()));
         onView(withId(R.id.radiogroup)).check(matches(isDisplayed()));
         onView(withId(R.id.spinner_sort)).check(matches(isDisplayed()));
-        onView(withId(R.id.btn_sort)).check(matches(isDisplayed()));
+        onView(withId(R.id.search)).check(matches(isDisplayed()));
         onView(withId(R.id.tv_filter)).check(matches(isDisplayed()));
         onView(withId(R.id.radiogroup2)).check(matches(isDisplayed()));
-        onView(withId(R.id.btn_alphabetically)).check(matches(isDisplayed()));
         onView(withId(R.id.spinner_lang)).check(matches(isDisplayed()));
         onView(withId(R.id.btn_filter)).check(matches(isDisplayed()));
+        onView(withId(R.id.rb_ascending)).check(matches(isDisplayed()));
+        onView(withId(R.id.rb_descending)).check(matches(isDisplayed()));
+        onView(withId(R.id.txt_tag)).check(matches(isDisplayed()));
     }
 
     @Test
     public void testButtonsSpinnersClickable() {
-        onView(withId(R.id.btn_sort)).check(matches(isClickable()));
-        onView(withId(R.id.btn_alphabetically)).check(matches(isClickable()));
         onView(withId(R.id.btn_filter)).check(matches(isClickable()));
         onView(withId(R.id.spinner_sort)).check(matches(isClickable()));
         onView(withId(R.id.spinner_lang)).check(matches(isClickable()));
