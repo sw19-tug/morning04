@@ -1,34 +1,67 @@
 package com.group04.dictionary04.Exam;
 
+import com.group04.dictionary04.enums.LanguageIdentifier;
+import com.group04.dictionary04.model.default_Entry;
+import com.group04.dictionary04.model.default_Exam;
+import com.group04.dictionary04.model.default_Filter;
+
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
+
+import java.util.Collections;
+import java.util.List;
 
 public class ExamUnitTest {
+    default_Exam exam;
+
 
     @Before
-    public void setup() {
+    public void setUp() {
+        exam = new default_Exam();
+        default_Entry entry = new default_Entry();
+        exam.addVocToTest(entry);
+        default_Filter filter = new default_Filter();
+        exam.setFilter(filter);
+    }
+
+    @Before
+    public void setVocsToTestUnitTest(){
+        default_Entry entry = new default_Entry("test1", "test2");
+        List<default_Entry> vocsToTest = Collections.singletonList(entry);
+        exam.setVocsToTest(vocsToTest);
+        Assert.assertNotNull(exam.getVocsToTest());
+    }
+
+    @Test
+    public void setFilterTest(){
+        exam.setFilter(null);
+        Assert.assertNull(exam.getFilter());
 
     }
 
-    /*@Test
-    public void generateExamTest() {
-        Exam random_exam = dictionary.generateExam(null);
+    @Test
+    public void getVocsToTestUnitTest(){
+        Assert.assertNotNull(exam.getVocsToTest());
+    }
 
-        default_Filter filter = new default_Filter();
-        filter.setLimit_pairs(10);
-        Exam random_exam10 = dictionary.generateExam(null);
+    @Test
+    public void getFailedVocsTest(){
+        List<default_Entry> failedVocs = exam.getFailedVocs();
+        Assert.assertNotNull(failedVocs);
+    }
 
-        filter.setLangID2(LanguageIdentifier.EN);
-        filter.setLangID1(LanguageIdentifier.DE);
-        Exam en_de_exam = dictionary.generateExam(filter);
+    @Test
+    public void setFailedVocsTest(){
 
-        assert !random_exam.getVocsToTest().isEmpty() : "Empty Exam with Filter=null\n";
-        assert !(random_exam10.getVocsToTest().size() == 10 ): "Vocs list size does not match filter list size\n";
+        exam.setFailedVocs(null);
+        Assert.assertNull(exam.getFailedVocs());
+    }
 
-        for (default_Entry it : en_de_exam.getVocsToTest()){
-            default_Entry entry = (default_Entry) dictionary.getTranslation(it); // Does this even work as expected
-            assert entry.getId2().getId().contains("EN") : "Wrong Language for Voc1\n";
-            assert entry.getId1().getId().contains("DE") : "Wrong Language for Voc2\n";
-        }
-    }*/
+    @Test
+    public void getFilterTest(){
+        Assert.assertNotNull(exam.getFilter());
+    }
+
 }
 

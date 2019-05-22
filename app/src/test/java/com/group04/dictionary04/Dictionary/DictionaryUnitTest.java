@@ -10,6 +10,8 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static com.group04.dictionary04.enums.DifficultyIdentifier.BEGINNER;
+
 public class DictionaryUnitTest{
     default_Dictionary dictionary;
     static int total_entries = 15;
@@ -19,12 +21,12 @@ public class DictionaryUnitTest{
     public void setUp() {
         dictionary = new default_Dictionary();
         for (int i = 0; i < total_entries; i++){
-            dictionary.addTranslation("first_de" + i, "second_en" + i, "" + (i%4), LanguageIdentifier.DE, LanguageIdentifier.EN);
+            dictionary.addTranslation("first_de" + i, "second_en" +i,"" + (i%4), LanguageIdentifier.DE, LanguageIdentifier.EN);
         }
     }
 
     @Test
-    public void getEntryTest(){
+     public void getEntryTest(){
         List<default_Entry> all_added_entries = dictionary.getEntries();
         assert all_added_entries.size() == total_entries : "Inserting Elements at setup failed!\n";
         for (default_Entry it : all_added_entries)
@@ -34,34 +36,43 @@ public class DictionaryUnitTest{
         }
     }
 
-    @Test
-    public void getLanguageByIndex(){
-        List<default_Entry> all_added_entries = dictionary.getEntries();
-        assert all_added_entries.size() == total_entries : "Inserting Elements at setup failed!\n";
-        for (int i = 0; i < all_added_entries.size(); i++)
-        {
-            assert dictionary.getEntries().get(i).getId1().getValue().equals("first_de" + i) : "Wrong translation retrieved";
-            assert dictionary.getEntries().get(i).getId2().getValue().equals("second_en" + i) : "Wrong translation retrieved";
-        }
-    }
+    /*@Test
+    public void getTranslationTest() {
+        default_Entry entry = new default_Entry();
+        /*default_Vocabulary voc1 = new default_Vocabulary();
+        default_Vocabulary voc2 = new default_Vocabulary();
+        voc1.setId("EN-1");
+        voc2.setId("DE-1");
+        entry.setId1(voc1);
+        entry.setId2(voc2);
 
-    @Test
-    public void getLanguageByName(){
-        assert dictionary.getLanguageByName("German").getLangName().equals(LanguageIdentifier.DE) : "Wrong language retrieved";
-        assert dictionary.getLanguageByName("English").getLangName().equals(LanguageIdentifier.EN) : "Wrong language retrieved";
-        assert dictionary.getLanguageByName("French").getLangName().equals(LanguageIdentifier.FR) : "Wrong language retrieved";
-        assert dictionary.getLanguageByName("Italy").getLangName().equals(LanguageIdentifier.IT) : "Wrong language retrieved";
-        assert dictionary.getLanguageByName("Spanish").getLangName().equals(LanguageIdentifier.SP) : "Wrong language retrieved";
-    }
+        dictionary.addTranslation("test-voc1", "test-voc1-otherlanguage");
 
-    @Test
-    public void getTranslationString() {
-        for (int i = 0; i < total_entries; i++){
-            String test = dictionary.getTranslationString(dictionary.getEntries().get(i).getId1());
-            assert test.equals(dictionary.getEntries().get(i).getId2().getLanguage()
-                    + ": " + dictionary.getEntries().get(i).getId2() + "\n") : "Wront translation string retrieved";
+        default_Entry returnEntry = dictionary.getTranslation(entry);
+        assert ( returnEntry.getId1() != null && returnEntry.getId2() != null ) : "Pair has empty Voc-entries!\n";
+    }*/
+
+    /*@Test
+    public void generateExamTest() {
+        Exam random_exam = dictionary.generateExam(null);
+
+        default_Filter filter = new default_Filter();
+        filter.setLimit_pairs(10);
+        Exam random_exam10 = dictionary.generateExam(null);
+
+        filter.setLangID2(LanguageIdentifier.EN);
+        filter.setLangID1(LanguageIdentifier.DE);
+        Exam en_de_exam = dictionary.generateExam(filter);
+
+        assert !random_exam.getVocsToTest().isEmpty() : "Empty Exam with Filter=null\n";
+        assert !(random_exam10.getVocsToTest().size() == 10 ): "Vocs list size does not match filter list size\n";
+
+        for (default_Entry it : en_de_exam.getVocsToTest()){
+            default_Entry entry = (default_Entry) dictionary.getTranslation(it); // Does this even work as expected
+            assert entry.getId2().getId().contains("EN") : "Wrong Language for Voc1\n";
+            assert entry.getId1().getId().contains("DE") : "Wrong Language for Voc2\n";
         }
-    }
+    }*/
 
     @Test
     public void addDifficultyTest() {
@@ -77,4 +88,37 @@ public class DictionaryUnitTest{
     public void updateEntryTest() {
 
     }
+
+    @Test
+    public void getEntryNameTest() {
+        for (int i = 0; i < total_entries; i++) {
+            assert dictionary.getEntries().get(i).getId1().getValue().contains("first_de" + i) : "DE ENTRY " + i + " NOT MATCH\n";
+            assert dictionary.getEntries().get(i).getId2().getValue().contains("second_en" + i) : "EN ENTRY" + i + "NOT MATCH\n";
+        }
+    }
+
+    @Test
+    public void getRatingTest() {
+        for (int i = 0; i < total_entries; i++) {
+            assert dictionary.getEntries().get(i).getRating().contains(""+(i%4)): "RATING OF ENTRY " + i + " NOT MATCH\n";
+        }
+    }
+
+    @Test
+    public void setRatingTest(){
+
+        for(int i = 0; i < total_entries; i++)
+            dictionary.getEntries().get(i).setRating(""+(i%4));
+
+        for(int i = 0; i < total_entries; i++)
+            assert dictionary.getEntries().get(i).getRating().equals(""+(i%4)) : "SET RATING FOR" + i +"NOT MATCH\n";
+    }
+
+    @Test
+    public void getDifficulty() {
+        assert dictionary.getEntries().get(0).getRating().contains(String.valueOf(BEGINNER.getValue() - 1)) : "GET DIFFICULTY NOT MATCH\n";
+
+    }
+
+
 }

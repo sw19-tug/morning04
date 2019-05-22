@@ -1,8 +1,14 @@
 package com.group04.dictionary04;
 
+import android.support.test.espresso.ViewAction;
+import android.support.test.espresso.action.ViewActions;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.view.View;
+import android.widget.Button;
 
+import org.hamcrest.Matcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +24,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.isSelected;
 import static android.support.test.espresso.matcher.ViewMatchers.withSpinnerText;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
@@ -75,4 +82,18 @@ public class MainActivityRatingTest
         onView(withId(R.id.list_items)).check(matches(isDisplayed()));
         onView(withId(R.id.list_items)).check(matches(isClickable()));
     }
+
+    @Test
+    public void testChangeRating() {
+        onView(withId(R.id.spinner_langt)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("German"))).perform(click());
+        onView(withId(R.id.spinner_langt)).check(matches(withSpinnerText(containsString("German"))));
+        onView(withId(R.id.btn_ascending)).perform(click());
+        onView(withId(R.id.btn_filter)).perform(ViewActions.click());
+
+//        onData(anything()).inAdapterView(withId(R.id.list_items)).atPosition(0);
+    }
+
+
+
 }

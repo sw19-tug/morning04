@@ -12,6 +12,18 @@ public class default_Vocabulary implements com.group04.dictionary04.interfaces.V
     private String value = null;
     private LanguageIdentifier language = null;
 
+    public  String getLangString(){
+        switch (this.language){
+            case DE: return "German";
+            case FR: return "French";
+            case EN: return "English";
+            case IT: return "Italian";
+            case SP: return "Spanish";
+        }
+        return null;
+    }
+
+
     public default_Vocabulary() {
 
     }
