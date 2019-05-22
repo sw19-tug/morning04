@@ -1,10 +1,7 @@
 package com.group04.dictionary04.Categorization;
 
 import android.arch.lifecycle.ReportFragment;
-import android.content.Context;
 import android.support.v7.app.AppCompatDelegate;
-
-import junit.framework.TestCase;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,7 +10,6 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.group04.dictionary04.R;
-import com.group04.dictionary04.SearchViewActivity;
 import com.group04.dictionary04.model.default_Dictionary;
 
 import static org.mockito.Mockito.doNothing;

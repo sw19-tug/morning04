@@ -47,11 +47,6 @@ public class MainActivity extends AppCompatActivity {
         this.startActivity(intent);
     }
 
-    public void launchSearchView(View view){
-        Intent intent = new Intent(this, SearchViewActivity.class);
-        this.startActivity(intent);
-    }
-
     public void launchSharingView(View view){
         Intent intent = new Intent(this, SharingViewActivity.class);
         this.startActivity(intent);

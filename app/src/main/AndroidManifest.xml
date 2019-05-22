@@ -22,7 +22,6 @@
         <activity android:name=".LearningViewActivity" android:label="LearningView"></activity>
         <activity android:name=".RatingViewActivity" android:label="RatingView"></activity>
         <activity android:name=".SaveTestViewActivity" android:label="SaveTest"></activity>
-        <activity android:name=".SearchViewActivity" android:label="SearchView"></activity>
         <activity android:name=".SharingViewActivity" android:label="SharingView" ></activity>
         <activity android:name=".TestViewActivity" android:label="TestView" ></activity>
     </application>

@@ -6,7 +6,7 @@
     <string name="menuInputView">Vocabulary Input</string>
     <string name="menuLearningView">Learning</string>
     <string name="menuSearchView">Browse Vocabulary</string>
-    <string name="menuRatingView">Ratings</string>
+    <string name="menuRatingView">Browse / Rate</string>
     <string name="menuTestView">Testing</string>
     <string name="menuADVView">Advanced Testing</string>
     <string name="menuBackupView">Backup / Restore</string>

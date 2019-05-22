@@ -35,11 +35,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" android:id="@+id/task2" android:onClick="launchLearningView"/>
     <Button
-            android:text="@string/menuSearchView"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" android:id="@+id/task3" android:onClick="launchSearchView"/>
-    <Button
             android:text="@string/menuRatingView"
             android:layout_weight="1"
             android:layout_width="match_parent"
