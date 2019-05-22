@@ -23,6 +23,7 @@ import com.group04.dictionary04.enums.LanguageIdentifier;
 import com.group04.dictionary04.enums.DifficultyIdentifier;
 import com.group04.dictionary04.enums.LanguageIdentifier;
 import com.group04.dictionary04.database.DatabaseController;
+import com.group04.dictionary04.model.CustomAdapter;
 import com.group04.dictionary04.model.default_Dictionary;
 
 import org.w3c.dom.Text;
@@ -41,6 +42,9 @@ public class InputViewActivity extends AppCompatActivity {
     private LanguageIdentifier language1;
     private LanguageIdentifier language2;
     private DifficultyIdentifier difficult;
+
+    String[] fruits={"Grapes","Mango","Pineapple","Strawberry"};
+    int images[] = {R.drawable.grapes, R.drawable.mango, R.drawable.pineapple, R.drawable.strawberry };
 
 
     @Override
@@ -68,11 +72,17 @@ public class InputViewActivity extends AppCompatActivity {
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, languages);
 
+        CustomAdapter customAdapter=new CustomAdapter(getApplicationContext(),images,fruits);
+
+
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        //filling both lang spinners with options
-        lang_spinner.setAdapter(dataAdapter);
-        lang_spinner2.setAdapter(dataAdapter);
+//        //filling both lang spinners with options
+//        lang_spinner.setAdapter(dataAdapter);
+//        lang_spinner2.setAdapter(dataAdapter);
+        lang_spinner.setAdapter(customAdapter);
+        lang_spinner2.setAdapter(customAdapter);
+
         Button button = (Button) findViewById(R.id.button_input);
 
         button.setOnClickListener(new View.OnClickListener() {
