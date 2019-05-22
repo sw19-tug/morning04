@@ -62,4 +62,9 @@ public class MainActivity extends AppCompatActivity {
         this.startActivity(intent);
     }
 
+    public void launchAdvancedTestView(View view){
+        Intent intent = new Intent(this, TestViewActivity.class);
+        this.startActivity(intent);
+    }
+
 }
