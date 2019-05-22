@@ -47,10 +47,10 @@ public class DatabaseController {
         dict.addTranslation("Rucksack", "backpack", "2",LanguageIdentifier.DE, LanguageIdentifier.EN);
         dict.addTranslation("Aufzug", "elevator", "3",LanguageIdentifier.DE, LanguageIdentifier.EN);
 
-        dict.addTranslation("Auto", "coche", LanguageIdentifier.DE, LanguageIdentifier.SP);
-        dict.addTranslation("Haus", "casa", LanguageIdentifier.DE, LanguageIdentifier.SP);
-        dict.addTranslation("Rucksack", "mochila", LanguageIdentifier.DE, LanguageIdentifier.SP);
-        dict.addTranslation("Aufzug", "ascensor", LanguageIdentifier.DE, LanguageIdentifier.SP);
+        dict.addTranslation("Auto", "coche", "1",LanguageIdentifier.DE, LanguageIdentifier.SP);
+        dict.addTranslation("Haus", "casa", "2", LanguageIdentifier.DE, LanguageIdentifier.SP);
+        dict.addTranslation("Rucksack", "mochila", "3", LanguageIdentifier.DE, LanguageIdentifier.SP);
+        dict.addTranslation("Aufzug", "ascensor", "1", LanguageIdentifier.DE, LanguageIdentifier.SP);
 
         Gson gson = new Gson();
         String dictString = gson.toJson(dict);
