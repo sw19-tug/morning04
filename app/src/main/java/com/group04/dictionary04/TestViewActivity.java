@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.group04.dictionary04.database.DatabaseController;
@@ -22,6 +23,7 @@ public class TestViewActivity extends Activity implements View.OnClickListener {
     TextView lang2;
     TextView givenVocab;
     default_Exam exam;
+    EditText input;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class TestViewActivity extends Activity implements View.OnClickListener {
         lang1 = findViewById(R.id.textView3);
         lang2 = findViewById(R.id.textView5);
         givenVocab = findViewById(R.id.textView4);
+        input = findViewById(R.id.editText2);
 
         exam = dict.generateExam(null);
 
@@ -80,7 +83,7 @@ public class TestViewActivity extends Activity implements View.OnClickListener {
         lang1.setText(exam.getVocsToTest().get(index).getId1().getLangString());
         lang2.setText(exam.getVocsToTest().get(index).getId2().getLangString());
         givenVocab.setText(exam.getVocsToTest().get(index).getId1().getValue());
-        //clear the input box
+        input.getText().clear();
 
     }
 

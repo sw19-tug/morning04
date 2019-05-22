@@ -7,7 +7,6 @@ public class default_Entry implements com.group04.dictionary04.interfaces.Entry 
     String rating = null;
 
     public default_Entry() {
-
     }
 
     public default_Entry(String _id, String id2) {

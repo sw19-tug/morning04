@@ -88,40 +88,4 @@ public class TestActivityInstrumentedTest {
         onView(withId(android.R.id.button2)).perform(click());
 
     }
-
-    
-
-/*
-
-    public String getText(final TextView textView)
-    {
-        return textView.getText().toString();
-    }
-
-
-
-
-    @Test
-    public void checkNext()
-    {
-
-       TextView txt = TestViewActivityTestRule.getActivity().findViewById(R.id.textView4);
-
-       String check = getText(txt);
-
-       onView(withId(R.id.button5)).perform(click());
-
-       onView(withId(R.id.button3)).check(matches(isDisplayed()));
-
-       onView(withId(R.id.button3)).check(matches(isClickable()));
-
-       onView(withId(R.id.button3)).perform(click());
-       onView(withId(R.id.textView4)).check(matches(withText(check)));
-
-
-    }
-
-*/
-
-
 }

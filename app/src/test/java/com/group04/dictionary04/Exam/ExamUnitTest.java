@@ -3,6 +3,7 @@ package com.group04.dictionary04.Exam;
 import com.group04.dictionary04.enums.LanguageIdentifier;
 import com.group04.dictionary04.model.default_Entry;
 import com.group04.dictionary04.model.default_Exam;
+import com.group04.dictionary04.model.default_Filter;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -17,51 +18,50 @@ public class ExamUnitTest {
 
     @Before
     public void setUp() {
-        //exam = new default_Exam();
+        exam = new default_Exam();
+        default_Entry entry = new default_Entry();
+        exam.addVocToTest(entry);
+        default_Filter filter = new default_Filter();
+        exam.setFilter(filter);
+    }
+
+    @Before
+    public void setVocsToTestUnitTest(){
+        default_Entry entry = new default_Entry("test1", "test2");
+        List<default_Entry> vocsToTest = Collections.singletonList(entry);
+        exam.setVocsToTest(vocsToTest);
+        Assert.assertNotNull(exam.getVocsToTest());
+    }
+
+    @Test
+    public void setFilterTest(){
+        exam.setFilter(null);
+        Assert.assertNull(exam.getFilter());
 
     }
 
     @Test
     public void getVocsToTestUnitTest(){
-        Assert.assertNull(exam.getVocsToTest());
-    }
-
-    @Test
-    public void setVocsToTestUnitTest(){
-        default_Entry entry = new default_Entry("test1", "test2");
-        List<default_Entry> vocsToTest = Collections.singletonList(entry);
-        exam.setVocsToTest(vocsToTest);
+        Assert.assertNotNull(exam.getVocsToTest());
     }
 
     @Test
     public void getFailedVocsTest(){
         List<default_Entry> failedVocs = exam.getFailedVocs();
-        Assert.assertNull(failedVocs);
+        Assert.assertNotNull(failedVocs);
     }
 
     @Test
     public void setFailedVocsTest(){
 
-    }
-
-    @Test
-    public void getResultTest(){
-
-    }
-
-    @Test
-    public void setResultTest(){
-
+        exam.setFailedVocs(null);
+        Assert.assertNull(exam.getFailedVocs());
     }
 
     @Test
     public void getFilterTest(){
-
+        Assert.assertNotNull(exam.getFilter());
     }
 
-    @Test
-    public void setFilterTest(){
-
-    }
 }
 

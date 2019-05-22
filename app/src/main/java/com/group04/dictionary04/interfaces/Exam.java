@@ -16,8 +16,9 @@ public interface Exam {
 
     String getResult();
     void setResult(String result);
-    String getFilter();
-    void setFilter(String filter);
+    default_Filter getFilter();
+    void setFilter(default_Filter filter);
     int countVocsToTest();
     int countFailedVocs();
+    void addVocToTest(default_Entry entry);
 }
