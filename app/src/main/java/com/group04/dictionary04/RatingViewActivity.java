@@ -58,7 +58,6 @@ public class RatingViewActivity extends AppCompatActivity {
 
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -258,7 +257,6 @@ public class RatingViewActivity extends AppCompatActivity {
         };
 
         sortList(entries);
-
         items.setAdapter(dataAdapter);
     }
 
