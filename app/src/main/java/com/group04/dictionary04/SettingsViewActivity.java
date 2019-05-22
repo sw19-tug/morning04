@@ -2,6 +2,7 @@ package com.group04.dictionary04;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -28,6 +29,7 @@ public class SettingsViewActivity extends AppCompatActivity {
 
     private SharedPreferences settings = null;
     private SharedPreferences.Editor editor = null;
+    public int delay = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -37,31 +39,6 @@ public class SettingsViewActivity extends AppCompatActivity {
       setSupportActionBar((Toolbar)findViewById(R.id.myactionbar));
       getSupportActionBar().setDisplayHomeAsUpEnabled(true);
       getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-      //Fill Spinner with numbers
-      final Spinner spinner_days = (Spinner) findViewById(R.id.spinner_days);
-      Integer[] days = new Integer[]{1, 2, 3, 4, 5, 6, 7};
-      ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this,android.R.layout.simple_spinner_item, days);
-      spinner_days.setAdapter(adapter);
-
-      final Button btnEnableDays = (Button) findViewById(R.id.btn_days);
-
-     btnEnableDays.setOnClickListener(new View.OnClickListener() {
-         @Override
-         public void onClick(View v) {
-
-             int days = spinner_days.getSelectedItemPosition();
-
-             //long time = System.currentTimeMillis() + 60000L; //Zum testen- nach einer Minute disabled
-             long time = System.currentTimeMillis() + 86400000L * days;
-
-             enableNotificationTime(v, time);
-
-             Toast.makeText(SettingsViewActivity.this,spinner_days.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-
-         }
-     });
-
 
 
       settings = getSharedPreferences(PREFS, MODE_PRIVATE);
@@ -81,14 +58,20 @@ public class SettingsViewActivity extends AppCompatActivity {
         //used to display current state of notifications
         //TODO: design, maybe add and option for the user to select the timer for Notification?(1-7 days?)
 
+
+
         boolean check = settings.getBoolean("enabled", true);
         TextView tv = findViewById(R.id.textView2);
         if(check){
             tv.setText("on");
+            tv.setTextColor(Color.parseColor("#00FF00"));
+
         }
         if(!check)
         {
             tv.setText("off");
+            tv.setTextColor(Color.parseColor("#FF0000"));
+
         }
 
 
@@ -110,13 +93,6 @@ public class SettingsViewActivity extends AppCompatActivity {
         editor.putBoolean("enabled", false);
         editor.commit();
     }
-
-    public void enableNotificationTime(View v, long time) {
-        editor.putLong("enabled_time", time);
-        editor.putBoolean("enabled", true);
-        editor.commit();
-    }
-
 
 
     @Override

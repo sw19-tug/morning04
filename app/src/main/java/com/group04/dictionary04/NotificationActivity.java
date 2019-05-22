@@ -17,10 +17,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.app.IntentService;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 
-
-public class NotificationActivity extends Service {
+public class NotificationActivity extends Service  {
 
 
 
@@ -28,8 +29,8 @@ public class NotificationActivity extends Service {
 
 
     //used to specify the reminder for the Notification
-    //private static long delay = MILLISECS_DAY * 3; //used for the final release
-    private static long delay = 60000L; // 1 Min to receive notification after the app got closed(testing)
+    private static long delay = MILLISECS_DAY * 3;
+    //private static long delay = 60000L; // 1 Min to receive notification after the app got closed(testing)
 
 
 
@@ -40,13 +41,6 @@ public class NotificationActivity extends Service {
 
         SharedPreferences settings = getSharedPreferences(MainActivity.PREFS, MODE_PRIVATE);
 
-        //Check if notification period time was set
-        if(settings.getLong("enabled_time", 0L) != 0L &&
-          settings.getLong("enabled_time", 0L) < System.currentTimeMillis()){
-
-            settings.edit().putBoolean("enabled", false).commit();
-            settings.edit().remove("enabled_time").commit();
-        }
 
         // checking if the NotificationService == enabled
         if (settings.getBoolean("enabled", true)) {
@@ -62,6 +56,7 @@ public class NotificationActivity extends Service {
         //stops the service
         stopSelf();
     }
+
 
     //start when the app gets closed
     public void setNotificationAlarm() {
