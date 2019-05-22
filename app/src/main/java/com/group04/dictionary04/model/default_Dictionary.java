@@ -7,6 +7,7 @@ import com.group04.dictionary04.interfaces.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 public class default_Dictionary implements Dictionary {
     private List<default_Entry> entries = new ArrayList<>();
@@ -23,7 +24,6 @@ public class default_Dictionary implements Dictionary {
         default_Language sp = new default_Language("Spanish", LanguageIdentifier.SP);
 
         languages.put(LanguageIdentifier.DE, de);
-
         languages.put(LanguageIdentifier.EN, en);
         languages.put(LanguageIdentifier.FR, fr);
         languages.put(LanguageIdentifier.IT, it);
@@ -73,8 +73,17 @@ public class default_Dictionary implements Dictionary {
 
     @Override
     public default_Exam generateExam(default_Filter filter) {
-
-        return null;
+        default_Exam exam = new default_Exam();
+        if (filter == null)
+        {
+            for (int i = 0; i < exam.limitVocs; ++i)
+            {
+                Random rand = new Random();
+                int random = rand.nextInt(entries.size());
+                exam.getVocsToTest().add(entries.get(random));
+            }
+        }
+        return exam;
     }
 
     //TODO do we really need this function?
@@ -92,9 +101,28 @@ public class default_Dictionary implements Dictionary {
         entry.setId1(ovoc1);
         entry.setId2(ovoc2);
 
+        entries.add(entry);
+    }
+
+
+    @Override
+    public void addTranslation(String voc1, String voc2, String rating, LanguageIdentifier lang1, LanguageIdentifier lang2) {
+        default_Language first = getLanguage(lang1);
+        default_Language second = getLanguage(lang2);
+
+
+        default_Vocabulary ovoc1 = first.addVocabulary(voc1);
+        ovoc1.setLanguage(lang1);
+        default_Vocabulary ovoc2 = second.addVocabulary(voc2);
+        ovoc2.setLanguage(lang2);
+        default_Entry entry = new default_Entry();
+        entry.setId1(ovoc1);
+        entry.setId2(ovoc2);
+        entry.setRating(rating);
 
         entries.add(entry);
     }
+
 
     @Override
     public void addTranslationWithDiffAndTag(String voc1, String voc2, LanguageIdentifier lang1, LanguageIdentifier lang2,DifficultyIdentifier diff, String tag)
@@ -165,7 +193,7 @@ public class default_Dictionary implements Dictionary {
         return returnString;
     }
 
-    public default_Language getLanguageByIndex(String name) {
+    public default_Language getLanguageByName(String name) {
         for(default_Language language : languages.values()) {
             if(language.getDisplayName().equals(name))
                 return language;

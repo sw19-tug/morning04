@@ -42,15 +42,15 @@ public class DatabaseController {
     public void saveTestDatabase() {
         default_Dictionary dict = new default_Dictionary();
 
-        dict.addTranslation("Auto", "car", LanguageIdentifier.DE, LanguageIdentifier.EN);
-        dict.addTranslation("Haus", "house", LanguageIdentifier.DE, LanguageIdentifier.EN);
-        dict.addTranslation("Rucksack", "backpack", LanguageIdentifier.DE, LanguageIdentifier.EN);
-        dict.addTranslation("Aufzug", "elevator", LanguageIdentifier.DE, LanguageIdentifier.EN);
+        dict.addTranslation("Auto", "car", "1",LanguageIdentifier.DE, LanguageIdentifier.EN);
+        dict.addTranslation("Haus", "house","1",LanguageIdentifier.DE, LanguageIdentifier.EN);
+        dict.addTranslation("Rucksack", "backpack", "2",LanguageIdentifier.DE, LanguageIdentifier.EN);
+        dict.addTranslation("Aufzug", "elevator", "3",LanguageIdentifier.DE, LanguageIdentifier.EN);
 
-        dict.addTranslation("Auto", "coche", LanguageIdentifier.DE, LanguageIdentifier.SP);
-        dict.addTranslation("Haus", "casa", LanguageIdentifier.DE, LanguageIdentifier.SP);
-        dict.addTranslation("Rucksack", "mochila", LanguageIdentifier.DE, LanguageIdentifier.SP);
-        dict.addTranslation("Aufzug", "ascensor", LanguageIdentifier.DE, LanguageIdentifier.SP);
+        dict.addTranslation("Auto", "coche", "1",LanguageIdentifier.DE, LanguageIdentifier.SP);
+        dict.addTranslation("Haus", "casa", "2", LanguageIdentifier.DE, LanguageIdentifier.SP);
+        dict.addTranslation("Rucksack", "mochila", "3", LanguageIdentifier.DE, LanguageIdentifier.SP);
+        dict.addTranslation("Aufzug", "ascensor", "1", LanguageIdentifier.DE, LanguageIdentifier.SP);
 
         Gson gson = new Gson();
         String dictString = gson.toJson(dict);

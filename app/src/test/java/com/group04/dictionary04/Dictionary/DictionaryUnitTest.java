@@ -10,6 +10,8 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static com.group04.dictionary04.enums.DifficultyIdentifier.BEGINNER;
+
 public class DictionaryUnitTest{
     default_Dictionary dictionary;
     static int total_entries = 15;
@@ -18,13 +20,13 @@ public class DictionaryUnitTest{
     @Before
     public void setUp() {
         dictionary = new default_Dictionary();
-        for (int i = 1; i <= total_entries; i++){
-            dictionary.addTranslation("first_de" + i, "second_en" +1, LanguageIdentifier.DE, LanguageIdentifier.EN);
+        for (int i = 0; i < total_entries; i++){
+            dictionary.addTranslation("first_de" + i, "second_en" +i,"" + (i%4), LanguageIdentifier.DE, LanguageIdentifier.EN);
         }
     }
 
     @Test
-    public void getEntryTest(){
+     public void getEntryTest(){
         List<default_Entry> all_added_entries = dictionary.getEntries();
         assert all_added_entries.size() == total_entries : "Inserting Elements at setup failed!\n";
         for (default_Entry it : all_added_entries)
@@ -86,4 +88,37 @@ public class DictionaryUnitTest{
     public void updateEntryTest() {
 
     }
+
+    @Test
+    public void getEntryNameTest() {
+        for (int i = 0; i < total_entries; i++) {
+            assert dictionary.getEntries().get(i).getId1().getValue().contains("first_de" + i) : "DE ENTRY " + i + " NOT MATCH\n";
+            assert dictionary.getEntries().get(i).getId2().getValue().contains("second_en" + i) : "EN ENTRY" + i + "NOT MATCH\n";
+        }
+    }
+
+    @Test
+    public void getRatingTest() {
+        for (int i = 0; i < total_entries; i++) {
+            assert dictionary.getEntries().get(i).getRating().contains(""+(i%4)): "RATING OF ENTRY " + i + " NOT MATCH\n";
+        }
+    }
+
+    @Test
+    public void setRatingTest(){
+
+        for(int i = 0; i < total_entries; i++)
+            dictionary.getEntries().get(i).setRating(""+(i%4));
+
+        for(int i = 0; i < total_entries; i++)
+            assert dictionary.getEntries().get(i).getRating().equals(""+(i%4)) : "SET RATING FOR" + i +"NOT MATCH\n";
+    }
+
+    @Test
+    public void getDifficulty() {
+        assert dictionary.getEntries().get(0).getRating().contains(String.valueOf(BEGINNER.getValue() - 1)) : "GET DIFFICULTY NOT MATCH\n";
+
+    }
+
+
 }

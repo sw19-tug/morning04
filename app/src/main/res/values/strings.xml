@@ -16,4 +16,12 @@
     <string name="menuRestoreData">Restore</string>
     <string name="menuClearTesting">Clear Testings</string>
     <string name="menuClearAll">Reset All</string>
+    <string name="language">Language</string>
+    <string name="vocab">VOCAB</string>
+    <string name="second_language">Second Language</string>
+    <string name="check_answer">check answer</string>
+    <string name="previous">previous</string>
+    <string name="save_exam">save exam</string>
+    <string name="next">next</string>
+    <string name="your_answer">your answer...</string>
 </resources>
