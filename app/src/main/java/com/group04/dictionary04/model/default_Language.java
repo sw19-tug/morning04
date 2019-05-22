@@ -1,6 +1,9 @@
 package com.group04.dictionary04.model;
 
+import android.util.Log;
+import com.group04.dictionary04.enums.DifficultyIdentifier;
 import com.group04.dictionary04.enums.LanguageIdentifier;
+import com.group04.dictionary04.interfaces.Dictionary;
 import com.group04.dictionary04.interfaces.Vocabulary;
 
 import java.util.ArrayList;
@@ -104,6 +107,48 @@ public class default_Language implements com.group04.dictionary04.interfaces.Lan
             return getVocabularies();
         }
 
+    }
+
+    public List<default_Entry> getVocabulariesQueryByTagRating(DifficultyIdentifier difficulty, String search, Dictionary dict) {
+        //if(search != null && search.length() > 0) {
+            List<default_Entry> list = new ArrayList<>();
+            int difficulty_value = difficulty.getValue();
+            for(default_Vocabulary vocIt : vocabularies) {
+                    for(default_Entry entryIt : dict.getEntries())
+                    {
+                        Log.d("log", "check matching in Entry " +
+                                entryIt.getId1().getId() + " " + entryIt.getId1().getValue() + " " +
+                                entryIt.getId2().getId() + " " + entryIt.getId2().getValue() + " Rating:" + entryIt.getRating());
+
+
+                        if(entryIt.getRating() == null) // no rating at the current record - so add it into the list
+                        {
+                            if((vocIt.getId().equals(entryIt.getId1().getId()) || vocIt.getId().equals(entryIt.getId2().getId())))
+                            {
+                                Log.d("log", "MATCHING FOUND BUT NO RATING GIVVEN AND ADD TO LIST " + vocIt.getId());
+                                if(search == null || search.length() == 0 || entryIt.getId1().getValue().toLowerCase().contains(search.toLowerCase())
+                                        || entryIt.getId2().getValue().toLowerCase().contains(search.toLowerCase()))
+                                    list.add(entryIt);
+                            }
+                        }
+                        else // there is a rating
+                        {
+                            if((vocIt.getId().equals(entryIt.getId1().getId()) || vocIt.getId().equals(entryIt.getId2().getId())) &&
+                                    difficulty_value == Integer.valueOf(entryIt.getRating()))
+                            {
+                                Log.d("log", "MATCHING FOUND AND ADD TO LIST " + vocIt.getId());
+                                if(search == null || search.length() == 0 || entryIt.getId1().getValue().toLowerCase().contains(search.toLowerCase())
+                                        || entryIt.getId2().getValue().toLowerCase().contains(search.toLowerCase()))
+                                    list.add(entryIt);
+                            }
+                        }
+                    }
+                    //list.add(voc);
+                }
+
+
+            return list;
+       // }
     }
 
     public List<String> getVocabularyStrings() {
