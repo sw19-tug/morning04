@@ -24,36 +24,34 @@ import static org.powermock.api.mockito.PowerMockito.mock;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 import static org.powermock.api.mockito.PowerMockito.spy;
 
-//@RunWith(PowerMockRunner.class)
-//@PrepareForTest({ ReportFragment.class })
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({ ReportFragment.class })
+
 
 public class CategorizationUnitTest extends SearchViewActivity {
-    //TODO Unsure of the best way to do unit testing for this activity, go over on-site
-//    private SearchViewActivity searchViewActivity;
-//    private Context context = ApplicationProvider.getApplicationContext();
-//
-//    default_Dictionary dictionary;
-//
-//    @Before
-//    public void setup() throws Exception {
-//        super.setUp();
-//        dictionary = new default_Dictionary();
-//    }
 
+    private SearchViewActivity searchViewActivity;
 
-    //TODO not feasible to test creation of activity
-//    @Test
-//    public void testLaunch() {
-//        mockStatic(ReportFragment.class);
-//        SearchViewActivity activity = spy(new SearchViewActivity());
-//
-//        doNothing().when(activity).setContentView(R.layout.searchview);
-//        doReturn(mock(AppCompatDelegate.class)).when(activity).getDelegate();
-//        // Call the method
-//        activity.onCreate(null);
-//
-//        // Verify that it worked
-//        verify(activity, times(1)).setContentView(R.layout.searchview);
-//    }
+    default_Dictionary dictionary;
 
+    @Before
+    public void setup() throws Exception {
+        dictionary = new default_Dictionary();
+    }
+
+    //TODO test not currently working
+
+    @Test
+    public void testLaunch() {
+        mockStatic(ReportFragment.class);
+        SearchViewActivity activity = spy(new SearchViewActivity());
+
+        doNothing().when(activity).setContentView(R.layout.searchview);
+        doReturn(mock(AppCompatDelegate.class)).when(activity).getDelegate();
+        // Call the method
+        activity.onCreate(null);
+
+        // Verify that it worked
+        verify(activity, times(1)).setContentView(R.layout.searchview);
+    }
 }
