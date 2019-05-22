@@ -8,10 +8,16 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.group04.dictionary04.database.DatabaseController;
 import com.group04.dictionary04.model.default_Dictionary;
+
+import java.util.Set;
 
 public class SettingsViewActivity extends AppCompatActivity {
     private default_Dictionary dict = null;
@@ -31,6 +37,30 @@ public class SettingsViewActivity extends AppCompatActivity {
       setSupportActionBar((Toolbar)findViewById(R.id.myactionbar));
       getSupportActionBar().setDisplayHomeAsUpEnabled(true);
       getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+      //Fill Spinner with numbers
+      final Spinner spinner_days = (Spinner) findViewById(R.id.spinner_days);
+      Integer[] days = new Integer[]{1, 2, 3, 4, 5, 6, 7};
+      ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this,android.R.layout.simple_spinner_item, days);
+      spinner_days.setAdapter(adapter);
+
+      final Button btnEnableDays = (Button) findViewById(R.id.btn_days);
+
+     btnEnableDays.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+
+             int days = spinner_days.getSelectedItemPosition();
+
+             //long time = System.currentTimeMillis() + 60000L; //Zum testen- nach einer Minute disabled
+             long time = System.currentTimeMillis() + 86400000L * days;
+
+             enableNotificationTime(v, time);
+
+             Toast.makeText(SettingsViewActivity.this,spinner_days.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+
+         }
+     });
 
 
 
@@ -78,6 +108,12 @@ public class SettingsViewActivity extends AppCompatActivity {
 
     public void disableNotification(View v) {
         editor.putBoolean("enabled", false);
+        editor.commit();
+    }
+
+    public void enableNotificationTime(View v, long time) {
+        editor.putLong("enabled_time", time);
+        editor.putBoolean("enabled", true);
         editor.commit();
     }
 

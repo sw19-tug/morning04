@@ -40,6 +40,14 @@ public class NotificationActivity extends Service {
 
         SharedPreferences settings = getSharedPreferences(MainActivity.PREFS, MODE_PRIVATE);
 
+        //Check if notification period time was set
+        if(settings.getLong("enabled_time", 0L) != 0L &&
+          settings.getLong("enabled_time", 0L) < System.currentTimeMillis()){
+
+            settings.edit().putBoolean("enabled", false).commit();
+            settings.edit().remove("enabled_time").commit();
+        }
+
         // checking if the NotificationService == enabled
         if (settings.getBoolean("enabled", true)) {
             //checks if the the service has reached the time limit
@@ -86,10 +94,7 @@ public class NotificationActivity extends Service {
                 = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(123456, notification);
 
-
     }
-
-
 
 
     @Nullable
