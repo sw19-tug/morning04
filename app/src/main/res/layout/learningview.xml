@@ -6,16 +6,29 @@
               tools:context=".MainActivity"
               android:layout_weight="20">
 
+    <android.support.v7.widget.Toolbar
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/myactionbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:elevation="4dp">
+
+        <EditText
+                android:id="@+id/search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Learning View"
+                android:layout_gravity="center"
+                android:focusedByDefault="false"/>
+
+    </android.support.v7.widget.Toolbar>
+
     <Spinner
             android:layout_width="match_parent"
             android:layout_height="match_parent" android:id="@+id/languageSelection"
             android:layout_weight="9"/>
-    <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="text"
-            android:ems="10"
-            android:id="@+id/search" android:layout_weight="9"/>
+
     <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"

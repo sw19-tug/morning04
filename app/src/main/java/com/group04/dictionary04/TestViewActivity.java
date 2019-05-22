@@ -3,10 +3,13 @@ package com.group04.dictionary04;
 import android.app.Activity;
 import android.os.Bundle;
 
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import com.group04.dictionary04.database.DatabaseController;
 import com.group04.dictionary04.model.default_Dictionary;
 
-public class TestViewActivity extends Activity {
+public class TestViewActivity extends AppCompatActivity {
 
     private default_Dictionary dict = null;
 
@@ -14,6 +17,9 @@ public class TestViewActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.testview);
+        setSupportActionBar((Toolbar)findViewById(R.id.myactionbar));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     @Override
@@ -21,7 +27,6 @@ public class TestViewActivity extends Activity {
         super.onResume();
 
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
-        dbController.saveTestDatabase();
         dict = dbController.getCurrentDatabase();
     }
 
@@ -39,5 +44,16 @@ public class TestViewActivity extends Activity {
 
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
         dbController.saveCurrentDatabase(dict);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            onBackPressed();  return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
