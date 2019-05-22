@@ -127,7 +127,7 @@ public class RatingViewActivity extends AppCompatActivity {
                     else
                         difficult = DifficultyIdentifier.NATIVE;
 
-                    loadCurrentLanguageList(dict.getLanguageByIndex(lang_spinner.getSelectedItem().toString()), difficult);
+                    loadCurrentLanguageList(dict.getLanguageByName(lang_spinner.getSelectedItem().toString()), difficult);
                 }
             }
         });

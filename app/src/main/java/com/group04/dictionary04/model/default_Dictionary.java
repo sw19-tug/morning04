@@ -23,7 +23,6 @@ public class default_Dictionary implements Dictionary {
         default_Language sp = new default_Language("Spanish", LanguageIdentifier.SP);
 
         languages.put(LanguageIdentifier.DE, de);
-
         languages.put(LanguageIdentifier.EN, en);
         languages.put(LanguageIdentifier.FR, fr);
         languages.put(LanguageIdentifier.IT, it);
@@ -184,7 +183,7 @@ public class default_Dictionary implements Dictionary {
         return returnString;
     }
 
-    public default_Language getLanguageByIndex(String name) {
+    public default_Language getLanguageByName(String name) {
         for(default_Language language : languages.values()) {
             if(language.getDisplayName().equals(name))
                 return language;

@@ -46,7 +46,7 @@ public class LearningViewActivity extends AppCompatActivity {
         lang_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                default_Language language = dict.getLanguageByIndex(parent.getSelectedItem().toString());
+                default_Language language = dict.getLanguageByName(parent.getSelectedItem().toString());
                 Toast.makeText(parent.getContext(), "" + language.getDisplayName(), Toast.LENGTH_SHORT).show();
                 loadCurrentLanguageList(language);
             }
@@ -76,7 +76,7 @@ public class LearningViewActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
 
-                loadCurrentLanguageList(dict.getLanguageByIndex(lang_spinner.getSelectedItem().toString()));
+                loadCurrentLanguageList(dict.getLanguageByName(lang_spinner.getSelectedItem().toString()));
             }
 
             @Override
@@ -99,7 +99,7 @@ public class LearningViewActivity extends AppCompatActivity {
 
     private void loadCurrentLanguageList(default_Language language) {
         String searchText = search.getText().toString();
-        ArrayAdapter<default_Vocabulary> dataAdapter = new ArrayAdapter<default_Vocabulary>(this, android.R.layout.simple_spinner_item, language.getVocabulariesQuery(searchText));
+        ArrayAdapter<default_Vocabulary> dataAdapter = new ArrayAdapter<default_Vocabulary>(this, android.R.layout.simple_selectable_list_item, language.getVocabulariesQuery(searchText));
         dataAdapter.setDropDownViewResource(android.R.layout.simple_selectable_list_item);
         vocList.setAdapter(dataAdapter);
     }
