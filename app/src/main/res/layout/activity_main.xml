@@ -50,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" android:id="@+id/task5" android:onClick="launchTestView"/>
     <Button
-        android:text="@string/menuTestView"
+        android:text="@string/menuAdvancedTestView"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent" android:id="@+id/task10" android:onClick="launchAdvancedTestView"/>
