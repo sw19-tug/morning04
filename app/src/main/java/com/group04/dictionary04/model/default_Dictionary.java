@@ -139,7 +139,8 @@ public class default_Dictionary implements Dictionary {
         default_Entry entry = new default_Entry();
         entry.setId1(ovoc1);
         entry.setId2(ovoc2);
-        entry.setRating(diff.toString());
+        //entry.setRating(diff.toString());
+        entry.setRating(String.valueOf(diff.getValue()));
         entry.setTag(tag);
 
 

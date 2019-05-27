@@ -1,54 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:id="@+id/base"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:layout_weight="100"
-android:orientation="vertical"
-tools:context=".AdvancedTestViewActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="100"
+    android:orientation="vertical"
+    tools:context=".AdvancedTestViewActivity">
+
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:gravity="center"
-        >
+        android:orientation="vertical">
 
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="150dp"
-            android:layout_height="26dp" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="150dp"
+        <android.support.v7.widget.Toolbar
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/myactionbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/from_to" />
+            android:background="@color/colorPrimary"
+            android:elevation="4dp">
 
-        <Spinner
-            android:id="@+id/spinner2"
-            android:layout_width="150dp"
+            <EditText
+                android:id="@+id/search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Advanced Testing View"
+                android:layout_gravity="center"
+                android:focusedByDefault="false"/>
+
+        </android.support.v7.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp">
+
+            <Spinner
+                android:id="@+id/spinner_from"
+                android:layout_width="140dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:background="@android:drawable/btn_dropdown"
+                android:spinnerMode="dropdown" />
+
+            <TextView
+                android:id="@+id/tv_to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="5dp"
+                android:text="to"
+                android:textSize="20dp" />
+
+            <Spinner
+                android:id="@+id/spinner_to"
+                android:layout_marginLeft="25dp"
+                android:layout_width="140dp"
+                android:layout_height="40dp"
+                android:background="@android:drawable/btn_dropdown"
+                android:spinnerMode="dropdown" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txt_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:text="Enter a tag:"
+                android:textSize="20dp"/>
+
+            <EditText
+                android:layout_width="225dp"
+                android:id="@+id/et_tag"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txt_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:text="Enter a rating:"
+                android:textSize="20dp"/>
+
+            <RatingBar
+                android:id="@+id/ratingBar_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                style = "?android:attr/ratingBarStyleIndicator"
+                android:isIndicator="false"
+                android:numStars="4"
+                android:stepSize="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <Button
+                android:id="@+id/btn_filter2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Filter"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <ListView
+                android:id="@+id/lv_vocabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical">
+
+            </ListView>
+
+
+        </LinearLayout>
+
+
     </LinearLayout>
 
+
 </android.support.constraint.ConstraintLayout>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
