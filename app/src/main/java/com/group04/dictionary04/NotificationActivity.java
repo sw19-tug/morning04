@@ -30,8 +30,6 @@ public class NotificationActivity extends Service  {
 
     //used to specify the reminder for the Notification
     private static long delay = MILLISECS_DAY * 3;
-    //private static long delay = 60000L; // 1 Min to receive notification after the app got closed(testing)
-
 
 
     @Override
@@ -73,7 +71,6 @@ public class NotificationActivity extends Service  {
 
         Intent calledIntent = new Intent(this, MainActivity.class);
 
-        //@SuppressWarnings("deprecation")
         Notification notification = new Notification.Builder(this)
                 .setAutoCancel(true)
                 .setContentIntent(PendingIntent.getActivity(this, 12345, calledIntent,

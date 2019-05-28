@@ -29,7 +29,6 @@ public class SettingsViewActivity extends AppCompatActivity {
 
     private SharedPreferences settings = null;
     private SharedPreferences.Editor editor = null;
-    public int delay = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -56,10 +55,6 @@ public class SettingsViewActivity extends AppCompatActivity {
 
 
         //used to display current state of notifications
-        //TODO: design, maybe add and option for the user to select the timer for Notification?(1-7 days?)
-
-
-
         boolean check = settings.getBoolean("enabled", true);
         TextView tv = findViewById(R.id.textView2);
         if(check){
@@ -87,11 +82,17 @@ public class SettingsViewActivity extends AppCompatActivity {
         editor.putLong("checkLast", System.currentTimeMillis());
         editor.putBoolean("enabled", true);
         editor.commit();
+        TextView tv = findViewById(R.id.textView2);
+        tv.setText("on");
+        tv.setTextColor(Color.parseColor("#00FF00"));
     }
 
     public void disableNotification(View v) {
         editor.putBoolean("enabled", false);
         editor.commit();
+        TextView tv = findViewById(R.id.textView2);
+        tv.setText("off");
+        tv.setTextColor(Color.parseColor("#FF0000"));
     }
 
 
