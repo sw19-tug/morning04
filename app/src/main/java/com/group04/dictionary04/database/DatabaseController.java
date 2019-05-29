@@ -84,6 +84,10 @@ public class DatabaseController {
         writeStringAsFile(reader.getString("dictionary04", null), "dict04-backup");
     }
 
+    public File backupDatabaseSharing() {
+        return writeStringAsFileAndReturn(reader.getString("dictionary04", null), "dict04-backup");
+    }
+
     public void restoreDatabase() {
         String backup = readFileAsString("dict04-backup");
         editor.putString("dictionary04", backup);
@@ -110,6 +114,23 @@ public class DatabaseController {
             Toast.makeText(context, "Backup-file could not be created", Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
+    }
+
+    public File writeStringAsFileAndReturn(final String fileContents, String fileName) {
+        try {
+            File returnFile = null;
+            returnFile = new File(context.getFilesDir(), fileName);
+            FileWriter out = new FileWriter(returnFile);
+            out.write(fileContents);
+            out.close();
+            Toast.makeText(context, "Backup created in file: dict04-backup", Toast.LENGTH_LONG).show();
+            return returnFile;
+        } catch (IOException e) {
+            Toast.makeText(context, "Backup-file could not be created", Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     public String readFileAsString(String fileName) {

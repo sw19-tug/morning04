@@ -49,15 +49,20 @@ public class BackupViewActivity extends AppCompatActivity {
 
     public void shareData(View view) {
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
-        dbController.backupDatabase();
-        File file = new File("dict04-backup");
+
+
         //Uri contentUri = FileProvider.getUriForFile(this, "com.your.app.package", file);
         Intent intentShareFile = new Intent(Intent.ACTION_SEND);
 
-        Log.d("as", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-        intentShareFile.setType("application/text");
-        intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+"dict04-backup"));
+        File file = dbController.backupDatabaseSharing();
 
+        File cacheFile = new File(this.getFilesDir(), "dict04-backup");
+
+        Log.d("as", file.getAbsolutePath());
+        intentShareFile.setType("application/text");
+        Uri photoURI = FileProvider.getUriForFile(this, this.getApplicationContext().getPackageName() + ".fileprovider", cacheFile);
+        intentShareFile.putExtra(Intent.EXTRA_STREAM, photoURI);
+        intentShareFile.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
                 "Sharing File...");
         intentShareFile.putExtra(Intent.EXTRA_TEXT, "Sharing File...");
