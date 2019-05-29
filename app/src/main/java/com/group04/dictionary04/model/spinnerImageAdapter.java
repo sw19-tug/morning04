@@ -10,17 +10,17 @@ import android.widget.TextView;
 
 import com.group04.dictionary04.R;
 
-public class CustomAdapter extends BaseAdapter {
+public class spinnerImageAdapter extends BaseAdapter {
     Context context;
     int images[];
     String[] lang;
     LayoutInflater inflter;
 
-    public CustomAdapter(Context applicationContext, int[] flags, String[] lang) {
-        this.context = applicationContext;
+    public spinnerImageAdapter(Context context, int[] flags, String[] lang) {
+        this.context = context;
         this.images = flags;
         this.lang = lang;
-        inflter = (LayoutInflater.from(applicationContext));
+        inflter = (LayoutInflater.from(context));
     }
 
     @Override
@@ -29,8 +29,8 @@ public class CustomAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int i) {
-        return null;
+    public String getItem(int i) {
+        return lang[i];
     }
 
     @Override
