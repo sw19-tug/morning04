@@ -54,10 +54,5 @@
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent" android:id="@+id/task8" android:onClick="launchBackupView"/>
-    <Button
-            android:text="@string/menuSharingView"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" android:id="@+id/task9" android:onClick="launchSharingView"/>
 
 </LinearLayout>

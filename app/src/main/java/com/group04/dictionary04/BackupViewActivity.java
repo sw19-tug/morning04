@@ -40,6 +40,11 @@ public class BackupViewActivity extends AppCompatActivity {
         dbController.clearDatabase();
     }
 
+    public void shareData(View view) {
+        DatabaseController dbController = new DatabaseController(this.getApplicationContext());
+        //dbController.clearDatabase();
+    }
+
     @Override
     public void onResume() {
         super.onResume();
