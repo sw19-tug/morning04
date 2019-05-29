@@ -13,13 +13,13 @@ import com.group04.dictionary04.R;
 public class CustomAdapter extends BaseAdapter {
     Context context;
     int images[];
-    String[] fruit;
+    String[] lang;
     LayoutInflater inflter;
 
-    public CustomAdapter(Context applicationContext, int[] flags, String[] fruit) {
+    public CustomAdapter(Context applicationContext, int[] flags, String[] lang) {
         this.context = applicationContext;
         this.images = flags;
-        this.fruit = fruit;
+        this.lang = lang;
         inflter = (LayoutInflater.from(applicationContext));
     }
 
@@ -44,7 +44,7 @@ public class CustomAdapter extends BaseAdapter {
         ImageView icon = (ImageView) view.findViewById(R.id.imageView);
         TextView names = (TextView) view.findViewById(R.id.textView);
         icon.setImageResource(images[i]);
-        names.setText(fruit[i]);
+        names.setText(lang[i]);
         return view;
     }
 }

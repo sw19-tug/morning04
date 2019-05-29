@@ -43,9 +43,8 @@ public class InputViewActivity extends AppCompatActivity {
     private LanguageIdentifier language2;
     private DifficultyIdentifier difficult;
 
-    String[] fruits={"Grapes","Mango","Pineapple","Strawberry"};
-    int images[] = {R.drawable.grapes, R.drawable.mango, R.drawable.pineapple, R.drawable.strawberry };
-
+    String[] langs={"Spanish","German","English","French","Italian"};
+    int images[] = {R.drawable.spain, R.drawable.germany, R.drawable.united_states, R.drawable.france, R.drawable.italy };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,16 +71,19 @@ public class InputViewActivity extends AppCompatActivity {
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, languages);
 
-        CustomAdapter customAdapter=new CustomAdapter(getApplicationContext(),images,fruits);
+        CustomAdapter customAdapter=new CustomAdapter(this,
+                images, langs);
 
 
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //customAdapter.setDropDownViewResource(android.R.layout.spinnercustom);
 
-//        //filling both lang spinners with options
-//        lang_spinner.setAdapter(dataAdapter);
-//        lang_spinner2.setAdapter(dataAdapter);
-        lang_spinner.setAdapter(customAdapter);
-        lang_spinner2.setAdapter(customAdapter);
+
+        //filling both lang spinners with options
+        lang_spinner.setAdapter(dataAdapter);
+        lang_spinner2.setAdapter(dataAdapter);
+        //lang_spinner.setAdapter(customAdapter);
+        //lang_spinner2.setAdapter(customAdapter);
 
         Button button = (Button) findViewById(R.id.button_input);
 
@@ -111,6 +113,7 @@ public class InputViewActivity extends AppCompatActivity {
                 }
                 else
                 {
+                    Log.e(spinner1.getSelectedItem().toString(), "success");
 
                     switch(spinner1.getSelectedItem().toString())
                     {
@@ -126,7 +129,7 @@ public class InputViewActivity extends AppCompatActivity {
                         case "French":
                             language1 = LanguageIdentifier.FR;
                             break;
-                        case "Italy":
+                        case "Italian":
                             language1 = LanguageIdentifier.IT;
                             break;
                     }
@@ -145,7 +148,7 @@ public class InputViewActivity extends AppCompatActivity {
                         case "French":
                             language2 = LanguageIdentifier.FR;
                             break;
-                        case "Italy":
+                        case "Italian":
                             language2 = LanguageIdentifier.IT;
                             break;
                     }
