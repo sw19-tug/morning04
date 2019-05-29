@@ -126,9 +126,7 @@ public class default_Language implements com.group04.dictionary04.interfaces.Lan
                             if((vocIt.getId().equals(entryIt.getId1().getId()) || vocIt.getId().equals(entryIt.getId2().getId())))
                             {
                                 Log.d("log", "MATCHING FOUND BUT NO RATING GIVVEN AND ADD TO LIST " + vocIt.getId());
-                                if(search == null || search.length() == 0
-                                        || (entryIt.getTag() != null && entryIt.getTag().toLowerCase().contains(search.toLowerCase()))
-                                        || entryIt.getId1().getValue().toLowerCase().contains(search.toLowerCase())
+                                if(search == null || search.length() == 0 || entryIt.getId1().getValue().toLowerCase().contains(search.toLowerCase())
                                         || entryIt.getId2().getValue().toLowerCase().contains(search.toLowerCase()))
                                     list.add(entryIt);
                             }
@@ -139,9 +137,7 @@ public class default_Language implements com.group04.dictionary04.interfaces.Lan
                                     difficulty_value == Integer.valueOf(entryIt.getRating()))
                             {
                                 Log.d("log", "MATCHING FOUND AND ADD TO LIST " + vocIt.getId());
-                                if(search == null || search.length() == 0
-                                        || (entryIt.getTag() != null && entryIt.getTag().toLowerCase().contains(search.toLowerCase()))
-                                        || entryIt.getId1().getValue().toLowerCase().contains(search.toLowerCase())
+                                if(search == null || search.length() == 0 || entryIt.getId1().getValue().toLowerCase().contains(search.toLowerCase())
                                         || entryIt.getId2().getValue().toLowerCase().contains(search.toLowerCase()))
                                     list.add(entryIt);
                             }
