@@ -1,10 +1,14 @@
 package com.group04.dictionary04;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +28,8 @@ import com.group04.dictionary04.model.default_Vocabulary;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.ContentValues.TAG;
+
 public class AdvancedTestViewActivity extends Activity implements View.OnClickListener {
 
     private default_Dictionary dict;
@@ -32,7 +38,12 @@ public class AdvancedTestViewActivity extends Activity implements View.OnClickLi
     private EditText tag;
     private RatingBar rating;
     private Button btnFilter;
+    private Button btnAdd;
+    private Button btnStart;
     private ListView list;
+
+    private List<default_Entry> exam_entries = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +53,14 @@ public class AdvancedTestViewActivity extends Activity implements View.OnClickLi
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
         dict = dbController.getCurrentDatabase();
 
+
         lang1 = findViewById(R.id.spinner_from);
         lang2 = findViewById(R.id.spinner_to);
         tag = findViewById(R.id.et_tag);
         rating = findViewById(R.id.ratingBar_rate);
         btnFilter = findViewById(R.id.btn_filter2);
+        btnAdd = findViewById(R.id.btn_add);
+        btnStart = findViewById(R.id.btn_start);
         list = findViewById(R.id.lv_vocabs);
 
         setDropdown();
@@ -66,6 +80,28 @@ public class AdvancedTestViewActivity extends Activity implements View.OnClickLi
             }
         });
 
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                SparseBooleanArray checkedVocabs = list.getCheckedItemPositions();
+                if (checkedVocabs != null) {
+
+                    for(int count = 0; count < checkedVocabs.size(); count++) {
+
+                        if (checkedVocabs.valueAt(count)) {
+
+                            default_Entry entry = (default_Entry)list.getAdapter()
+                              .getItem(checkedVocabs.keyAt(count));
+                            exam_entries.add(entry);
+
+                            Log.d("log", "added entry " + entry.getId1().getValue() + " " + entry.getId2().getValue());
+
+                        }
+                    }
+                }
+            }
+        });
     }
 
     public void setDropdown(){
@@ -85,7 +121,7 @@ public class AdvancedTestViewActivity extends Activity implements View.OnClickLi
     private void loadLanguageList(default_Language lang1, LanguageIdentifier lang2, String tag,
       int difficulty_value) {
 
-        final List<String> entries = new ArrayList<>();
+        final List<default_Entry> entries = new ArrayList<>();
         List<default_Vocabulary> vocab = lang1.getVocabularies();
 
         for(default_Vocabulary vocIt : vocab)
@@ -98,7 +134,7 @@ public class AdvancedTestViewActivity extends Activity implements View.OnClickLi
                     if((vocIt.getId().equals(entryIt.getId1().getId()) &&
                       (entryIt.getId2().getLanguage() == lang2)))
                     {
-                        entries.add(entryIt.getId1().getValue());
+                        entries.add(entryIt);
                     }
                 }
                 //only rating empty
@@ -109,7 +145,7 @@ public class AdvancedTestViewActivity extends Activity implements View.OnClickLi
                         if((vocIt.getId().equals(entryIt.getId1().getId()) &&
                           (entryIt.getId2().getLanguage() == lang2)) && entryIt.getTag().equals(tag))
                         {
-                            entries.add(entryIt.getId1().getValue());
+                            entries.add(entryIt);
                         }
                     }
                 }
@@ -122,7 +158,7 @@ public class AdvancedTestViewActivity extends Activity implements View.OnClickLi
                           (entryIt.getId2().getLanguage() == lang2)) && difficulty_value ==
                           Integer.valueOf(entryIt.getRating()))
                         {
-                            entries.add(entryIt.getId1().getValue());
+                            entries.add(entryIt);
                         }
                     }
                 }
@@ -135,15 +171,15 @@ public class AdvancedTestViewActivity extends Activity implements View.OnClickLi
                           (entryIt.getId2().getLanguage() == lang2)) && difficulty_value ==
                           Integer.valueOf(entryIt.getRating()) && entryIt.getTag().equals(tag))
                         {
-                            entries.add(entryIt.getId1().getValue());
+                            entries.add(entryIt);
                         }
                     }
                 }
             }
         }
 
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>
-                (this, android.R.layout.simple_list_item_1, entries);
+        final ArrayAdapter<default_Entry> arrayAdapter = new ArrayAdapter<>
+                (this, android.R.layout.simple_list_item_multiple_choice, entries);
 
         list.setAdapter(arrayAdapter);
     }
