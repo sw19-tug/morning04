@@ -14,6 +14,12 @@ import com.group04.dictionary04.model.default_Dictionary;
 import com.group04.dictionary04.model.default_Entry;
 import com.group04.dictionary04.model.default_Exam;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
+
 public class TestViewActivity extends Activity implements View.OnClickListener {
 
     private default_Dictionary dict = null;
@@ -165,6 +171,7 @@ public class TestViewActivity extends Activity implements View.OnClickListener {
         dialog.setNegativeButton("yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                exam.setResult(getCurrentDate() + "  " + getCurrentTime());
                 dict.getExams().add(exam);
             }
         });
@@ -198,4 +205,21 @@ public class TestViewActivity extends Activity implements View.OnClickListener {
         }
 
     }
+
+
+    public static final String DATE_FORMAT_1 = "hh:mm a";
+
+    public static String getCurrentTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT_1);
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date today = Calendar.getInstance().getTime();
+        return dateFormat.format(today);
+    }
+
+    public static String getCurrentDate() {
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+        return df.format(c);
+    }
+
 }

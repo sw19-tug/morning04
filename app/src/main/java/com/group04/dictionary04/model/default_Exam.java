@@ -45,12 +45,18 @@ public class default_Exam implements com.group04.dictionary04.interfaces.Exam {
 
     @Override
     public String getResult() {
-        return null;
+        return result;
     }
 
     @Override
-    public void setResult(String result) {
+    public String toString() {
+        return getResult();
+    }
 
+
+    @Override
+    public void setResult(String result1) {
+        result = result1;
     }
 
     @Override
