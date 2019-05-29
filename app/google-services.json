@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "910698479138",
+    "firebase_url": "https://morning04-53e7b.firebaseio.com",
+    "project_id": "morning04-53e7b",
+    "storage_bucket": "morning04-53e7b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:910698479138:android:b584236f6435c0ea",
+        "android_client_info": {
+          "package_name": "com.group04.dictionary04"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "910698479138-ap6j788rsat5i236sfs80v4oqj7nqcbd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZy6sQFLfwyzRGW8FTgu7QSG3V_JoDayI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "910698479138-ap6j788rsat5i236sfs80v4oqj7nqcbd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
