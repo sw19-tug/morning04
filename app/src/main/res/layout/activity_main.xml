@@ -50,6 +50,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" android:id="@+id/task6" android:onClick="launchADVView"/>
     <Button
+            android:text="@string/menuSavedExams"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:id="@+id/task12" android:onClick="launchSavedExams"/>
+    <Button
             android:text="@string/menuBackupView"
             android:layout_weight="1"
             android:layout_width="match_parent"

@@ -11,6 +11,7 @@
     <string name="menuADVView">Advanced Testing</string>
     <string name="menuBackupView">Backup / Restore</string>
     <string name="menuSharingView">Sharing</string>
+    <string name="menuSavedExams">Saved Exams</string>
 
     <string name="menuBackupData">Backup</string>
     <string name="menuRestoreData">Restore</string>

@@ -57,4 +57,9 @@ public class MainActivity extends AppCompatActivity {
         this.startActivity(intent);
     }
 
+    public void launchSavedExams(View view){
+        Intent intent = new Intent(this, SavedExamsViewActivity.class);
+        this.startActivity(intent);
+    }
+
 }
