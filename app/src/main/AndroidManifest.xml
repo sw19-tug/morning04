@@ -24,6 +24,7 @@
         <activity android:name=".SaveTestViewActivity" android:label="SaveTest"></activity>
         <activity android:name=".SharingViewActivity" android:label="SharingView" ></activity>
         <activity android:name=".TestViewActivity" android:label="TestView" ></activity>
+        <activity android:name=".SavedExamsViewActivity" android:label="SavedExamsView" ></activity>
     </application>
 
 </manifest>
