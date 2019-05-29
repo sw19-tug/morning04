@@ -2,9 +2,13 @@ package com.group04.dictionary04;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AppComponentFactory;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,7 +24,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class TestViewActivity extends Activity implements View.OnClickListener {
+public class TestViewActivity extends AppCompatActivity implements View.OnClickListener {
 
     private default_Dictionary dict = null;
 
@@ -35,11 +39,14 @@ public class TestViewActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.testview);
+        setSupportActionBar((Toolbar)findViewById(R.id.myactionbar));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
         dict = dbController.getCurrentDatabase();
 
-        setContentView(R.layout.testview);
+
         lang1 = findViewById(R.id.textView3);
         lang2 = findViewById(R.id.textView5);
         givenVocab = findViewById(R.id.textView4);
@@ -63,7 +70,7 @@ public class TestViewActivity extends Activity implements View.OnClickListener {
         super.onResume();
 
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
-        dbController.saveTestDatabase();
+//        dbController.saveTestDatabase();
         dict = dbController.getCurrentDatabase();
     }
 
@@ -222,4 +229,14 @@ public class TestViewActivity extends Activity implements View.OnClickListener {
         return df.format(c);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            onBackPressed();  return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }

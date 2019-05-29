@@ -1,12 +1,16 @@
 package com.group04.dictionary04;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.group04.dictionary04.database.DatabaseController;
 import com.group04.dictionary04.model.default_Dictionary;
@@ -32,6 +36,24 @@ public class SavedExamsViewActivity extends AppCompatActivity {
         ArrayAdapter<default_Exam> dataAdapter = new ArrayAdapter<default_Exam>(this, android.R.layout.simple_selectable_list_item, dict.getExams());
         vocList.setAdapter(dataAdapter);
 
+
+        vocList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                showSavedExam();
+            }
+        });
+
+    }
+
+    private void showSavedExam() {
+        new AlertDialog.Builder(this)
+                .setTitle("Saved Exams")
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) { }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 
     public void backupData(View view) {
