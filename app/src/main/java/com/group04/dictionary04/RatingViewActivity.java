@@ -50,14 +50,14 @@ public class RatingViewActivity extends AppCompatActivity {
     private View ratingPopupView;
     private EditText search = null;
     private Spinner lang_spinner = null;
-
+    private Spinner tag_spinner = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
-        dbController.saveTestDatabase();
+        //dbController.saveTestDatabase();
         dict = dbController.getCurrentDatabase();
 
         setContentView(R.layout.ratingview);
@@ -267,7 +267,11 @@ public class RatingViewActivity extends AppCompatActivity {
                 TextView text1 = (TextView) view.findViewById(android.R.id.text1);
                 TextView text2 = (TextView) view.findViewById(android.R.id.text2);
 
-                text1.setText(entries.get(position).getId1().getValue());
+                if(entries.get(position).getTag() != null)
+                    text1.setText(entries.get(position).getId1().getValue() + " - (" + entries.get(position).getTag() + ")");
+                else
+                    text1.setText(entries.get(position).getId1().getValue());
+
                 text2.setText(entries.get(position).getId2().getValue());
                 return view;
             }
