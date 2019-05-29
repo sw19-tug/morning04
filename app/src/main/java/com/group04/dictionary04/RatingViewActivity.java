@@ -7,21 +7,14 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.RatingBar;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 
 import com.group04.dictionary04.enums.DifficultyIdentifier;
 import com.group04.dictionary04.enums.LanguageIdentifier;
@@ -55,15 +48,16 @@ public class RatingViewActivity extends AppCompatActivity {
     private RatingBar ratingPopup;
     private Button btnPopup;
     private View ratingPopupView;
-
-
-
+    private EditText search = null;
+    private Spinner lang_spinner = null;
+    private Spinner tag_spinner = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
+        //dbController.saveTestDatabase();
         dict = dbController.getCurrentDatabase();
 
         setContentView(R.layout.ratingview);
@@ -77,12 +71,12 @@ public class RatingViewActivity extends AppCompatActivity {
         btnDescending = (RadioButton) findViewById(R.id.btn_descending);
         items = (ListView) findViewById(R.id.list_items);
 
-
+        search = (EditText) findViewById(R.id.search);
         //SPINNER
         List<String> languages = new ArrayList<>();
 
         languages = dict.getLanguagesStrings();
-        final Spinner lang_spinner = (Spinner) findViewById(R.id.spinner_langt);
+        lang_spinner = (Spinner) findViewById(R.id.spinner_langt);
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_dropdown_item, languages);
@@ -100,35 +94,30 @@ public class RatingViewActivity extends AppCompatActivity {
 
         items.setAdapter(rateAdapter);
 
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+
+                queryData();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         btnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                //CHECK RADIO BUTTONS
-                if(!btnAscending.isChecked() && !btnDescending.isChecked()) {
-                    Toast.makeText(RatingViewActivity.this, "Please choose a sort sequence",
-                            Toast.LENGTH_SHORT).show();
-                }
-                //CHECK RATING BAR
-                else if((int)ratingBar.getRating() == 0){
-                    Toast.makeText(RatingViewActivity.this, "Please choose a difficulty",
-                            Toast.LENGTH_SHORT).show();
-                }
-                else {
-
-                    //GET DIFFICULTY
-                    if((int) ratingBar.getRating() == 1)
-                        difficult = DifficultyIdentifier.BEGINNER;
-                    else if((int) ratingBar.getRating() == 2)
-                        difficult = DifficultyIdentifier.INTERMEDIATE;
-                    else if((int) ratingBar.getRating() == 3)
-                        difficult = DifficultyIdentifier.ADVANCED;
-                    else
-                        difficult = DifficultyIdentifier.NATIVE;
-
-                    loadCurrentLanguageList(dict.getLanguageByIndex(lang_spinner.getSelectedItem().toString()), difficult);
-                }
+                queryData();
             }
         });
 
@@ -174,6 +163,33 @@ public class RatingViewActivity extends AppCompatActivity {
         });
     }
 
+    private void queryData() {
+        //CHECK RADIO BUTTONS
+        if(!btnAscending.isChecked() && !btnDescending.isChecked()) {
+            Toast.makeText(RatingViewActivity.this, "Please choose a sort sequence",
+                    Toast.LENGTH_SHORT).show();
+        }
+        //CHECK RATING BAR
+        else if((int)ratingBar.getRating() == 0){
+            Toast.makeText(RatingViewActivity.this, "Please choose a difficulty",
+                    Toast.LENGTH_SHORT).show();
+        }
+        else {
+
+            //GET DIFFICULTY
+            if((int) ratingBar.getRating() == 1)
+                difficult = DifficultyIdentifier.BEGINNER;
+            else if((int) ratingBar.getRating() == 2)
+                difficult = DifficultyIdentifier.INTERMEDIATE;
+            else if((int) ratingBar.getRating() == 3)
+                difficult = DifficultyIdentifier.ADVANCED;
+            else
+                difficult = DifficultyIdentifier.NATIVE;
+
+            loadCurrentLanguageList(dict.getLanguageByName(lang_spinner.getSelectedItem().toString()), difficult);
+        }
+    }
+
     private void initPopupViewControls()
     {
         // Get layout inflater object.
@@ -205,12 +221,12 @@ public class RatingViewActivity extends AppCompatActivity {
 
 
     private void loadCurrentLanguageList(default_Language language, DifficultyIdentifier difficulty) {
+        String searchText = search.getText().toString();
+        final List<default_Entry> entries = language.getVocabulariesQueryByTagRating(difficulty, searchText, dict);
+        //List<default_Vocabulary> vocabularie = language.getVocabularies();
+        //int difficulty_value = difficulty.getValue();
 
-        final List<default_Entry> entries = new ArrayList<>();
-        List<default_Vocabulary> vocabularie = language.getVocabularies();
-        int difficulty_value = difficulty.getValue();
-
-        for(default_Vocabulary vocIt : vocabularie)
+        /*for(default_Vocabulary vocIt : vocabularie)
         {
             Log.d("log", "looking for vocabulary " + vocIt.getId() + " " + vocIt.getValue() + " Difficulty: " +
                     difficulty_value);
@@ -239,7 +255,7 @@ public class RatingViewActivity extends AppCompatActivity {
                     }
                 }
             }
-        }
+        }*/
 
         Log.d("log", "now there are " + entries.size() + " in the new atries list");
 
@@ -251,14 +267,17 @@ public class RatingViewActivity extends AppCompatActivity {
                 TextView text1 = (TextView) view.findViewById(android.R.id.text1);
                 TextView text2 = (TextView) view.findViewById(android.R.id.text2);
 
-                text1.setText(entries.get(position).getId1().getValue());
+                if(entries.get(position).getTag() != null)
+                    text1.setText(entries.get(position).getId1().getValue() + " - (" + entries.get(position).getTag() + ")");
+                else
+                    text1.setText(entries.get(position).getId1().getValue());
+
                 text2.setText(entries.get(position).getId2().getValue());
                 return view;
             }
         };
 
         sortList(entries);
-
         items.setAdapter(dataAdapter);
     }
 

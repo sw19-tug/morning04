@@ -6,7 +6,7 @@
     <string name="menuInputView">Vocabulary Input</string>
     <string name="menuLearningView">Learning</string>
     <string name="menuSearchView">Browse Vocabulary</string>
-    <string name="menuRatingView">Ratings</string>
+    <string name="menuRatingView">Browse / Rate</string>
     <string name="menuTestView">Testing</string>
     <string name="menuADVView">Advanced Testing</string>
     <string name="menuBackupView">Backup / Restore</string>
@@ -22,4 +22,12 @@
     <string name="disable">Disable Notifications</string>
 
 
+    <string name="language">Language</string>
+    <string name="vocab">VOCAB</string>
+    <string name="second_language">Second Language</string>
+    <string name="check_answer">check answer</string>
+    <string name="previous">previous</string>
+    <string name="save_exam">save exam</string>
+    <string name="next">next</string>
+    <string name="your_answer">your answer...</string>
 </resources>

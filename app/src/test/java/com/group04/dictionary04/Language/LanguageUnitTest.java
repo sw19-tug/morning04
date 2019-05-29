@@ -28,4 +28,8 @@ public class LanguageUnitTest {
         assert id.equals(voc.getId()) : "Language: Found Voc-ID does not match requested\n";
     }
 
+    @Test
+    public void getDisplayName() {
+        assert lang.getDisplayName().equals("English") : "Language: Found Voc-ID does not match requested\n";
+    }
 }
