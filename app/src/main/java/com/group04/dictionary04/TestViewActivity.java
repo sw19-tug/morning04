@@ -3,6 +3,7 @@ package com.group04.dictionary04;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -38,6 +39,12 @@ public class TestViewActivity extends Activity implements View.OnClickListener {
         givenVocab = findViewById(R.id.textView4);
         input = findViewById(R.id.editText2);
 
+        if(dict.getEntries().size() == 0)
+        {
+            Intent intent = new Intent(this, MainActivity.class);
+            this.startActivity(intent);
+            return;
+        }
         exam = dict.generateExam(null);
 
         lang1.setText(exam.getVocsToTest().get(index).getId1().getLangString());
