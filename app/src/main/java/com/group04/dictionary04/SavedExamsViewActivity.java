@@ -40,20 +40,40 @@ public class SavedExamsViewActivity extends AppCompatActivity {
         vocList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                showSavedExam();
+                default_Exam exam = (default_Exam) parent.getItemAtPosition(position);
+                showSavedExam(exam);
             }
         });
 
+        // 2 buttons - restart exam in testing view und einen delete button
+        // zusätzlich vlt noch eine % anzeige vom fortschritt
+
     }
 
-    private void showSavedExam() {
-        new AlertDialog.Builder(this)
-                .setTitle("Saved Exams")
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) { }
-                })
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();
+    private void showSavedExam(final default_Exam exam) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Saved Exams");
+        builder.setNeutralButton("Retry Test", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        retryTest(exam);
+                    }
+                });
+        builder.setNegativeButton("Delete Test", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                deleteTest(exam);
+            }
+        });
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
+        builder.show();
+    }
+
+    public void deleteTest(default_Exam exam) {
+        dict.deleteExam(exam); // not working atm
+    }
+
+    public void retryTest(default_Exam exam) {
+
     }
 
     public void backupData(View view) {

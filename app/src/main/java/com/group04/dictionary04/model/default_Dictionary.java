@@ -226,4 +226,9 @@ public class default_Dictionary implements Dictionary {
     public void setExams(List<default_Exam> exams) {
 
     }
+
+    public void deleteExam(default_Exam exam){
+        exams.remove(exam);
+    }
+
 }

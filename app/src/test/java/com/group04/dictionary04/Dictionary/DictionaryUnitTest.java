@@ -120,5 +120,15 @@ public class DictionaryUnitTest{
 
     }
 
+    @Test
+    public void deleteExam() {
+        default_Exam exam = dictionary.generateExam(null);
+        dictionary.getExams().add(exam);
+        List<default_Exam> exams = dictionary.getExams();
+        assert exams.size() == 1;
+        dictionary.deleteExam(exam);
+        assert exams.size() == 0;
+    }
+
 
 }
