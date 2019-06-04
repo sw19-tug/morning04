@@ -27,4 +27,39 @@ public class AdvancedTestUnitTest {
         List<default_Entry> all_added_entries = dictionary.getEntries();
     }
 
+    @Test
+    public void noValidVocabSearch(){
+
+    }
+
+    @Test
+    public void validVocabSearch(){
+
+    }
+
+    @Test
+    public void noSelectedVocabsAddButton(){
+
+    }
+
+    @Test
+    public void selectedVocabsAddButton(){
+
+    }
+
+    @Test
+    public void noVocabsStartButton(){
+
+    }
+
+    @Test
+    public void selectSameLangSpinner(){
+
+    }
+
+    @Test
+    public void multipleInvalidSelections(){
+
+    }
+
 }
