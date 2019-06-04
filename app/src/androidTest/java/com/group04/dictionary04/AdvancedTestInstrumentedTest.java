@@ -59,7 +59,6 @@ public class AdvancedTestInstrumentedTest {
     {
         onView(withId(R.id.spinner_from)).check(matches(isClickable()));
         onView(withId(R.id.spinner_to)).check(matches(isClickable()));
-        onView(withId(R.id.ratingBar_rate)).check(matches(isClickable()));
     }
 
 
@@ -82,28 +81,33 @@ public class AdvancedTestInstrumentedTest {
     @Test
     public void performSearch()
     {
-        onView(withId(R.id.et_tag)).perform(typeText("test"),closeSoftKeyboard());
-        onView(withId(R.id.btn_filter2)).perform(click());
+        onView(withId(R.id.et_tag)).perform(typeText("car"),closeSoftKeyboard());
 
-        //positive Button
-        onView(withId(android.R.id.button1)).perform(click());
+        onView(withId(R.id.btn_filter2)).perform(click());
     }
 
 
 
     @Test
-    public void performSaveExam()
+    public void performAdd()
     {
+        onView(withId(R.id.et_tag)).perform(typeText("car"),closeSoftKeyboard());
 
-        onView(withId(R.id.button4)).perform(click());
+        onView(withId(R.id.btn_filter2)).perform(click());
 
-        //check if allertDialog has popped up
-        int titelId = AdvancedTestViewActivityTestRule.getActivity().getResources().getIdentifier("alertTitle", "id", "android");
-        onView(withId(titelId)).inRoot(isDialog()).check(matches(withText("Done..."))).check(matches(isDisplayed()));
-        onView(withText("Do you want to save your exam progress?")).check(matches(isDisplayed()));
+        onView(withId(R.id.btn_add)).perform(click());
+    }
 
-        //negative(NO) btn
-        onView(withId(android.R.id.button2)).perform(click());
 
+    @Test
+    public void performStartTest()
+    {
+        onView(withId(R.id.et_tag)).perform(typeText("car"),closeSoftKeyboard());
+
+        onView(withId(R.id.btn_filter2)).perform(click());
+
+        onView(withId(R.id.btn_add)).perform(click());
+
+        onView(withId(R.id.btn_start)).perform(click());
     }
 }
