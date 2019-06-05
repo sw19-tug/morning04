@@ -26,6 +26,7 @@
     <string name="vocab">VOCAB</string>
     <string name="second_language">Second Language</string>
     <string name="check_answer">check answer</string>
+    <string name="test_hint">hint</string>
     <string name="previous">previous</string>
     <string name="save_exam">save exam</string>
     <string name="next">next</string>

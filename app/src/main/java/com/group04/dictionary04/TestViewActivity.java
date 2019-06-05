@@ -106,6 +106,30 @@ public class TestViewActivity extends Activity implements View.OnClickListener {
         }
     }
 
+    public void hintButtonHandler(){
+        int i = 0;
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("Hint is the first letter of the answer:");
+        char answerHint = exam.getVocsToTest().get(index).getId2().getValue().charAt(0);
+        dialog.setNegativeButton("more help", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                i++;
+
+            }
+        });
+        dialog.setPositiveButton("Try it", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog alertDialog=dialog.create();
+        alertDialog.setMessage("Starts with:\n" + answerHint);
+        alertDialog.show();
+
+    }
+
     public void checkButtonHandler(){
         AlertDialog.Builder dialog=new AlertDialog.Builder(this);
         dialog.setTitle("Is your Answer correct?");
@@ -176,6 +200,9 @@ public class TestViewActivity extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.button1:
+                hintButtonHandler();
+                break;
             case R.id.button0:
                 checkButtonHandler();
                 break;
