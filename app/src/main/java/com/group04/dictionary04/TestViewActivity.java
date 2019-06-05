@@ -111,21 +111,15 @@ public class TestViewActivity extends Activity implements View.OnClickListener {
 
     public void hintButtonHandler(final int hintNum){
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setTitle("Hint is the first letter of the answer:");
+        dialog.setTitle("Hint is the first letter(s) of the answer:");
         int answerLength = exam.getVocsToTest().get(index).getId2().getValue().length();
         String answerHint = "";
         if (hintNum < answerLength) {
-
-
-            //for (int i =  hintNum; i < answerLength; i++){
             answerHint = exam.getVocsToTest().get(index).getId2().getValue().substring(0, hintNum);
 
-            //};
             dialog.setNegativeButton("more help", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    int newHint = hintCounter();
-                    Log.d("HintNum", Integer.toString(newHint));
                     hintButtonHandler(hintCounter());
                 }
             });
@@ -137,7 +131,8 @@ public class TestViewActivity extends Activity implements View.OnClickListener {
             });
         }
         else{
-            answerHint = "Sorry, you have used all your hints";
+            String finalHint = exam.getVocsToTest().get(index).getId2().getValue().substring(0, answerLength - 1);
+            answerHint = "Sorry, you have used all your hints, final hint:\n " + finalHint;
         }
         AlertDialog alertDialog=dialog.create();
         alertDialog.setMessage(answerHint);
