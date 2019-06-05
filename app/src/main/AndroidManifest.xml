@@ -27,6 +27,7 @@
         <activity android:name=".SaveTestViewActivity" android:label="SaveTest"></activity>
         <activity android:name=".TestViewActivity" android:label="TestView" ></activity>
         <activity android:name=".SettingsViewActivity" android:label="SettingsView" ></activity>
+        <activity android:name=".AdvancedTestViewActivity" android:label="ADVView" ></activity>
         <provider
                 android:name=".fileprovider.GenericFileProvider"
                 android:authorities="${applicationId}.fileprovider"

@@ -196,6 +196,15 @@ public class default_Dictionary implements Dictionary {
         return returnString;
     }
 
+    public default_Language getLanguageByIndex(String name) {
+        for(default_Language language : languages.values()) {
+            if(language.getDisplayName().equals(name))
+                return language;
+        }
+
+        return null;
+    }
+
     public default_Language getLanguageByName(String name) {
         for(default_Language language : languages.values()) {
             if(language.getDisplayName().equals(name))
