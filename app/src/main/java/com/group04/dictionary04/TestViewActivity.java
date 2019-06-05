@@ -8,11 +8,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.group04.dictionary04.database.DatabaseController;
 import com.group04.dictionary04.model.default_Dictionary;
 import com.group04.dictionary04.model.default_Entry;
@@ -45,20 +47,26 @@ public class TestViewActivity extends AppCompatActivity implements View.OnClickL
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
         dict = dbController.getCurrentDatabase();
+       //--------------------------------------------------------
+        Intent intent = getIntent();
+        String data = intent.getStringExtra("data");
 
+        if(data != null){
+
+            Gson gson = new Gson();
+            exam = gson.fromJson(data, default_Exam.class);
+            Log.d("asdf", data);
+        }
+        else{
+
+            exam = dict.generateExam(null);
+        }
+        //--------------------------------------------------------
 
         lang1 = findViewById(R.id.textView3);
         lang2 = findViewById(R.id.textView5);
         givenVocab = findViewById(R.id.textView4);
         input = findViewById(R.id.editText2);
-
-        if(dict.getEntries().size() == 0)
-        {
-            Intent intent = new Intent(this, MainActivity.class);
-            this.startActivity(intent);
-            return;
-        }
-        exam = dict.generateExam(null);
 
         lang1.setText(exam.getVocsToTest().get(index).getId1().getLangString());
         lang2.setText(exam.getVocsToTest().get(index).getId2().getLangString());

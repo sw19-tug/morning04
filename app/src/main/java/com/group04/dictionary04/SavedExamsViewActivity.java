@@ -2,6 +2,7 @@ package com.group04.dictionary04;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,7 +13,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.group04.dictionary04.database.DatabaseController;
+import com.group04.dictionary04.interfaces.Exam;
 import com.group04.dictionary04.model.default_Dictionary;
 import com.group04.dictionary04.model.default_Exam;
 import com.group04.dictionary04.model.default_Vocabulary;
@@ -73,6 +76,11 @@ public class SavedExamsViewActivity extends AppCompatActivity {
     }
 
     public void retryTest(default_Exam exam) {
+        Gson gson = new Gson();
+
+        Intent myIntent = new Intent(SavedExamsViewActivity.this, TestViewActivity.class);
+        myIntent.putExtra("data", gson.toJson(exam));
+        startActivity(myIntent);
 
     }
 
