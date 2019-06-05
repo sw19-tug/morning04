@@ -218,7 +218,7 @@ public class RatingViewActivity extends AppCompatActivity {
                             entryIt.getId1().getId() + " " + entryIt.getId1().getValue() + " " +
                             entryIt.getId2().getId() + " " + entryIt.getId2().getValue() + " Rating:" + entryIt.getRating());
 
-                    if(entryIt.getRating() != null)
+                    if(entryIt.getRating() != null && Integer.valueOf(entryIt.getRating()) != 0)
                     {
                         if((vocIt.getId().equals(entryIt.getId1().getId()) || vocIt.getId().equals(entryIt.getId2().getId())) &&
                                 difficulty_value == Integer.valueOf(entryIt.getRating()))
@@ -242,7 +242,7 @@ public class RatingViewActivity extends AppCompatActivity {
                             entryIt.getId2().getId() + " " + entryIt.getId2().getValue() + " Rating:" + entryIt.getRating());
 
 
-                    if(entryIt.getRating() == null)
+                    if(entryIt.getRating() == null || Integer.valueOf(entryIt.getRating()) == 0)
                     {
                         if((vocIt.getId().equals(entryIt.getId1().getId()) || vocIt.getId().equals(entryIt.getId2().getId())))
                         {
