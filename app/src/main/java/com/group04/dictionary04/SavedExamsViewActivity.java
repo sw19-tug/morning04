@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -32,6 +33,7 @@ public class SavedExamsViewActivity extends AppCompatActivity {
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
         dict = dbController.getCurrentDatabase();
         vocList = (ListView) findViewById(R.id.vocList);
+//        dbController.saveTestDatabase();
 
         ArrayAdapter<default_Exam> dataAdapter = new ArrayAdapter<default_Exam>(this, android.R.layout.simple_selectable_list_item, dict.getExams());
         vocList.setAdapter(dataAdapter);
@@ -44,10 +46,6 @@ public class SavedExamsViewActivity extends AppCompatActivity {
                 showSavedExam(exam);
             }
         });
-
-        // 2 buttons - restart exam in testing view und einen delete button
-        // zusätzlich vlt noch eine % anzeige vom fortschritt
-
     }
 
     private void showSavedExam(final default_Exam exam) {
@@ -69,11 +67,12 @@ public class SavedExamsViewActivity extends AppCompatActivity {
     }
 
     public void deleteTest(default_Exam exam) {
-        dict.deleteExam(exam); // not working atm
+        dict.deleteExam(exam);
+        ArrayAdapter<default_Exam> dataAdapter = new ArrayAdapter<default_Exam>(this, android.R.layout.simple_selectable_list_item, dict.getExams());
+        vocList.setAdapter(dataAdapter);
     }
 
     public void retryTest(default_Exam exam) {
-
     }
 
     public void backupData(View view) {
