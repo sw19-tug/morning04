@@ -3,15 +3,23 @@ package com.group04.dictionary04;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.group04.dictionary04.database.DatabaseController;
+import com.group04.dictionary04.interfaces.Exam;
 import com.group04.dictionary04.model.default_Dictionary;
 import com.group04.dictionary04.model.default_Entry;
 import com.group04.dictionary04.model.default_Exam;
+
+import java.lang.reflect.Type;
+import java.util.List;
 
 public class TestViewActivity extends Activity implements View.OnClickListener {
 
@@ -25,6 +33,8 @@ public class TestViewActivity extends Activity implements View.OnClickListener {
     default_Exam exam;
     EditText input;
 
+    List<default_Entry> list = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,12 +43,25 @@ public class TestViewActivity extends Activity implements View.OnClickListener {
         dict = dbController.getCurrentDatabase();
 
         setContentView(R.layout.testview);
+
+        Intent intent = getIntent();
+        String data = intent.getStringExtra("data");
+
+        if(data != null){
+
+            Gson gson = new Gson();
+            exam = gson.fromJson(data, default_Exam.class);
+            Log.d("asdf", data);
+        }
+        else{
+
+            exam = dict.generateExam(null);
+        }
+
         lang1 = findViewById(R.id.textView3);
         lang2 = findViewById(R.id.textView5);
         givenVocab = findViewById(R.id.textView4);
         input = findViewById(R.id.editText2);
-
-        exam = dict.generateExam(null);
 
         lang1.setText(exam.getVocsToTest().get(index).getId1().getLangString());
         lang2.setText(exam.getVocsToTest().get(index).getId2().getLangString());

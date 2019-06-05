@@ -3,6 +3,7 @@ package com.group04.dictionary04;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseBooleanArray;
@@ -16,12 +17,16 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.group04.dictionary04.database.DatabaseController;
 import com.group04.dictionary04.enums.DifficultyIdentifier;
 import com.group04.dictionary04.enums.LanguageIdentifier;
+import com.group04.dictionary04.interfaces.Exam;
 import com.group04.dictionary04.model.default_Dictionary;
 import com.group04.dictionary04.model.default_Entry;
+import com.group04.dictionary04.model.default_Exam;
 import com.group04.dictionary04.model.default_Language;
 import com.group04.dictionary04.model.default_Vocabulary;
 
@@ -72,11 +77,25 @@ public class AdvancedTestViewActivity extends Activity implements View.OnClickLi
             int difficulty = (int)rating.getRating();
 
             loadLanguageList(dict.getLanguageByIndex(lang1.getSelectedItem().toString()),
-                dict.getLanguageByIndex(lang2.getSelectedItem().toString()).getLangName(),
-                tag.getText().toString(), difficulty);
+            dict.getLanguageByIndex(lang2.getSelectedItem().toString()).getLangName(),
+            tag.getText().toString(), difficulty);
 
             tag.getText().clear();
             rating.setRating(0);
+            }
+        });
+
+        btnStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+               Gson gson = new Gson();
+
+               Intent myIntent = new Intent(AdvancedTestViewActivity.this, TestViewActivity.class);
+               Exam exam = new default_Exam();
+               exam.setVocsToTest(exam_entries);
+               myIntent.putExtra("data", gson.toJson(exam));
+               startActivity(myIntent);
             }
         });
 
@@ -95,7 +114,12 @@ public class AdvancedTestViewActivity extends Activity implements View.OnClickLi
                               .getItem(checkedVocabs.keyAt(count));
                             exam_entries.add(entry);
 
-                            Log.d("log", "added entry " + entry.getId1().getValue() + " " + entry.getId2().getValue());
+                            String length = String.valueOf(exam_entries.size()) + " Elements in exam";
+
+                           Toast toast = Toast.makeText(getApplicationContext(), length, Toast.LENGTH_LONG);
+                           toast.show();
+
+                           Log.d("log", "added entry " + entry.getId1().getValue() + " " + entry.getId2().getValue());
 
                         }
                     }
