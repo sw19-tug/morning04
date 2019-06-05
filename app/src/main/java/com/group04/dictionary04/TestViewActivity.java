@@ -54,7 +54,7 @@ public class TestViewActivity extends Activity implements View.OnClickListener {
             Log.d("asdf", data);
         }
         else{
-
+            Log.d("asdf", "adfasdfasdfasdfasdfsdf");
             exam = dict.generateExam(null);
         }
 

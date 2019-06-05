@@ -10,6 +10,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
@@ -21,6 +22,9 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withHint;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static org.hamcrest.CoreMatchers.anything;
+import static org.hamcrest.Matchers.*;
+import static org.hamcrest.core.AllOf.allOf;
 
 
 @RunWith(AndroidJUnit4.class)
@@ -102,12 +106,19 @@ public class AdvancedTestInstrumentedTest {
     @Test
     public void performStartTest()
     {
-        onView(withId(R.id.et_tag)).perform(typeText("car"),closeSoftKeyboard());
+        onView(withId(R.id.spinner_from)).check(matches(isDisplayed()));
+        onView(withId(R.id.spinner_to)).check(matches(isDisplayed()));
+
+        onView(withId(R.id.spinner_from)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("German"))).perform(click());
+
+        onView(withId(R.id.spinner_to)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("English"))).perform(click());
 
         onView(withId(R.id.btn_filter2)).perform(click());
+        onData(anything()).inAdapterView(withId(R.id.lv_vocabs)).atPosition(0).perform(click());
 
-        onView(withId(R.id.btn_add)).perform(click());
-
+        onView(withId(R.id.btn_add)).perform(closeSoftKeyboard(), click());
         onView(withId(R.id.btn_start)).perform(click());
     }
 }
