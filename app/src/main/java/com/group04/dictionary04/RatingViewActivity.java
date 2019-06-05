@@ -132,14 +132,14 @@ public class RatingViewActivity extends AppCompatActivity {
                 initPopupViewControls();
 
                 dialog.setView(ratingPopupView);
-                Button ok_button = (Button)ratingPopupView.findViewById(R.id.btn_ok);
+                Button change_difficulty_button = (Button)ratingPopupView.findViewById(R.id.btn_change_difficulty);
+                Button delete_entry = (Button)ratingPopupView.findViewById(R.id.btn_delete_entry);
 
                 final AlertDialog dia_alert = dialog.create();
-                dia_alert.setTitle("Change difficulty");
+                dia_alert.setTitle("Change difficulty or delete entry");
                 dia_alert.show();
 
-
-                ok_button.setOnClickListener(new View.OnClickListener() {
+                change_difficulty_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) { {
                         ratingBarNew = (RatingBar) ratingPopupView.findViewById(R.id.ratingBar_popup);
