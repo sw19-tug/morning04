@@ -90,7 +90,8 @@
         <Button
             android:text="@string/menuSavedExams"
             android:layout_weight="1"
-            android:layout_width="match_parent"
+            android:layout_width="120dp"
+            android:drawableTop="@drawable/ic_action_savedexams"
             android:layout_height="match_parent" android:id="@+id/task12" android:onClick="launchSavedExams"/>
 
         <Button
