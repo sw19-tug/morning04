@@ -189,10 +189,10 @@ public class RatingViewActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
         }
         //CHECK RATING BAR
-        else if((int)ratingBar.getRating() == 0){
+        /*else if((int)ratingBar.getRating() == 0){
             Toast.makeText(RatingViewActivity.this, "Please choose a difficulty",
                     Toast.LENGTH_SHORT).show();
-        }
+        }*/
         else {
 
             //GET DIFFICULTY
@@ -206,6 +206,8 @@ public class RatingViewActivity extends AppCompatActivity {
                 difficult = DifficultyIdentifier.NATIVE;
 
             loadCurrentLanguageList(dict.getLanguageByName(lang_spinner.getSelectedItem().toString()), difficult);
+
+            ratingBar.setRating(0);
         }
     }
 
@@ -241,7 +243,8 @@ public class RatingViewActivity extends AppCompatActivity {
 
     private void loadCurrentLanguageList(default_Language language, DifficultyIdentifier difficulty) {
         String searchText = search.getText().toString();
-        final List<default_Entry> entries = language.getVocabulariesQueryByTagRating(difficulty, searchText, dict);
+        float ratingBarValue = ratingBar.getRating();
+        final List<default_Entry> entries = language.getVocabulariesQueryByTagRating(ratingBarValue, difficulty, searchText, dict);
         //List<default_Vocabulary> vocabularie = language.getVocabularies();
         //int difficulty_value = difficulty.getValue();
 
