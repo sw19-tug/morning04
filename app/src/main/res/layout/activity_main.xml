@@ -15,48 +15,92 @@
             android:elevation="4dp">
 
         <TextView
-                android:text="Main-Menu"
-                android:textSize="20sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"/>
+            android:text="Main-Menu"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
 
     </android.support.v7.widget.Toolbar>
 
 
-    <Button
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
             android:text="@string/menuInputView"
             android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" android:id="@+id/task1" android:onClick="launchInputView"/>
-    <Button
+            android:layout_width="120dp"
+            android:drawableTop="@drawable/ic_input_btn"
+            android:layout_height="100dp" android:id="@+id/task1" android:onClick="launchInputView"/>
+        <Button
             android:text="@string/menuLearningView"
             android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" android:id="@+id/task2" android:onClick="launchLearningView"/>
-    <Button
+            android:layout_width="120dp"
+            android:drawableTop="@drawable/ic_learning_btn"
+            android:layout_height="100dp" android:id="@+id/task2" android:onClick="launchLearningView"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <Button
             android:text="@string/menuRatingView"
             android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" android:id="@+id/task4" android:onClick="launchRatingView"/>
-    <Button
+            android:layout_width="120dp"
+            android:drawableTop="@drawable/ic_rate_btn"
+            android:layout_height="100dp" android:id="@+id/task4" android:onClick="launchRatingView"/>
+        <Button
             android:text="@string/menuTestView"
             android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" android:id="@+id/task5" android:onClick="launchTestView"/>
-    <Button
+            android:layout_width="120dp"
+            android:drawableTop="@drawable/ic_testing_btn"
+            android:layout_height="100dp" android:id="@+id/task5" android:onClick="launchTestView"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom">
+
+        <Button
             android:text="@string/menuADVView"
             android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" android:id="@+id/task6" android:onClick="launchADVView"/>
-    <Button
+            android:layout_width="120dp"
+            android:drawableTop="@drawable/ic_testing_btn"
+            android:layout_height="100dp" android:id="@+id/task6" android:onClick="launchADVView"/>
+        <Button
+            android:text="@string/menuBackupView"
+            android:layout_weight="1"
+            android:layout_width="120dp"
+            android:drawableTop="@drawable/ic_backup_btn"
+            android:layout_height="100dp" android:id="@+id/task8" android:onClick="launchBackupView"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+
+        <Button
             android:text="@string/menuSavedExams"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent" android:id="@+id/task12" android:onClick="launchSavedExams"/>
-    <Button
-            android:text="@string/menuBackupView"
+
+        <Button
+            android:text="@string/menuSettingsView"
             android:layout_weight="1"
+            android:layout_width="120dp"
+            android:drawableTop="@drawable/ic_settings_btn"
+            android:layout_height="100dp" android:id="@+id/task10" android:onClick="launchSettingsView"/>
+    </LinearLayout>
+
             android:layout_width="match_parent"
             android:layout_height="match_parent" android:id="@+id/task8" android:onClick="launchBackupView"/>
 
