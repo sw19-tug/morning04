@@ -152,7 +152,7 @@ public class RatingViewActivity extends AppCompatActivity {
                         // get Difficulty from ratingBar and set it to default entry
                         dia_alert.cancel();
 
-                        }
+                    }
 
                     }
 
@@ -172,7 +172,7 @@ public class RatingViewActivity extends AppCompatActivity {
 
                         //refresh ArrayAdapter after deleting entry
                         queryData();
-                        }
+                    }
 
                     }
 
@@ -245,7 +245,10 @@ public class RatingViewActivity extends AppCompatActivity {
         //List<default_Vocabulary> vocabularie = language.getVocabularies();
         //int difficulty_value = difficulty.getValue();
 
-        /*for(default_Vocabulary vocIt : vocabularie)
+        /*List<default_Vocabulary> vocabularie = language.getVocabularies();
+        int difficulty_value = difficulty.getValue();
+
+        for(default_Vocabulary vocIt : vocabularie)
         {
             Log.d("log", "looking for vocabulary " + vocIt.getId() + " " + vocIt.getValue() + " Difficulty: " +
                     difficulty_value);
@@ -297,6 +300,7 @@ public class RatingViewActivity extends AppCompatActivity {
         };
 
         sortList(entries);
+
         items.setAdapter(dataAdapter);
     }
 
