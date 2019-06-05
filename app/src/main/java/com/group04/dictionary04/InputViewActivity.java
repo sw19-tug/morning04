@@ -1,18 +1,13 @@
 package com.group04.dictionary04;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.media.Rating;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
@@ -21,19 +16,9 @@ import android.widget.Toast;
 
 import com.group04.dictionary04.enums.LanguageIdentifier;
 import com.group04.dictionary04.enums.DifficultyIdentifier;
-import com.group04.dictionary04.enums.LanguageIdentifier;
 import com.group04.dictionary04.database.DatabaseController;
+import com.group04.dictionary04.model.spinnerImageAdapter;
 import com.group04.dictionary04.model.default_Dictionary;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import com.group04.dictionary04.database.DatabaseController;
-import com.group04.dictionary04.model.default_Dictionary;
-import com.group04.dictionary04.model.default_Language;
-import com.group04.dictionary04.model.default_Vocabulary;
 
 public class InputViewActivity extends AppCompatActivity {
 
@@ -42,6 +27,8 @@ public class InputViewActivity extends AppCompatActivity {
     private LanguageIdentifier language2;
     private DifficultyIdentifier difficult;
 
+    String[] langs={"ES","DE","EN","FR","IT"};
+    int images[] = {R.drawable.spain, R.drawable.germany, R.drawable.united_states, R.drawable.france, R.drawable.italy };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,27 +39,16 @@ public class InputViewActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         final DatabaseController dbController = new DatabaseController(getApplicationContext());
-        //dbController.saveTestDatabase();
         dict = dbController.getCurrentDatabase();
-
-
-        List<String> languages = new ArrayList<>();
-
-        //Adding all usable languages to List
-        languages = dict.getLanguagesStrings();
-
 
         Spinner lang_spinner = (Spinner) findViewById(R.id.spinner1_input);
         Spinner lang_spinner2 = (Spinner) findViewById(R.id.spinner2_input);
 
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, languages);
+        spinnerImageAdapter spinnerImageAdapter =new spinnerImageAdapter(this, images, langs);
 
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        lang_spinner.setAdapter(spinnerImageAdapter);
+        lang_spinner2.setAdapter(spinnerImageAdapter);
 
-        //filling both lang spinners with options
-        lang_spinner.setAdapter(dataAdapter);
-        lang_spinner2.setAdapter(dataAdapter);
         Button button = (Button) findViewById(R.id.button_input);
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -101,41 +77,40 @@ public class InputViewActivity extends AppCompatActivity {
                 }
                 else
                 {
-
                     switch(spinner1.getSelectedItem().toString())
                     {
-                        case "Spanish":
+                        case "ES":
                             language1 = LanguageIdentifier.SP;
                             break;
-                        case "German":
+                        case "DE":
                             language1 = LanguageIdentifier.DE;
                             break;
-                        case "English":
+                        case "EN":
                             language1 = LanguageIdentifier.EN;
                             break;
-                        case "French":
+                        case "FR":
                             language1 = LanguageIdentifier.FR;
                             break;
-                        case "Italy":
+                        case "IT":
                             language1 = LanguageIdentifier.IT;
                             break;
                     }
 
                     switch(spinner2.getSelectedItem().toString())
                     {
-                        case "Spanish":
+                        case "ES":
                             language2 = LanguageIdentifier.SP;
                             break;
-                        case "German":
+                        case "DE":
                             language2 = LanguageIdentifier.DE;
                             break;
-                        case "English":
+                        case "EN":
                             language2 = LanguageIdentifier.EN;
                             break;
-                        case "French":
+                        case "FR":
                             language2 = LanguageIdentifier.FR;
                             break;
-                        case "Italy":
+                        case "IT":
                             language2 = LanguageIdentifier.IT;
                             break;
                     }
