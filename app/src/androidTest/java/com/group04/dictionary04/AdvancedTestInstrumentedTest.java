@@ -79,7 +79,7 @@ public class AdvancedTestInstrumentedTest {
 
 
     @Test
-    public void performSearch()
+    public void performSearchVocabs()
     {
         onView(withId(R.id.et_tag)).perform(typeText("car"),closeSoftKeyboard());
 
@@ -89,7 +89,7 @@ public class AdvancedTestInstrumentedTest {
 
 
     @Test
-    public void performAdd()
+    public void performAddToTest()
     {
         onView(withId(R.id.et_tag)).perform(typeText("car"),closeSoftKeyboard());
 
