@@ -49,11 +49,6 @@ public class MainActivity extends AppCompatActivity {
         this.startActivity(intent);
     }
 
-    public void launchSharingView(View view){
-        Intent intent = new Intent(this, SharingViewActivity.class);
-        this.startActivity(intent);
-    }
-
     public void launchTestView(View view){
         Intent intent = new Intent(this, TestViewActivity.class);
         this.startActivity(intent);

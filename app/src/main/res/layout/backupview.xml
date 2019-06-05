@@ -41,4 +41,9 @@
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"  android:onClick="clearAll"/>
+    <Button
+            android:text="Share"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:onClick="shareData"/>
 </LinearLayout>
