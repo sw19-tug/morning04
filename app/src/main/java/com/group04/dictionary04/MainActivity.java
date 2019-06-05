@@ -1,6 +1,7 @@
 package com.group04.dictionary04;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
@@ -9,11 +10,13 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    public final static String PREFS = "PrefsFile";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         //TODO with this we can enable system wide Dark-Mode
         //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
     }
@@ -48,11 +51,6 @@ public class MainActivity extends AppCompatActivity {
         this.startActivity(intent);
     }
 
-    public void launchSharingView(View view){
-        Intent intent = new Intent(this, SharingViewActivity.class);
-        this.startActivity(intent);
-    }
-
     public void launchTestView(View view){
         Intent intent = new Intent(this, TestViewActivity.class);
         this.startActivity(intent);
@@ -62,5 +60,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SavedExamsViewActivity.class);
         this.startActivity(intent);
     }
+
+    public void launchSettingsView(View view){
+        Intent intent = new Intent(this, SettingsViewActivity.class);
+        this.startActivity(intent);
+    }
+
 
 }

@@ -12,11 +12,17 @@
     <string name="menuBackupView">Backup / Restore</string>
     <string name="menuSharingView">Sharing</string>
     <string name="menuSavedExams">Saved Exams</string>
+    <string name="menuSettingsView">Settings</string>
+
 
     <string name="menuBackupData">Backup</string>
     <string name="menuRestoreData">Restore</string>
     <string name="menuClearTesting">Clear Testings</string>
     <string name="menuClearAll">Reset All</string>
+    <string name="enable">Enable Notifications</string>
+    <string name="disable">Disable Notifications</string>
+
+
     <string name="language">Language</string>
     <string name="vocab">VOCAB</string>
     <string name="second_language">Second Language</string>

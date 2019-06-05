@@ -2,6 +2,8 @@ package com.group04.dictionary04.database;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Environment;
+import android.util.Log;
 import android.widget.Toast;
 import com.google.gson.Gson;
 import com.group04.dictionary04.enums.LanguageIdentifier;
@@ -84,8 +86,8 @@ public class DatabaseController {
         writeStringAsFile(reader.getString("dictionary04", null), "dict04-backup");
     }
 
-    public void restoreDatabase() {
-        String backup = readFileAsString("dict04-backup");
+    public void restoreDatabase(File path) {
+        String backup = readFileAsString(path);
         editor.putString("dictionary04", backup);
         editor.commit();
     }
@@ -102,7 +104,9 @@ public class DatabaseController {
 
     public void writeStringAsFile(final String fileContents, String fileName) {
         try {
-            FileWriter out = new FileWriter(new File(context.getFilesDir(), fileName));
+            File f = new File(Environment.getExternalStorageDirectory(), fileName);
+            Log.d("testststs", "" + f.getAbsoluteFile());
+            FileWriter out = new FileWriter(f);
             out.write(fileContents);
             out.close();
             Toast.makeText(context, "Backup created in file: dict04-backup", Toast.LENGTH_LONG).show();
@@ -112,13 +116,13 @@ public class DatabaseController {
         }
     }
 
-    public String readFileAsString(String fileName) {
+    public String readFileAsString(File fileName) {
         StringBuilder stringBuilder = new StringBuilder();
         String line;
         BufferedReader in = null;
 
         try {
-            in = new BufferedReader(new FileReader(new File(context.getFilesDir(), fileName)));
+            in = new BufferedReader(new FileReader(fileName));
             while ((line = in.readLine()) != null) stringBuilder.append(line);
             Toast.makeText(context, "Backup-file found successfully", Toast.LENGTH_LONG).show();
         } catch (FileNotFoundException e) {
