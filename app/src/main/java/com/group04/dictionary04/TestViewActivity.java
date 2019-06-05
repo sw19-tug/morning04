@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ public class TestViewActivity extends Activity implements View.OnClickListener {
     private default_Dictionary dict = null;
 
     int index = 0;
+    int hintNum = 0;
 
     TextView lang1;
     TextView lang2;
@@ -85,6 +87,7 @@ public class TestViewActivity extends Activity implements View.OnClickListener {
         givenVocab.setText(exam.getVocsToTest().get(index).getId1().getValue());
         input.getText().clear();
 
+        hintNum = 0;
     }
 
     public void displayPopUp(String title, String NeutralButton){
@@ -106,28 +109,39 @@ public class TestViewActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    public void hintButtonHandler(){
-        int i = 0;
+    public void hintButtonHandler(final int hintNum){
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("Hint is the first letter of the answer:");
-        char answerHint = exam.getVocsToTest().get(index).getId2().getValue().charAt(0);
-        dialog.setNegativeButton("more help", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                i++;
+        int answerLength = exam.getVocsToTest().get(index).getId2().getValue().length();
+        String answerHint = "";
+        if (hintNum < answerLength) {
 
-            }
-        });
-        dialog.setPositiveButton("Try it", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
+
+            //for (int i =  hintNum; i < answerLength; i++){
+            answerHint = exam.getVocsToTest().get(index).getId2().getValue().substring(0, hintNum);
+
+            //};
+            dialog.setNegativeButton("more help", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    int newHint = hintCounter();
+                    Log.d("HintNum", Integer.toString(newHint));
+                    hintButtonHandler(hintCounter());
+                }
+            });
+            dialog.setPositiveButton("Try it", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+        }
+        else{
+            answerHint = "Sorry, you have used all your hints";
+        }
         AlertDialog alertDialog=dialog.create();
-        alertDialog.setMessage("Starts with:\n" + answerHint);
+        alertDialog.setMessage(answerHint);
         alertDialog.show();
-
     }
 
     public void checkButtonHandler(){
@@ -201,7 +215,7 @@ public class TestViewActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.button1:
-                hintButtonHandler();
+                hintButtonHandler(hintCounter());
                 break;
             case R.id.button0:
                 checkButtonHandler();
@@ -217,5 +231,10 @@ public class TestViewActivity extends Activity implements View.OnClickListener {
                 break;
         }
 
+    }
+
+    public int hintCounter(){
+        hintNum++;
+        return hintNum;
     }
 }
