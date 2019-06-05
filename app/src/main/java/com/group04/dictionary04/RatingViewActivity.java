@@ -132,14 +132,14 @@ public class RatingViewActivity extends AppCompatActivity {
                 initPopupViewControls();
 
                 dialog.setView(ratingPopupView);
-                Button ok_button = (Button)ratingPopupView.findViewById(R.id.btn_ok);
+                Button change_difficulty_button = (Button)ratingPopupView.findViewById(R.id.btn_change_difficulty);
+                Button delete_entry_button = (Button)ratingPopupView.findViewById(R.id.btn_delete_entry);
 
                 final AlertDialog dia_alert = dialog.create();
-                dia_alert.setTitle("Change difficulty");
+                dia_alert.setTitle("Change difficulty or delete entry");
                 dia_alert.show();
 
-
-                ok_button.setOnClickListener(new View.OnClickListener() {
+                change_difficulty_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) { {
                         ratingBarNew = (RatingBar) ratingPopupView.findViewById(R.id.ratingBar_popup);
@@ -149,10 +149,29 @@ public class RatingViewActivity extends AppCompatActivity {
                         Toast.makeText(RatingViewActivity.this, "CHANGED " + entry_to_change.getId1().getValue() +" TO " + new_rating + " STARS",
                                 Toast.LENGTH_SHORT).show();
 
+                        // get Difficulty from ratingBar and set it to default entry
+                        dia_alert.cancel();
+
+                        }
+
+                    }
+
+                });
+
+                delete_entry_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) { {
+                        default_Entry entry_to_delete = (default_Entry)parent.getAdapter().getItem(position);
+                        dict.deleteEntry(entry_to_delete);
+                        //entry_to_change.setRating(Integer.toString(new_rating));
+                        Toast.makeText(RatingViewActivity.this, "Entry " + entry_to_delete.getId1().getValue() +" deleted",
+                                Toast.LENGTH_SHORT).show();
 
                         // get Difficulty from ratingBar and set it to default entry
                         dia_alert.cancel();
 
+                        //refresh ArrayAdapter after deleting entry
+                        queryData();
                         }
 
                     }

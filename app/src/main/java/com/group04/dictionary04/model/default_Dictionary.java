@@ -233,4 +233,10 @@ public class default_Dictionary implements Dictionary {
         exams.remove(exam);
     }
 
+
+    public void deleteEntry(default_Entry entry) {
+    entries.remove(entry);
+
+    }
+
 }
