@@ -85,26 +85,6 @@ public class SavedExamsViewActivity extends AppCompatActivity {
 
     }
 
-    public void backupData(View view) {
-        DatabaseController dbController = new DatabaseController(this.getApplicationContext());
-        dbController.backupDatabase();
-    }
-
-    public void restoreData(View view) {
-        DatabaseController dbController = new DatabaseController(this.getApplicationContext());
-        dbController.restoreDatabase();
-    }
-
-    public void clearTesting(View view) {
-        DatabaseController dbController = new DatabaseController(this.getApplicationContext());
-        dbController.clearTesting();
-    }
-
-    public void clearAll(View view) {
-        DatabaseController dbController = new DatabaseController(this.getApplicationContext());
-        dbController.clearDatabase();
-    }
-
     @Override
     public void onResume() {
         super.onResume();
