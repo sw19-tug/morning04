@@ -32,6 +32,7 @@ public class TestActivityInstrumentedTest {
     @Test
     public void testButtons() {
         onView(withId(R.id.button0)).check(matches(isDisplayed()));
+        onView(withId(R.id.button1)).check(matches(isDisplayed()));
         onView(withId(R.id.button5)).check(matches(isDisplayed()));
         onView(withId(R.id.button4)).check(matches(isDisplayed()));
         onView(withId(R.id.button3)).check(matches(isDisplayed()));
@@ -41,6 +42,7 @@ public class TestActivityInstrumentedTest {
     public void testButtonsClickable()
     {
         onView(withId(R.id.button0)).check(matches(isClickable()));
+        onView(withId(R.id.button1)).check(matches(isClickable()));
         onView(withId(R.id.button5)).check(matches(isClickable()));
         onView(withId(R.id.button4)).check(matches(isClickable()));
         onView(withId(R.id.button3)).check(matches(isClickable()));
@@ -67,7 +69,6 @@ public class TestActivityInstrumentedTest {
         onView(withId(R.id.editText2)).perform(typeText("car"),closeSoftKeyboard());
         onView(withId(R.id.button0)).perform(click());
 
-        //positive Button
         onView(withId(android.R.id.button1)).perform(click());
     }
 
@@ -79,12 +80,10 @@ public class TestActivityInstrumentedTest {
 
         onView(withId(R.id.button4)).perform(click());
 
-        //check if allertDialog has popped up
-        int titelId = TestViewActivityTestRule.getActivity().getResources().getIdentifier("alertTitle", "id", "android");
-        onView(withId(titelId)).inRoot(isDialog()).check(matches(withText("Done..."))).check(matches(isDisplayed()));
+        int titleId = TestViewActivityTestRule.getActivity().getResources().getIdentifier("alertTitle", "id", "android");
+        onView(withId(titleId)).inRoot(isDialog()).check(matches(withText("Done..."))).check(matches(isDisplayed()));
         onView(withText("Do you want to save your exam progress?")).check(matches(isDisplayed()));
 
-        //negative(NO) btn
         onView(withId(android.R.id.button2)).perform(click());
 
     }
