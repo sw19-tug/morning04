@@ -88,4 +88,46 @@ public class TestActivityInstrumentedTest {
         onView(withId(android.R.id.button2)).perform(click());
 
     }
+
+
+
+    @Test
+    public void performHintBasic()
+    {
+        onView(withId(R.id.button1)).check(matches(isDisplayed()));
+        onView(withId(R.id.button1)).perform(click());
+        onView(withText("Hint is the first letter(s) of the answer:")).check(matches(isDisplayed()));
+        onView(withId(android.R.id.button2)).perform(click());
+    }
+
+    @Test
+    public void performHintAdvanced() {
+        onView(withId(R.id.button1)).check(matches(isDisplayed()));
+        onView(withId(R.id.button1)).perform(click());
+        String y = TestViewActivityTestRule.getActivity().exam.getVocsToTest().get(TestViewActivityTestRule.getActivity().index).getId2().getValue().substring(0, 1);
+        onView(withText(y)).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void performHintMax(){
+       int x = TestViewActivityTestRule.getActivity().exam.getVocsToTest().get(TestViewActivityTestRule.getActivity().index).getId2().getValue().length();
+        onView(withId(R.id.button1)).check(matches(isDisplayed()));
+        onView(withId(R.id.button1)).perform(click());
+
+       for(int i = 1; i < x ; i++)
+       {
+           onView(withText("MORE HELP")).perform(click());
+           if(i == x-1)
+
+           {
+             String y = TestViewActivityTestRule.getActivity().exam.getVocsToTest().get(TestViewActivityTestRule.getActivity().index).getId2().getValue().substring(0, i);
+             String z = "Sorry, you have used all your hints, final hint:\n " + y;
+             onView(withText(z)).check(matches(isDisplayed()));
+           }
+
+       }
+    }
+
+
+
 }
