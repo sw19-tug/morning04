@@ -1,5 +1,7 @@
 package com.group04.dictionary04.model;
 
+import android.util.Log;
+
 import com.group04.dictionary04.enums.DifficultyIdentifier;
 import com.group04.dictionary04.enums.LanguageIdentifier;
 import com.group04.dictionary04.interfaces.*;
@@ -138,7 +140,8 @@ public class default_Dictionary implements Dictionary {
         default_Entry entry = new default_Entry();
         entry.setId1(ovoc1);
         entry.setId2(ovoc2);
-        entry.setRating(diff.toString());
+        //entry.setRating(diff.toString());
+        entry.setRating(String.valueOf(diff.getValue()));
         entry.setTag(tag);
 
 
@@ -193,6 +196,15 @@ public class default_Dictionary implements Dictionary {
         return returnString;
     }
 
+    public default_Language getLanguageByIndex(String name) {
+        for(default_Language language : languages.values()) {
+            if(language.getDisplayName().equals(name))
+                return language;
+        }
+
+        return null;
+    }
+
     public default_Language getLanguageByName(String name) {
         for(default_Language language : languages.values()) {
             if(language.getDisplayName().equals(name))
@@ -226,4 +238,15 @@ public class default_Dictionary implements Dictionary {
     public void setExams(List<default_Exam> exams) {
 
     }
+
+    public void deleteExam(default_Exam exam){
+        exams.remove(exam);
+    }
+
+
+    public void deleteEntry(default_Entry entry) {
+    entries.remove(entry);
+
+    }
+
 }

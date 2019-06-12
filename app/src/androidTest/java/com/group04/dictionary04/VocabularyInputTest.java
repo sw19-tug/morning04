@@ -45,11 +45,11 @@ public class VocabularyInputTest {
 
         // test buttons are visible
 
-        String german_spinner_text = "German";
-        String english_spinner_text = "English";
-        String spanish_spinner_text = "Spanish";
-        String french_spinner_text = "French";
-        String italy_spinner_text = "Italy";
+        String german_spinner_text = "DE";
+        String english_spinner_text = "EN";
+        String spanish_spinner_text = "ES";
+        String french_spinner_text = "FR";
+        String italy_spinner_text = "IT";
 
         // submit button
         onView(withId(R.id.button_input)).check(matches(isDisplayed()));
@@ -91,9 +91,9 @@ public class VocabularyInputTest {
         onView(withId(R.id.txt_lang1_input)).perform(typeText("German Word"));
         onView(withId(R.id.txt_lang2_input)).perform(typeText("English Word"));
         onView(withId(R.id.ratingBar_difficulty)).perform(click());
-        onView(withId(R.id.txt_tag_input)).perform(typeText("holiday"),closeSoftKeyboard());
+        onView(withId(R.id.txt_tag_input)).perform(closeSoftKeyboard(), typeText("holiday"));
 
-        onView(withId(R.id.button_input)).perform(click());
+        onView(withId(R.id.button_input)).perform(closeSoftKeyboard(), click());
 
     }
 

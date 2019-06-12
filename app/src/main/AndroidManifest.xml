@@ -7,7 +7,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_foreground"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -26,6 +26,8 @@
         <activity android:name=".RatingViewActivity" android:label="RatingView"></activity>
         <activity android:name=".SaveTestViewActivity" android:label="SaveTest"></activity>
         <activity android:name=".TestViewActivity" android:label="TestView" ></activity>
+        <activity android:name=".SettingsViewActivity" android:label="SettingsView" ></activity>
+        <activity android:name=".AdvancedTestViewActivity" android:label="ADVView" ></activity>
         <provider
                 android:name=".fileprovider.GenericFileProvider"
                 android:authorities="${applicationId}.fileprovider"
@@ -35,6 +37,7 @@
                     android:name="android.support.FILE_PROVIDER_PATHS"
                     android:resource="@xml/provider_paths"/>
         </provider>
+        <activity android:name=".SavedExamsViewActivity" android:label="SavedExamsView" ></activity>
     </application>
 
 </manifest>

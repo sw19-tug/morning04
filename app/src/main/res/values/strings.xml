@@ -8,9 +8,10 @@
     <string name="menuSearchView">Browse Vocabulary</string>
     <string name="menuRatingView">Browse / Rate</string>
     <string name="menuTestView">Testing</string>
-    <string name="menuADVView">Advanced Testing</string>
+    <string name="menuADVView">Add Vocabulary</string>
     <string name="menuBackupView">Backup / Restore</string>
     <string name="menuSharingView">Sharing</string>
+    <string name="menuSavedExams">Saved Exams</string>
     <string name="menuSettingsView">Settings</string>
 
 
@@ -31,4 +32,6 @@
     <string name="save_exam">save exam</string>
     <string name="next">next</string>
     <string name="your_answer">your answer...</string>
+    <string name="menuAdvancedTestView">AdvancedTesting</string>
+    <string name="from_to">from to </string>
 </resources>

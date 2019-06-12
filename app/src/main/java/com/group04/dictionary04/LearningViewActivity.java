@@ -17,6 +17,7 @@ import com.group04.dictionary04.database.DatabaseController;
 import com.group04.dictionary04.model.default_Dictionary;
 import com.group04.dictionary04.model.default_Language;
 import com.group04.dictionary04.model.default_Vocabulary;
+import com.group04.dictionary04.model.spinnerImageAdapter;
 
 public class LearningViewActivity extends AppCompatActivity {
     private default_Dictionary dict = null;
@@ -39,9 +40,12 @@ public class LearningViewActivity extends AppCompatActivity {
         search = (EditText) findViewById(R.id.search);
         vocList = (ListView) findViewById(R.id.vocList);
         final Spinner lang_spinner = (Spinner) findViewById(R.id.languageSelection);
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, dict.getLanguagesStrings());
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        lang_spinner.setAdapter(dataAdapter);
+
+        String[] langs={"Spanish","German","English","French","Italy"};
+        int images[] = {R.drawable.spain, R.drawable.germany, R.drawable.united_states, R.drawable.france, R.drawable.italy };
+        spinnerImageAdapter spinnerImageAdapter =new spinnerImageAdapter(this, images, langs);
+        lang_spinner.setAdapter(spinnerImageAdapter);
+
 
         lang_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

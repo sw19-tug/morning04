@@ -2,19 +2,32 @@ package com.group04.dictionary04;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AppComponentFactory;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.group04.dictionary04.database.DatabaseController;
 import com.group04.dictionary04.model.default_Dictionary;
 import com.group04.dictionary04.model.default_Entry;
 import com.group04.dictionary04.model.default_Exam;
 
-public class TestViewActivity extends Activity implements View.OnClickListener {
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
+
+public class TestViewActivity extends AppCompatActivity implements View.OnClickListener {
 
     private default_Dictionary dict = null;
 
@@ -30,11 +43,28 @@ public class TestViewActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.testview);
+        setSupportActionBar((Toolbar)findViewById(R.id.myactionbar));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
         dict = dbController.getCurrentDatabase();
+       //--------------------------------------------------------
+        Intent intent = getIntent();
+        String data = intent.getStringExtra("data");
 
-        setContentView(R.layout.testview);
+        if(data != null){
+
+            Gson gson = new Gson();
+            exam = gson.fromJson(data, default_Exam.class);
+            Log.d("asdf", data);
+        }
+        else{
+
+            exam = dict.generateExam(null);
+        }
+        //--------------------------------------------------------
+
         lang1 = findViewById(R.id.textView3);
         lang2 = findViewById(R.id.textView5);
         givenVocab = findViewById(R.id.textView4);
@@ -191,6 +221,7 @@ public class TestViewActivity extends Activity implements View.OnClickListener {
         dialog.setNegativeButton("yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                exam.setResult(getCurrentDate() + "  " + getCurrentTime());
                 dict.getExams().add(exam);
             }
         });
@@ -231,5 +262,32 @@ public class TestViewActivity extends Activity implements View.OnClickListener {
     public int hintCounter(){
         hintNum++;
         return hintNum;
+    }
+
+
+    public static final String DATE_FORMAT_1 = "hh:mm a";
+
+    public static String getCurrentTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT_1);
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date today = Calendar.getInstance().getTime();
+        return dateFormat.format(today);
+    }
+
+    public static String getCurrentDate() {
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+        return df.format(c);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            onBackPressed();  return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -132,14 +132,14 @@ public class RatingViewActivity extends AppCompatActivity {
                 initPopupViewControls();
 
                 dialog.setView(ratingPopupView);
-                Button ok_button = (Button)ratingPopupView.findViewById(R.id.btn_ok);
+                Button change_difficulty_button = (Button)ratingPopupView.findViewById(R.id.btn_change_difficulty);
+                Button delete_entry_button = (Button)ratingPopupView.findViewById(R.id.btn_delete_entry);
 
                 final AlertDialog dia_alert = dialog.create();
-                dia_alert.setTitle("Change difficulty");
+                dia_alert.setTitle("Change difficulty or delete entry");
                 dia_alert.show();
 
-
-                ok_button.setOnClickListener(new View.OnClickListener() {
+                change_difficulty_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) { {
                         ratingBarNew = (RatingBar) ratingPopupView.findViewById(R.id.ratingBar_popup);
@@ -149,11 +149,30 @@ public class RatingViewActivity extends AppCompatActivity {
                         Toast.makeText(RatingViewActivity.this, "CHANGED " + entry_to_change.getId1().getValue() +" TO " + new_rating + " STARS",
                                 Toast.LENGTH_SHORT).show();
 
+                        // get Difficulty from ratingBar and set it to default entry
+                        dia_alert.cancel();
+
+                    }
+
+                    }
+
+                });
+
+                delete_entry_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) { {
+                        default_Entry entry_to_delete = (default_Entry)parent.getAdapter().getItem(position);
+                        dict.deleteEntry(entry_to_delete);
+                        //entry_to_change.setRating(Integer.toString(new_rating));
+                        Toast.makeText(RatingViewActivity.this, "Entry " + entry_to_delete.getId1().getValue() +" deleted",
+                                Toast.LENGTH_SHORT).show();
 
                         // get Difficulty from ratingBar and set it to default entry
                         dia_alert.cancel();
 
-                        }
+                        //refresh ArrayAdapter after deleting entry
+                        queryData();
+                    }
 
                     }
 
@@ -170,10 +189,10 @@ public class RatingViewActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
         }
         //CHECK RATING BAR
-        else if((int)ratingBar.getRating() == 0){
+        /*else if((int)ratingBar.getRating() == 0){
             Toast.makeText(RatingViewActivity.this, "Please choose a difficulty",
                     Toast.LENGTH_SHORT).show();
-        }
+        }*/
         else {
 
             //GET DIFFICULTY
@@ -187,6 +206,8 @@ public class RatingViewActivity extends AppCompatActivity {
                 difficult = DifficultyIdentifier.NATIVE;
 
             loadCurrentLanguageList(dict.getLanguageByName(lang_spinner.getSelectedItem().toString()), difficult);
+
+            ratingBar.setRating(0);
         }
     }
 
@@ -222,11 +243,15 @@ public class RatingViewActivity extends AppCompatActivity {
 
     private void loadCurrentLanguageList(default_Language language, DifficultyIdentifier difficulty) {
         String searchText = search.getText().toString();
-        final List<default_Entry> entries = language.getVocabulariesQueryByTagRating(difficulty, searchText, dict);
+        float ratingBarValue = ratingBar.getRating();
+        final List<default_Entry> entries = language.getVocabulariesQueryByTagRating(ratingBarValue, difficulty, searchText, dict);
         //List<default_Vocabulary> vocabularie = language.getVocabularies();
         //int difficulty_value = difficulty.getValue();
 
-        /*for(default_Vocabulary vocIt : vocabularie)
+        /*List<default_Vocabulary> vocabularie = language.getVocabularies();
+        int difficulty_value = difficulty.getValue();
+
+        for(default_Vocabulary vocIt : vocabularie)
         {
             Log.d("log", "looking for vocabulary " + vocIt.getId() + " " + vocIt.getValue() + " Difficulty: " +
                     difficulty_value);
@@ -278,6 +303,7 @@ public class RatingViewActivity extends AppCompatActivity {
         };
 
         sortList(entries);
+
         items.setAdapter(dataAdapter);
     }
 
