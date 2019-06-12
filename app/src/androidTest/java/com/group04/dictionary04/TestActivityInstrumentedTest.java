@@ -32,6 +32,7 @@ public class TestActivityInstrumentedTest {
     @Test
     public void testButtons() {
         onView(withId(R.id.button0)).check(matches(isDisplayed()));
+        onView(withId(R.id.button1)).check(matches(isDisplayed()));
         onView(withId(R.id.button5)).check(matches(isDisplayed()));
         onView(withId(R.id.button4)).check(matches(isDisplayed()));
         onView(withId(R.id.button3)).check(matches(isDisplayed()));
@@ -41,6 +42,7 @@ public class TestActivityInstrumentedTest {
     public void testButtonsClickable()
     {
         onView(withId(R.id.button0)).check(matches(isClickable()));
+        onView(withId(R.id.button1)).check(matches(isClickable()));
         onView(withId(R.id.button5)).check(matches(isClickable()));
         onView(withId(R.id.button4)).check(matches(isClickable()));
         onView(withId(R.id.button3)).check(matches(isClickable()));
@@ -67,7 +69,6 @@ public class TestActivityInstrumentedTest {
         onView(withId(R.id.editText2)).perform(typeText("car"),closeSoftKeyboard());
         onView(withId(R.id.button0)).perform(click());
 
-        //positive Button
         onView(withId(android.R.id.button1)).perform(click());
     }
 
@@ -79,13 +80,53 @@ public class TestActivityInstrumentedTest {
 
         onView(withId(R.id.button4)).perform(click());
 
-        //check if allertDialog has popped up
-        int titelId = TestViewActivityTestRule.getActivity().getResources().getIdentifier("alertTitle", "id", "android");
-        onView(withId(titelId)).inRoot(isDialog()).check(matches(withText("Done..."))).check(matches(isDisplayed()));
+        int titleId = TestViewActivityTestRule.getActivity().getResources().getIdentifier("alertTitle", "id", "android");
+        onView(withId(titleId)).inRoot(isDialog()).check(matches(withText("Done..."))).check(matches(isDisplayed()));
         onView(withText("Do you want to save your exam progress?")).check(matches(isDisplayed()));
 
-        //negative(NO) btn
         onView(withId(android.R.id.button2)).perform(click());
 
     }
+
+
+
+    @Test
+    public void performHintBasic()
+    {
+        onView(withId(R.id.button1)).check(matches(isDisplayed()));
+        onView(withId(R.id.button1)).perform(click());
+        onView(withText("Hint is the first letter(s) of the answer:")).check(matches(isDisplayed()));
+        onView(withId(android.R.id.button2)).perform(click());
+    }
+
+    @Test
+    public void performHintAdvanced() {
+        onView(withId(R.id.button1)).check(matches(isDisplayed()));
+        onView(withId(R.id.button1)).perform(click());
+        String y = TestViewActivityTestRule.getActivity().exam.getVocsToTest().get(TestViewActivityTestRule.getActivity().index).getId2().getValue().substring(0, 1);
+        onView(withText(y)).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void performHintMax(){
+       int x = TestViewActivityTestRule.getActivity().exam.getVocsToTest().get(TestViewActivityTestRule.getActivity().index).getId2().getValue().length();
+        onView(withId(R.id.button1)).check(matches(isDisplayed()));
+        onView(withId(R.id.button1)).perform(click());
+
+       for(int i = 1; i < x ; i++)
+       {
+           onView(withText("MORE HELP")).perform(click());
+           if(i == x-1)
+
+           {
+             String y = TestViewActivityTestRule.getActivity().exam.getVocsToTest().get(TestViewActivityTestRule.getActivity().index).getId2().getValue().substring(0, i);
+             String z = "Sorry, you have used all your hints, final hint:\n " + y;
+             onView(withText(z)).check(matches(isDisplayed()));
+           }
+
+       }
+    }
+
+
+
 }

@@ -6,6 +6,7 @@ import android.app.AppComponentFactory;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -31,6 +32,7 @@ public class TestViewActivity extends AppCompatActivity implements View.OnClickL
     private default_Dictionary dict = null;
 
     int index = 0;
+    int hintNum = 0;
 
     TextView lang1;
     TextView lang2;
@@ -68,6 +70,8 @@ public class TestViewActivity extends AppCompatActivity implements View.OnClickL
         givenVocab = findViewById(R.id.textView4);
         input = findViewById(R.id.editText2);
 
+        exam = dict.generateExam(null);
+
         lang1.setText(exam.getVocsToTest().get(index).getId1().getLangString());
         lang2.setText(exam.getVocsToTest().get(index).getId2().getLangString());
         givenVocab.setText(exam.getVocsToTest().get(0).getId1().getValue());
@@ -78,7 +82,7 @@ public class TestViewActivity extends AppCompatActivity implements View.OnClickL
         super.onResume();
 
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
-//        dbController.saveTestDatabase();
+        dbController.saveTestDatabase();
         dict = dbController.getCurrentDatabase();
     }
 
@@ -113,6 +117,7 @@ public class TestViewActivity extends AppCompatActivity implements View.OnClickL
         givenVocab.setText(exam.getVocsToTest().get(index).getId1().getValue());
         input.getText().clear();
 
+        hintNum = 0;
     }
 
     public void displayPopUp(String title, String NeutralButton){
@@ -132,6 +137,36 @@ public class TestViewActivity extends AppCompatActivity implements View.OnClickL
         {
             saveButtonHandler();
         }
+    }
+
+    public void hintButtonHandler(final int hintNum){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("Hint is the first letter(s) of the answer:");
+        int answerLength = exam.getVocsToTest().get(index).getId2().getValue().length();
+        String answerHint = "";
+        if (hintNum < answerLength) {
+            answerHint = exam.getVocsToTest().get(index).getId2().getValue().substring(0, hintNum);
+
+            dialog.setNegativeButton("more help", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    hintButtonHandler(hintCounter());
+                }
+            });
+            dialog.setPositiveButton("Try it", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+        }
+        else{
+            String finalHint = exam.getVocsToTest().get(index).getId2().getValue().substring(0, answerLength - 1);
+            answerHint = "Sorry, you have used all your hints, final hint:\n " + finalHint;
+        }
+        AlertDialog alertDialog=dialog.create();
+        alertDialog.setMessage(answerHint);
+        alertDialog.show();
     }
 
     public void checkButtonHandler(){
@@ -205,6 +240,9 @@ public class TestViewActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.button1:
+                hintButtonHandler(hintCounter());
+                break;
             case R.id.button0:
                 checkButtonHandler();
                 break;
@@ -219,6 +257,11 @@ public class TestViewActivity extends AppCompatActivity implements View.OnClickL
                 break;
         }
 
+    }
+
+    public int hintCounter(){
+        hintNum++;
+        return hintNum;
     }
 
 
