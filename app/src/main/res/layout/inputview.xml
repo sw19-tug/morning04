@@ -16,7 +16,7 @@
             android:elevation="4dp">
 
         <TextView
-                android:text="Voc-Input"
+                android:text="Vocabulary-Input"
                 android:textSize="20sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -26,30 +26,8 @@
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:orientation="vertical"
-        android:gravity="center">
-
-
-        <TextView
-            android:id="@+id/textView_top"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dictionary Input V. 1.0.0._132"
-            android:textColor="@color/colorAccent"
-            android:textSize="24sp" />
-
-        <!-- Include other widget or layout tags here. These are considered
-                "child views" or "children" of the linear layout -->
-
-    </LinearLayout>
-
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:orientation="horizontal"

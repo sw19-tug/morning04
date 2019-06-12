@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.AppComponentFactory;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.support.v7.app.AppCompatActivity;
@@ -14,9 +15,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.group04.dictionary04.database.DatabaseController;
+import com.group04.dictionary04.interfaces.Exam;
 import com.group04.dictionary04.model.default_Dictionary;
 import com.group04.dictionary04.model.default_Entry;
 import com.group04.dictionary04.model.default_Exam;
@@ -52,7 +55,7 @@ public class TestViewActivity extends AppCompatActivity implements View.OnClickL
        //--------------------------------------------------------
         Intent intent = getIntent();
         String data = intent.getStringExtra("data");
-
+        boolean valid = true;
         if(data != null){
 
             Gson gson = new Gson();
@@ -60,21 +63,31 @@ public class TestViewActivity extends AppCompatActivity implements View.OnClickL
             Log.d("asdf", data);
         }
         else{
-
-            exam = dict.generateExam(null);
+            if(dict.getEntries().size() == 0)
+            {
+                Toast.makeText(getApplicationContext(), "no data available", Toast.LENGTH_SHORT).show();
+                valid = false;
+                Intent myIntent = new Intent(TestViewActivity.this, MainActivity.class);
+                startActivity(myIntent);
+                finishAffinity();
+            } else
+                exam = dict.generateExam(null);
         }
         //--------------------------------------------------------
+        if(valid) {
+            lang1 = findViewById(R.id.textView3);
+            lang2 = findViewById(R.id.textView5);
+            givenVocab = findViewById(R.id.textView4);
+            input = findViewById(R.id.editText2);
 
-        lang1 = findViewById(R.id.textView3);
-        lang2 = findViewById(R.id.textView5);
-        givenVocab = findViewById(R.id.textView4);
-        input = findViewById(R.id.editText2);
+            if(exam.getVocsToTest().size() > 0) {
+                lang1.setText(exam.getVocsToTest().get(index).getId1().getLangString());
+                lang2.setText(exam.getVocsToTest().get(index).getId2().getLangString());
+                givenVocab.setText(exam.getVocsToTest().get(0).getId1().getValue());
+            }
+        }
 
-        exam = dict.generateExam(null);
 
-        lang1.setText(exam.getVocsToTest().get(index).getId1().getLangString());
-        lang2.setText(exam.getVocsToTest().get(index).getId2().getLangString());
-        givenVocab.setText(exam.getVocsToTest().get(0).getId1().getValue());
     }
 
     @Override
@@ -82,7 +95,7 @@ public class TestViewActivity extends AppCompatActivity implements View.OnClickL
         super.onResume();
 
         DatabaseController dbController = new DatabaseController(this.getApplicationContext());
-        dbController.saveTestDatabase();
+//        dbController.saveTestDatabase();
         dict = dbController.getCurrentDatabase();
     }
 

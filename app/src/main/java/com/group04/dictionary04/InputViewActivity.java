@@ -147,6 +147,32 @@ public class InputViewActivity extends AppCompatActivity {
                         difficulty.setRating(0);
 
                     }
+                    else if(difficulty.getRating() != 0)
+                    {
+                        dict.addTranslation(field1.getText().toString(), field2.getText().toString(), String.valueOf((int)difficulty.getRating()), language1, language2);
+
+                        String toast_success1 = "added successfully";
+                        Toast toast_success = Toast.makeText(getApplicationContext(),toast_success1, Toast.LENGTH_LONG);
+                        toast_success.show();
+                        field1.setText("");
+                        field2.setText("");
+                        tag.setText("");
+                        difficulty.setRating(0);
+
+                    }
+                    else if(!tag.getText().toString().isEmpty())
+                    {
+                        dict.addTranslationWithTag(field1.getText().toString(), field2.getText().toString(), tag.getText().toString(), language1, language2);
+
+                        String toast_success1 = "added successfully";
+                        Toast toast_success = Toast.makeText(getApplicationContext(),toast_success1, Toast.LENGTH_LONG);
+                        toast_success.show();
+                        field1.setText("");
+                        field2.setText("");
+                        tag.setText("");
+                        difficulty.setRating(0);
+
+                    }
                     else
                     {
                         AlertDialog.Builder alertdial = new AlertDialog.Builder(InputViewActivity.this);
