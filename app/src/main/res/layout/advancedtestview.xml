@@ -137,7 +137,7 @@
                 android:choiceMode="multipleChoice"
                 android:listSelector="@android:color/darker_gray"
                 android:layout_width="match_parent"
-                android:layout_height="340dp"
+                android:layout_height="match_parent"
                 android:scrollbars="vertical">
 
             </ListView>
