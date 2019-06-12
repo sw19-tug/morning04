@@ -11,6 +11,8 @@ import org.junit.Test;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.RootMatchers.isDialog;
 import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
@@ -35,22 +37,4 @@ public class SavedExamsTest {
         onView(withId(R.id.vocList)).check(matches(isClickable()));
     }
 
-    @Test
-    public void testAllertDialog() {
-        onView(withId(R.id.vocList)).perform(click());
-
-        //check if allertDialog has popped up
-        int titelId = SavedExamsViewTestRule.getActivity().getResources().getIdentifier("alertTitle", "id", "android");
-        onView(withId(titelId)).inRoot(isDialog()).check(matches(withText("Saved Exams"))).check(matches(isDisplayed()));
-    }
-
-
-    @Test
-    public void deleteTest() {
-
-        onView(withId(R.id.vocList)).perform(click());
-        onView(withId(android.R.id.button2)).perform(click());
-
-
-    }
 }
