@@ -47,6 +47,7 @@ public class RatingViewActivity extends AppCompatActivity {
 
     private RatingBar ratingPopup;
     private Button btnPopup;
+    private Button btnClear;
     private View ratingPopupView;
     private EditText search = null;
     private Spinner lang_spinner = null;
@@ -70,6 +71,7 @@ public class RatingViewActivity extends AppCompatActivity {
         btnAscending = (RadioButton) findViewById(R.id.btn_ascending);
         btnDescending = (RadioButton) findViewById(R.id.btn_descending);
         items = (ListView) findViewById(R.id.list_items);
+        btnClear = (Button) findViewById(R.id.btn_clear);
 
         search = (EditText) findViewById(R.id.search);
         //SPINNER
@@ -86,7 +88,7 @@ public class RatingViewActivity extends AppCompatActivity {
         lang_spinner.setAdapter(dataAdapter);
 
         //TEST LIST INPUT
-        vocabs.add("");
+        //vocabs.add("");
 
 
         ArrayAdapter<String> rateAdapter = new ArrayAdapter<>(RatingViewActivity.this,
@@ -104,6 +106,7 @@ public class RatingViewActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
 
+                Log.d("asdf", "Bin hier");
                 queryData();
             }
 
@@ -118,6 +121,14 @@ public class RatingViewActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 queryData();
+            }
+        });
+
+        btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ratingBar.setRating(0);
             }
         });
 
@@ -207,7 +218,7 @@ public class RatingViewActivity extends AppCompatActivity {
 
             loadCurrentLanguageList(dict.getLanguageByName(lang_spinner.getSelectedItem().toString()), difficult);
 
-            ratingBar.setRating(0);
+            //ratingBar.setRating(0);
         }
     }
 

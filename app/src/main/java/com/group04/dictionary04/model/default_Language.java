@@ -131,7 +131,9 @@ public class default_Language implements com.group04.dictionary04.interfaces.Lan
                                 difficulty_value == Integer.valueOf(entryIt.getRating()))
                         {
                             Log.d("log", "MATCHING FOUND AND ADD TO LIST " + vocIt.getId());
-                            list.add(entryIt);
+
+                            if(search == null || search.length() == 0 || (entryIt.getId1().getValue().contains(search) || entryIt.getId2().getValue().contains(search)))
+                                list.add(entryIt);
                         }
                     }
                 }
