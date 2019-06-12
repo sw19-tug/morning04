@@ -89,7 +89,7 @@ public class AdvancedTestViewActivity extends Activity implements View.OnClickLi
             @Override
             public void onClick(View v) {
                 Log.d("asdf", "asdf " + exam_entries.size());
-                if (exam_entries.size() >= 0){
+                if (exam_entries.size() > 0){
                    Gson gson = new Gson();
 
                    Intent myIntent = new Intent(AdvancedTestViewActivity.this, TestViewActivity.class);
@@ -97,6 +97,10 @@ public class AdvancedTestViewActivity extends Activity implements View.OnClickLi
                    exam.setVocsToTest(exam_entries);
                    myIntent.putExtra("data", gson.toJson(exam));
                    startActivity(myIntent);
+                }
+                else{
+
+                    Toast.makeText(getApplicationContext(), "no vocabulary selected", Toast.LENGTH_SHORT).show();
                 }
             }
         });
