@@ -88,14 +88,16 @@ public class AdvancedTestViewActivity extends Activity implements View.OnClickLi
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("asdf", "asdf " + exam_entries.size());
+                if (exam_entries.size() >= 0){
+                   Gson gson = new Gson();
 
-               Gson gson = new Gson();
-
-               Intent myIntent = new Intent(AdvancedTestViewActivity.this, TestViewActivity.class);
-               Exam exam = new default_Exam();
-               exam.setVocsToTest(exam_entries);
-               myIntent.putExtra("data", gson.toJson(exam));
-               startActivity(myIntent);
+                   Intent myIntent = new Intent(AdvancedTestViewActivity.this, TestViewActivity.class);
+                   Exam exam = new default_Exam();
+                   exam.setVocsToTest(exam_entries);
+                   myIntent.putExtra("data", gson.toJson(exam));
+                   startActivity(myIntent);
+                }
             }
         });
 
