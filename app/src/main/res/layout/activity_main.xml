@@ -68,11 +68,11 @@
         android:gravity="bottom">
 
         <Button
-            android:text="@string/menuADVView"
+            android:text="@string/menuAdvancedTestView"
             android:layout_weight="1"
             android:layout_width="120dp"
             android:drawableTop="@drawable/ic_testing_btn"
-            android:layout_height="100dp" android:id="@+id/task6" android:onClick="launchADVView"/>
+            android:layout_height="100dp" android:id="@+id/task6" android:onClick="launchAdvancedTestView"/>
         <Button
             android:text="@string/menuBackupView"
             android:layout_weight="1"
