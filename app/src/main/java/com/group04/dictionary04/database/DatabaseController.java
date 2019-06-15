@@ -41,7 +41,7 @@ public class DatabaseController {
         reader = context.getSharedPreferences("DATABASE", context.MODE_PRIVATE);
     }
 
-    public void saveTestDatabase() {
+    /*public void saveTestDatabase() {
         default_Dictionary dict = new default_Dictionary();
 
         dict.addTranslation("Auto", "car", "1",LanguageIdentifier.DE, LanguageIdentifier.EN);
@@ -58,7 +58,7 @@ public class DatabaseController {
         String dictString = gson.toJson(dict);
         editor.putString("dictionary04", dictString);
         editor.commit();
-    }
+    }*/
 
     public void saveCurrentDatabase(default_Dictionary dict) {
         Gson gson = new Gson();

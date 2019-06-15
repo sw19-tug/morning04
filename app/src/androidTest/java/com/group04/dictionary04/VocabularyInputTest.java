@@ -89,10 +89,9 @@ public class VocabularyInputTest {
 //        onData(allOf(is(instanceOf(String.class)), is("English"))).perform(click());
 
         onView(withId(R.id.txt_lang1_input)).perform(typeText("German Word"));
-        onView(withId(R.id.txt_lang2_input)).perform(typeText("English Word"));
-        onView(withId(R.id.ratingBar_difficulty)).perform(click());
-        onView(withId(R.id.txt_tag_input)).perform(closeSoftKeyboard(), typeText("holiday"));
-
+        onView(withId(R.id.txt_lang2_input)).perform(typeText("English Word"), closeSoftKeyboard());
+        onView(withId(R.id.txt_tag_input)).perform(typeText("holiday"));
+        onView(withId(R.id.ratingBar_difficulty)).perform(click(), closeSoftKeyboard());
         onView(withId(R.id.button_input)).perform(closeSoftKeyboard(), click());
 
     }

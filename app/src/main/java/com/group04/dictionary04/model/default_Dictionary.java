@@ -30,8 +30,12 @@ public class default_Dictionary implements Dictionary {
         languages.put(LanguageIdentifier.FR, fr);
         languages.put(LanguageIdentifier.IT, it);
         languages.put(LanguageIdentifier.SP, sp);
-    }
 
+        addTranslation("Auto", "car", "1", LanguageIdentifier.DE, LanguageIdentifier.EN);
+        addTranslation("Auto", "coche", "1", LanguageIdentifier.DE, LanguageIdentifier.SP);
+        addTranslation("Auto", "auto", "1", LanguageIdentifier.DE, LanguageIdentifier.IT);
+        addTranslation("Auto", "voiture", "1", LanguageIdentifier.DE, LanguageIdentifier.FR);
+    }
 
     @Override
     public default_Entry getEntry(String id1, String id2) {

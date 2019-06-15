@@ -116,7 +116,7 @@ public class LearningViewActivity extends AppCompatActivity {
         //dbController.saveTestDatabase();
         dict = dbController.getCurrentDatabase();
 
-        Log.d("log", "Currently there are " + dict.getEntries().size() + " entries in this dict");
+        Log.d("log", "Currently there are " + dict + " entries in this dict");
     }
 
     @Override

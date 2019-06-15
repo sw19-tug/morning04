@@ -2,12 +2,17 @@ package com.group04.dictionary04;
 
 import android.support.test.espresso.UiController;
 import android.support.test.espresso.ViewAction;
+import android.support.test.espresso.action.AdapterDataLoaderAction;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.Toast;
 
 import com.group04.dictionary04.enums.DifficultyIdentifier;
 import com.group04.dictionary04.enums.LanguageIdentifier;
@@ -17,10 +22,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.List;
+
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isNotChecked;
@@ -29,16 +37,22 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static com.group04.dictionary04.matcher.VocabularyMatcher.withLanguage;
 import static com.group04.dictionary04.matcher.VocabularyMatcher.withRating;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.anything;
+import static org.hamcrest.Matchers.comparesEqualTo;
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.core.AllOf.allOf;
+import static org.hamcrest.core.IsNot.not;
 
 
 @RunWith(AndroidJUnit4.class)
 public class MainActivityRatingTest
 {
+    private static final String TEXT_ITEM_0 = "item: 0";
+
     @Rule
     public ActivityTestRule<RatingViewActivity> RatingViewActivityTestRule = new ActivityTestRule<>(RatingViewActivity.class);
 
@@ -86,6 +100,32 @@ public class MainActivityRatingTest
     public void testList() {
         onView(withId(R.id.list_items)).check(matches(isDisplayed()));
         onView(withId(R.id.list_items)).check(matches(isClickable()));
+    }
+
+    @Test
+    public void deleteEntry() {
+        onView(withId(R.id.spinner_langt)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("German"))).perform(click());
+        onView(withId(R.id.spinner_langt)).check(matches(withSpinnerText(containsString("German"))));
+        onView(withId(R.id.btn_ascending)).perform(click());
+
+        onView(withId(R.id.ratingBar_rating)).perform(new SetRating());
+        onView(withId(R.id.btn_filter)).perform(ViewActions.click());
+
+        //ListView list = (ListView)(withId(R.id.list_items));
+
+        onView(withId(R.id.list_items)).check(matches(isDisplayed()));
+        onView(withId(R.id.list_items)).perform(click());
+
+
+        onView(withId(R.id.btn_delete_entry)).perform(click());
+
+
+
+
+    }
+
+    private void checkNotNull(ListView list) {
     }
 
     @Test
