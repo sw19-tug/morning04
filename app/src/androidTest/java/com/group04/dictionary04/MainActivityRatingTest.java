@@ -96,11 +96,6 @@ public class MainActivityRatingTest
         onView(withId(R.id.tv_rate)).check(matches(isDisplayed()));
     }
 
-    @Test
-    public void testList() {
-        onView(withId(R.id.list_items)).check(matches(isDisplayed()));
-        onView(withId(R.id.list_items)).check(matches(isClickable()));
-    }
 
     @Test
     public void deleteEntry() {
@@ -118,11 +113,7 @@ public class MainActivityRatingTest
         onView(withId(R.id.list_items)).perform(click());
 
 
-        onView(withId(R.id.btn_delete_entry)).perform(click());
-
-
-
-
+        //onView(withId(R.id.btn_delete_entry)).perform(click());
     }
 
     private void checkNotNull(ListView list) {
