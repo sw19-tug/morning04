@@ -1,5 +1,7 @@
 package com.group04.dictionary04.model;
 
+import android.util.Log;
+
 import com.group04.dictionary04.enums.DifficultyIdentifier;
 import com.group04.dictionary04.enums.LanguageIdentifier;
 import com.group04.dictionary04.interfaces.*;
@@ -7,11 +9,14 @@ import com.group04.dictionary04.interfaces.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 public class default_Dictionary implements Dictionary {
     private List<default_Entry> entries = new ArrayList<>();
     private HashMap<LanguageIdentifier, default_Language> languages = new HashMap<>();
+
     List<default_Exam> exams = new ArrayList<>();
+
 
     public default_Dictionary() {
         default_Language de = new default_Language("German", LanguageIdentifier.DE);
@@ -25,8 +30,12 @@ public class default_Dictionary implements Dictionary {
         languages.put(LanguageIdentifier.FR, fr);
         languages.put(LanguageIdentifier.IT, it);
         languages.put(LanguageIdentifier.SP, sp);
-    }
 
+        addTranslation("Auto", "car", "1", LanguageIdentifier.DE, LanguageIdentifier.EN);
+        addTranslation("Auto", "coche", "1", LanguageIdentifier.DE, LanguageIdentifier.SP);
+        addTranslation("Auto", "auto", "1", LanguageIdentifier.DE, LanguageIdentifier.IT);
+        addTranslation("Auto", "voiture", "1", LanguageIdentifier.DE, LanguageIdentifier.FR);
+    }
 
     @Override
     public default_Entry getEntry(String id1, String id2) {
@@ -70,8 +79,17 @@ public class default_Dictionary implements Dictionary {
 
     @Override
     public default_Exam generateExam(default_Filter filter) {
-
-        return null;
+        default_Exam exam = new default_Exam();
+        if (filter == null)
+        {
+            for (int i = 0; i < exam.limitVocs; ++i)
+            {
+                Random rand = new Random();
+                int random = rand.nextInt(entries.size());
+                exam.getVocsToTest().add(entries.get(random));
+            }
+        }
+        return exam;
     }
 
     //TODO do we really need this function?
@@ -89,18 +107,80 @@ public class default_Dictionary implements Dictionary {
         entry.setId1(ovoc1);
         entry.setId2(ovoc2);
 
+        entries.add(entry);
+    }
+
+
+    @Override
+    public void addTranslation(String voc1, String voc2, String rating, LanguageIdentifier lang1, LanguageIdentifier lang2) {
+        default_Language first = getLanguage(lang1);
+        default_Language second = getLanguage(lang2);
+
+
+        default_Vocabulary ovoc1 = first.addVocabulary(voc1);
+        ovoc1.setLanguage(lang1);
+        default_Vocabulary ovoc2 = second.addVocabulary(voc2);
+        ovoc2.setLanguage(lang2);
+        default_Entry entry = new default_Entry();
+        entry.setId1(ovoc1);
+        entry.setId2(ovoc2);
+        entry.setRating(rating);
 
         entries.add(entry);
     }
 
+    public void addTranslationWithTag(String voc1, String voc2, String tag, LanguageIdentifier lang1, LanguageIdentifier lang2) {
+        default_Language first = getLanguage(lang1);
+        default_Language second = getLanguage(lang2);
+
+
+        default_Vocabulary ovoc1 = first.addVocabulary(voc1);
+        ovoc1.setLanguage(lang1);
+        default_Vocabulary ovoc2 = second.addVocabulary(voc2);
+        ovoc2.setLanguage(lang2);
+        default_Entry entry = new default_Entry();
+        entry.setId1(ovoc1);
+        entry.setId2(ovoc2);
+        entry.setTag(tag);
+
+        entries.add(entry);
+    }
+
+
+
+
+    @Override
+    public void addTranslationWithDiffAndTag(String voc1, String voc2, LanguageIdentifier lang1, LanguageIdentifier lang2,DifficultyIdentifier diff, String tag)
+    {
+        default_Language first = getLanguage(lang1);
+        default_Language second = getLanguage(lang2);
+
+
+        default_Vocabulary ovoc1 = first.addVocabulary(voc1);
+        ovoc1.setLanguage(lang1);
+        default_Vocabulary ovoc2 = second.addVocabulary(voc2);
+        ovoc2.setLanguage(lang2);
+        default_Entry entry = new default_Entry();
+        entry.setId1(ovoc1);
+        entry.setId2(ovoc2);
+        //entry.setRating(diff.toString());
+        entry.setRating(String.valueOf(diff.getValue()));
+        entry.setTag(tag);
+
+
+        entries.add(entry);
+    }
+
+
+
     @Override
     public void addDifficulty(default_Entry entry, DifficultyIdentifier diff) {
-
+        entry.setRating(diff.toString());
     }
 
     @Override
     public void addTag(default_Entry entry, String tag) {
-
+        entry.setTag(tag);
     }
 
     @Override
@@ -123,15 +203,6 @@ public class default_Dictionary implements Dictionary {
         return new ArrayList<default_Language>(languages.values());
     }
 
-    public List<String> getLanguagesStrings() {
-        List<String> list = new ArrayList<>();
-
-        for(default_Language language : languages.values()) {
-            list.add(language.getDisplayName());
-        }
-
-        return list;
-    }
 
     public String getTranslationString(default_Vocabulary voc) {
         String idToSearch = voc.getId();
@@ -157,6 +228,25 @@ public class default_Dictionary implements Dictionary {
         return null;
     }
 
+    public default_Language getLanguageByName(String name) {
+        for(default_Language language : languages.values()) {
+            if(language.getDisplayName().equals(name))
+                return language;
+        }
+
+        return null;
+    }
+
+    public List<String> getLanguagesStrings() {
+        List<String> list = new ArrayList<>();
+
+        for(default_Language language : languages.values()) {
+            list.add(language.getDisplayName());
+        }
+
+        return list;
+    }
+
     @Override
     public void setLanguages(List<default_Language> languages) {
 
@@ -171,4 +261,15 @@ public class default_Dictionary implements Dictionary {
     public void setExams(List<default_Exam> exams) {
 
     }
+
+    public void deleteExam(default_Exam exam){
+        exams.remove(exam);
+    }
+
+
+    public void deleteEntry(default_Entry entry) {
+    entries.remove(entry);
+
+    }
+
 }

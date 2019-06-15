@@ -1,3 +1,37 @@
 <resources>
     <string name="app_name">Dictionary04</string>
+    <string name="action_settings">Settings</string>
+    <string name="search">Search</string>
+
+    <string name="menuInputView">Vocabulary Input</string>
+    <string name="menuLearningView">Learning</string>
+    <string name="menuSearchView">Browse Vocabulary</string>
+    <string name="menuRatingView">Browse / Rate</string>
+    <string name="menuTestView">Testing</string>
+    <string name="menuADVView">Add Vocabulary</string>
+    <string name="menuBackupView">Backup / Restore</string>
+    <string name="menuSharingView">Sharing</string>
+    <string name="menuSavedExams">Saved Exams</string>
+    <string name="menuSettingsView">Settings</string>
+
+
+    <string name="menuBackupData">Backup</string>
+    <string name="menuRestoreData">Restore</string>
+    <string name="menuClearTesting">Clear Testings</string>
+    <string name="menuClearAll">Reset All</string>
+    <string name="enable">Enable Notifications</string>
+    <string name="disable">Disable Notifications</string>
+
+
+    <string name="language">Language</string>
+    <string name="vocab">VOCAB</string>
+    <string name="second_language">Second Language</string>
+    <string name="check_answer">check answer</string>
+    <string name="test_hint">hint</string>
+    <string name="previous">previous</string>
+    <string name="save_exam">save exam</string>
+    <string name="next">next</string>
+    <string name="your_answer">your answer...</string>
+    <string name="menuAdvancedTestView">AdvancedTesting</string>
+    <string name="from_to">from to </string>
 </resources>

@@ -10,6 +10,8 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static com.group04.dictionary04.enums.DifficultyIdentifier.BEGINNER;
+
 public class DictionaryUnitTest{
     default_Dictionary dictionary;
     static int total_entries = 15;
@@ -18,72 +20,63 @@ public class DictionaryUnitTest{
     @Before
     public void setUp() {
         dictionary = new default_Dictionary();
-        for (int i = 1; i <= total_entries; i++){
-            dictionary.addTranslation("first_de" + i, "second_en" +1, LanguageIdentifier.DE, LanguageIdentifier.EN);
+        for (int i = 0; i < total_entries; i++){
+            dictionary.addTranslation("first_de" + i, "second_en" +i,"" + (i%4), LanguageIdentifier.DE, LanguageIdentifier.EN);
         }
     }
 
     @Test
-    public void getEntryTest(){
+     public void getEntryTest(){
         List<default_Entry> all_added_entries = dictionary.getEntries();
-        assert all_added_entries.size() == total_entries : "Inserting Elements at setup failed!\n";
-        for (default_Entry it : all_added_entries)
-        {
-            assert it.getId1().getId().contains("DE") : "Languageidentifier does not match ID\n";
-            assert it.getId2().getId().contains("EN") : "Languageidentifier does not match ID\n";
+        assert all_added_entries.size()-4 == total_entries : "Inserting Elements at setup failed!\n";
+        for (int i = 4; i < total_entries; i++) {
+            assert dictionary.getEntries().get(i).getId1().getId().contains("DE") : "Languageidentifier does not match ID\n";
+            assert dictionary.getEntries().get(i).getId2().getId().contains("EN") : "Languageidentifier does not match ID\n";
         }
     }
 
-    /*@Test
-    public void getTranslationTest() {
-        default_Entry entry = new default_Entry();
-        /*default_Vocabulary voc1 = new default_Vocabulary();
-        default_Vocabulary voc2 = new default_Vocabulary();
-        voc1.setId("EN-1");
-        voc2.setId("DE-1");
-        entry.setId1(voc1);
-        entry.setId2(voc2);
 
-        dictionary.addTranslation("test-voc1", "test-voc1-otherlanguage");
+    @Test
+    public void getEntryNameTest() {
+        for (int i = 4; i < total_entries; i++) {
 
-        default_Entry returnEntry = dictionary.getTranslation(entry);
-        assert ( returnEntry.getId1() != null && returnEntry.getId2() != null ) : "Pair has empty Voc-entries!\n";
-    }*/
-
-    /*@Test
-    public void generateExamTest() {
-        Exam random_exam = dictionary.generateExam(null);
-
-        default_Filter filter = new default_Filter();
-        filter.setLimit_pairs(10);
-        Exam random_exam10 = dictionary.generateExam(null);
-
-        filter.setLangID2(LanguageIdentifier.EN);
-        filter.setLangID1(LanguageIdentifier.DE);
-        Exam en_de_exam = dictionary.generateExam(filter);
-
-        assert !random_exam.getVocsToTest().isEmpty() : "Empty Exam with Filter=null\n";
-        assert !(random_exam10.getVocsToTest().size() == 10 ): "Vocs list size does not match filter list size\n";
-
-        for (default_Entry it : en_de_exam.getVocsToTest()){
-            default_Entry entry = (default_Entry) dictionary.getTranslation(it); // Does this even work as expected
-            assert entry.getId2().getId().contains("EN") : "Wrong Language for Voc1\n";
-            assert entry.getId1().getId().contains("DE") : "Wrong Language for Voc2\n";
+            assert dictionary.getEntries().get(i).getId1().getValue().contains("first_de" + (i-4)) : "DE ENTRY " + (i-4) + " NOT MATCH\n";
+            assert dictionary.getEntries().get(i).getId2().getValue().contains("second_en" + (i-4)) : "EN ENTRY" + (i-4) + "NOT MATCH\n";
         }
-    }*/
+    }
 
     @Test
-    public void addDifficultyTest() {
+    public void getRatingTest() {
+        for (int i = 4; i < total_entries; i++) {
+            assert dictionary.getEntries().get(i).getRating().contains(""+(i%4)): "RATING OF ENTRY " + (i-4) + " NOT MATCH\n";
+        }
+    }
+
+    @Test
+    public void setRatingTest(){
+
+        for(int i = 0; i < total_entries; i++)
+            dictionary.getEntries().get(i).setRating(""+(i%4));
+
+        for(int i = 0; i < total_entries; i++)
+            assert dictionary.getEntries().get(i).getRating().equals(""+(i%4)) : "SET RATING FOR" + i +"NOT MATCH\n";
+    }
+
+    @Test
+    public void getDifficulty() {
+        assert dictionary.getEntries().get(4).getRating().contains(String.valueOf(BEGINNER.getValue() - 1)) : "GET DIFFICULTY NOT MATCH\n";
 
     }
 
     @Test
-    public void addTagTest() {
-
+    public void deleteExam() {
+        default_Exam exam = dictionary.generateExam(null);
+        dictionary.getExams().add(exam);
+        List<default_Exam> exams = dictionary.getExams();
+        assert exams.size() == 1;
+        dictionary.deleteExam(exam);
+        assert exams.size() == 0;
     }
 
-    @Test
-    public void updateEntryTest() {
 
-    }
 }

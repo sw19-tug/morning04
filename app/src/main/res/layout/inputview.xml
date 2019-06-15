@@ -4,36 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              tools:context=".MainActivity">
+              tools:context=".InputViewActivity"
+              android:gravity="center_horizontal">
 
-
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:orientation="vertical"
-        android:gravity="center">
-
+    <android.support.v7.widget.Toolbar
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/myactionbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:elevation="4dp">
 
         <TextView
-            android:id="@+id/textView_top"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dictionary Input V. 1.0.0._132"
-            android:textColor="@color/colorAccent"
-            android:textSize="24sp" />
+                android:text="Vocabulary-Input"
+                android:textSize="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
 
-        <!-- Include other widget or layout tags here. These are considered
-                "child views" or "children" of the linear layout -->
-
-    </LinearLayout>
-
+    </android.support.v7.widget.Toolbar>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:orientation="horizontal"
@@ -90,12 +84,68 @@
 
     </LinearLayout>
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="331dp"
+        android:layout_height="73dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <TextView
+            android:id="@+id/textView_difficulty"
+            android:layout_width="wrap_content"
+            android:layout_height="31dp"
+            android:text="Rate the Difficult: "
+            android:textSize="15sp" />
+
+
+        <RatingBar
+            android:id="@+id/ratingBar_difficulty"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:isIndicator="false"
+            android:numStars="4"
+            android:stepSize="1" />
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="73dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="78dp"
+            android:layout_height="wrap_content"
+            android:text="Enter a Tag:" />
+
+        <EditText
+            android:id="@+id/txt_tag_input"
+            android:layout_width="174dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Enter your tag here!"
+            android:inputType="textPersonName" />
+
+
+    </LinearLayout>
+
+
+
 
     <Button
         android:id="@+id/button_input"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Insert your words!" />
+        android:text="Insert your words!"
+        android:background="@drawable/input_btn_design"
+        tools:layout_width="120dp"
+        tools:layout_gravity="center_horizontal"/>
+
 
 
 </LinearLayout>

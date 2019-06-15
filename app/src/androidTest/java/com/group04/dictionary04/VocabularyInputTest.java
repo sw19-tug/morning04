@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onData;
+import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -34,7 +35,7 @@ import static org.hamcrest.Matchers.is;
 
 
 @RunWith(AndroidJUnit4.class)
-public class VocabularyInputTest001 {
+public class VocabularyInputTest {
 
     @Rule
     public ActivityTestRule<InputViewActivity> InputViewActivityTestRule = new ActivityTestRule<>(InputViewActivity.class);
@@ -44,9 +45,11 @@ public class VocabularyInputTest001 {
 
         // test buttons are visible
 
-        String german_spinner_text = "German";
-        String english_spinner_text = "English";
-        String spanish_spinner_text = "Spanish";
+        String german_spinner_text = "DE";
+        String english_spinner_text = "EN";
+        String spanish_spinner_text = "ES";
+        String french_spinner_text = "FR";
+        String italy_spinner_text = "IT";
 
         // submit button
         onView(withId(R.id.button_input)).check(matches(isDisplayed()));
@@ -67,6 +70,15 @@ public class VocabularyInputTest001 {
         onData(allOf(is(instanceOf(String.class)), is(german_spinner_text))).perform(click()); // clickable
         onView(withId(R.id.spinner1_input)).check(matches(withSpinnerText(containsString(german_spinner_text)))); // default value
 
+        // dropdown spinner 1_change_language
+        onView(withId(R.id.spinner1_input)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is(spanish_spinner_text))).perform(click()); // clickable
+        onView(withId(R.id.spinner2_input)).check(matches(withSpinnerText(containsString(german_spinner_text))));
+
+        // dropdown spinner 2_change_language
+        onView(withId(R.id.spinner2_input)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is(french_spinner_text))).perform(click()); // clickable
+        onView(withId(R.id.spinner1_input)).check(matches(withSpinnerText(containsString(spanish_spinner_text))));
 //        String sucessful_text = "Successful";
 //        onView(withText(sucessful_text)).inRoot(withDecorView(not(is(InputViewActivityTestRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
     }
@@ -77,11 +89,11 @@ public class VocabularyInputTest001 {
 //        onData(allOf(is(instanceOf(String.class)), is("English"))).perform(click());
 
         onView(withId(R.id.txt_lang1_input)).perform(typeText("German Word"));
-        onView(withId(R.id.txt_lang2_input)).perform(typeText("English Word"));
-        onView(withId(R.id.button_input)).perform(click());
-//
-//        String sucessful_text = "Successful";
-//        onView(withText(sucessful_text)).inRoot(withDecorView(not(is(InputViewActivityTestRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+        onView(withId(R.id.txt_lang2_input)).perform(typeText("English Word"), closeSoftKeyboard());
+        onView(withId(R.id.txt_tag_input)).perform(typeText("holiday"));
+        onView(withId(R.id.ratingBar_difficulty)).perform(click(), closeSoftKeyboard());
+        onView(withId(R.id.button_input)).perform(closeSoftKeyboard(), click());
+
     }
 
 }
